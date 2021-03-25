@@ -1,6 +1,8 @@
 # datasetbucket
 
-## Python and Flask installation via VSCode:
+## Python and Flask installation via VSCode
+
+### Prior to install our project in your local environment, follow these steps to make sure all the requirements are in place and working
 
 1. Install python in your machine
 
@@ -72,10 +74,16 @@
     `    return 'Hello, World!’`
 
     Check the Hello Flask by going to Play Debug menu on VSCode
+
     Click on Run and Debug
+
     and choose to run as Flask
+
     watch the command line for the local web server address to appear
+
     Click on it, and a new window will open with your Hello Flask
+
+    NOTE: Delete this app.py before downloading the project folder with a new app.py containing the project routes.
 
 9. Freeze your dependencies
 
@@ -86,15 +94,12 @@
 
     a txt file will be created automatically with a list of dependencies
     keep updating this requirements every time before you git command push, with the same line of command above, the file updates itself with that
-
-    You are ready to start building your python-flask app!
-    For visual help: follw this Youtube Tutorial https://youtu.be/ojzNmvkNfqc
-
 ## Local Deployement via VSCode
-### Before you commit your changes to Github and run your app:
+### Download the project folders to your local environment and before you commit your changes to Github for the first time, follow these steps:
 
-1. Create an env.py and .gitignore files to keep your sensitive data secret
-    on the terminal
+1. If you can't locate these folders in your workspace, make sure you create an env.py and .gitignore files to keep your sensitive data secret
+
+    On the terminal
 
     `touch env.py`
 
@@ -118,15 +123,15 @@
 
     `os.environ.setdefault("SECRET_KEY", "secret_key_here")`
 
-    `os.environ.setdefault("MONGO_URI", "value_here")`
+    `os.environ.setdefault("MONGO_URI", "value_from mongoDB_here")`
 
     `os.environ.setdefault("MONGO_DBNAME", "your_database_collection_name_here")`
 
-    This information will create the integration between mongoBD and python-flask and redirect debug to your main terminal via the command `python3 app.py` (this will give you a port at 5000 to open a new window and run the app on your browser).
+    This information will help create the integration between mongoBD and python-flask and redirect debug to your main terminal via the command `python3 app.py` (this will give you a port at 5000 to open a new window and run the app on your browser).
 
 ## Heroku Deployment
 
-1. Create a procfile
+1. Create a Procfile
 
 2. Update your requirements.txt
 
@@ -135,3 +140,15 @@
 4. Enter the Config Vars
 
 5. Connect your github Repo
+
+## Connect MongoDB with Flask via flask-pymongo
+
+### Flask-PyMongo is a 3rd-party library that helps connect the MongoDB database and the datasetbucket application by using a database url
+
+1. On the terminal:
+
+    `pip3 install flask-pymongo`
+
+    `pip3 install dnspython`
+
+    `pipe freeze > requirements.txt`
