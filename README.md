@@ -96,6 +96,7 @@
     on the terminal
 
     `touch env.py`
+    
     `touch .gitignore`
 
     Open the .gitignore and insert:
