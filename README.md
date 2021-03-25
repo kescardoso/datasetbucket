@@ -151,4 +151,4 @@
 
     `pip3 install dnspython`
 
-    `pipe freeze > requirements.txt`
+    `pip3 freeze > requirements.txt`
