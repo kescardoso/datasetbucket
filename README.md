@@ -90,13 +90,14 @@
     You are ready to start building your python-flask app!
     For visual help: follw this Youtube Tutorial https://youtu.be/ojzNmvkNfqc
 
-## Before you commit your changes to Github and run your app:
+## Local Deployement via VSCode
+### Before you commit your changes to Github and run your app:
 
 1. Create an env.py and .gitignore files to keep your sensitive data secret
     on the terminal
 
     `touch env.py`
-    
+
     `touch .gitignore`
 
     Open the .gitignore and insert:
@@ -121,4 +122,16 @@
 
     `os.environ.setdefault("MONGO_DBNAME", "your_database_collection_name_here")`
 
-    This information will create the integration between mongoBD and python-flask and redirect debug to your main terminal via the command `python3 app.py` (this will give you a port at 5000 to open a new window and run the app on your broweser).
+    This information will create the integration between mongoBD and python-flask and redirect debug to your main terminal via the command `python3 app.py` (this will give you a port at 5000 to open a new window and run the app on your browser).
+
+## Heroku Deployment
+
+1. Create a procfile
+
+2. Update your requirements.txt
+
+3. Open your Heroku Dashboard and create a new app
+
+4. Enter the Config Vars
+
+5. Connect your github Repo
