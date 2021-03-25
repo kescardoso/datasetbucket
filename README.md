@@ -74,6 +74,36 @@ on the terminal:
 a txt file will be created automatically with a list of dependencies
 keep updating this requirements every time before you git command push, with the same line of command above, the file updates itself with that
 
-
 You are ready to start building your python-flask app!
 For visual help: follw this Youtube Tutorial https://youtu.be/ojzNmvkNfqc
+
+## Before you commit your changes to Github and run your app:
+1. Create an env.py and .gitignore files to keep your sensitive data secret
+    on the terminal:
+
+    `touch env.py`
+    `touch .gitignore`
+
+    Open the .gitignore and insert:
+
+    `env.py`
+
+    `__pycache__`
+
+    Save and close .gitignore
+
+2. Open env.py and enter the following:
+
+    `import os`
+
+    `os.environ.setdefault("IP", "0.0.0.0")`
+
+    `os.environ.setdefault("PORT", "5000")`
+
+    `os.environ.setdefault("SECRET_KEY", "secret_key_here")`
+
+    `os.environ.setdefault("MONGO_URI", "value_here")`
+
+    `os.environ.setdefault("MONGO_DBNAME", "your_database_collection_name_here")`
+
+    This information will create the integration between mongoBD and python-flask and redirect debug to your main terminal via the command `python3 app.py` (this will give you a port at 5000 to open a new window and run the app on your broweser).
