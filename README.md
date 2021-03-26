@@ -94,7 +94,7 @@
 
     a txt file will be created automatically with a list of dependencies
     keep updating this requirements every time before you git command push, with the same line of command above, the file updates itself with that
-## Local Deployement via VSCode
+## Local Deployment via VSCode
 ### Download the project folders to your local environment and before you commit your changes to Github for the first time, follow these steps:
 
 1. If you can't locate these folders in your workspace, make sure you create an env.py and .gitignore files to keep your sensitive data secret
@@ -131,15 +131,29 @@
 
 ## Heroku Deployment
 
-1. Create a Procfile
+1. Fulfil all Heroku requirements by freezing your dependencies and creating a Procfile:
 
-2. Update your requirements.txt
+    On the terminal (vscode):
 
-3. Open your Heroku Dashboard and create a new app
+    `pip3 freeze > requirements.txt`
 
-4. Enter the Config Vars
+    `echo web: python app.py > Procfile`
 
-5. Connect your github Repo
+2. Open your Heroku Dashboard and create a new app. Name your app and choose your region.
+
+3. Connect your heroku app to your git repository, by going to:
+
+    - "Deploy" Menu > "Deployment method" > Click: "Connect to GitHub"
+
+    - "Connect to GitHub" > search your repo from the dropdown, and connect
+
+    - Choose a branch to deploy your changes
+
+4. Add your Config Vars to Heroku.
+
+    Navigate to the settings menu, and then to Config Vars session, and enter here the sensitive information from your env.py file.
+
+5. Connect your GitHub Repo
 
 ## Connect MongoDB with Flask via flask-pymongo
 
