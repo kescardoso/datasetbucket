@@ -8,7 +8,7 @@ about data containing population and demographic subjects.
 
 ## Python and Flask installation via VSCode
 
-### Prior to install our project in your local environment, follow these steps to make sure all the requirements are in place and working
+### Prior to install this project in your local environment, follow these steps to make sure all the requirements are in place and working
 
 1. Install python in your machine
 
@@ -89,23 +89,12 @@ about data containing population and demographic subjects.
 
     Click on it, and a new window will open with your Hello Flask
 
-    NOTE: Delete this app.py before downloading the project folder with a new app.py containing the project routes.
-
-9. Freeze your dependencies
-
-    after you get the dependencies installed, make sure you freeze them for version control 
-    on the terminal:
-
-    `pip3 freeze > requirements.txt`
-
-    a txt file will be created automatically with a list of dependencies
-    keep updating this requirements every time before you git command push, with the same line of command above, the file updates itself with that
 ## Local Deployment via VSCode
 ### Download the project folders to your local environment and before you commit your changes to Github for the first time, follow these steps:
 
 1. If you can't locate these folders in your workspace, make sure you create an env.py and .gitignore files to keep your sensitive data secret
 
-    On the terminal
+    On the vscode terminal:
 
     `touch env.py`
 
@@ -131,7 +120,7 @@ about data containing population and demographic subjects.
 
     `os.environ.setdefault("MONGO_URI", "value_from mongoDB_here")`
 
-    `os.environ.setdefault("MONGO_DBNAME", "your_database_collection_name_here")`
+    `os.environ.setdefault("MONGO_DBNAME", "value_from mongoDB_here")`
 
     This information will help create the integration between mongoBD and python-flask and redirect debug to your main terminal via the command `python3 app.py` (this will give you a port at 5000 to open a new window and run the app on your browser).
 
@@ -165,18 +154,21 @@ about data containing population and demographic subjects.
 
 ## Connect MongoDB with Flask via flask-pymongo
 
-### Flask-PyMongo is a 3rd-party library that helps connect the MongoDB database and the datasetbucket application by using a database url
+Flask-PyMongo is a 3rd-party library that helps connect the MongoDB database and the datasetbucket application by using a database url. On the vscode terminal, install:
 
-1. On the terminal:
+1. `pip3 install flask-pymongo`
 
-    `pip3 install flask-pymongo`
+2. `pip3 install dnspython`
 
-    `pip3 install dnspython`
+3. `pip3 freeze > requirements.txt`
 
-    `pip3 freeze > requirements.txt`
 
-# Style and UX/UI Rules
+## Technologies used
 
-## This project uses the Materialize front-end framework
-
-(Materialize)[https://materializecss.com/] is a modern front-end framework (responsive and mobile-first, similar to Bootstrap) that helps developers build a stylish and responsive application.
+- Python - an interpreted, high-level and general-purpose programming language, great for data base structured projects
+- Pip - a package manager for Python, that allows developers to install and manage additional libraries and dependencies that are not distributed as part of the standard library.
+- Flask - a Python framework that depends on the Jinja template engine and the Werkzeug WSGI toolkit
+- MongoDB - a document database (stores data in JSON-like documents) with a horizontal, scale-out architecture that can support huge volumes of both data and traffic.
+- [Materialize](https://materializecss.com/) - a modern front-end framework (responsive and mobile-first, similar to Bootstrap) that helps developers build a stylish and responsive application.
+- Git - a version control system for for source code management; it allows tracking file changes and coordinating work on those files among multiple people and machines.
+- GitHub - a code hosting platform for version control and collaboration. It lets developers work remotely and together on projects from anywhere.
