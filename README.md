@@ -139,6 +139,8 @@
 
     `echo web: python app.py > Procfile`
 
+    Commit and push your changes.
+
 2. Open your Heroku Dashboard and create a new app. Name your app and choose your region.
 
 3. Connect your heroku app to your git repository, by going to:
