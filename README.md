@@ -6,6 +6,8 @@ with the purpose of store and display information about dataset structures based
 You will be able to find and read reports from a wiki styled list of information 
 about data containing population and demographic subjects.
 
+### Check the deployed version on Heroku: https://datasetbucket.herokuapp.com/
+
 ## Python and Flask installation via VSCode
 
 ### Prior to install this project in your local environment, follow these steps to make sure all the requirements are in place and working
