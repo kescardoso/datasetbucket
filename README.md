@@ -168,3 +168,9 @@
     `pip3 install dnspython`
 
     `pip3 freeze > requirements.txt`
+
+# Style and UX/UI Rules
+
+## This project uses the Materialize front-end framework
+
+(Materialize)[https://materializecss.com/] is a modern front-end framework (responsive and mobile-first, similar to Bootstrap) that helps developers build a stylish and responsive application.
