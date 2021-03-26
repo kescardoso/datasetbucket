@@ -25,7 +25,38 @@
     <title>DataSets Bucket</title>
 </head>
 <body>
-    <h1>Hey! I'm part of the base template!</h1>
+
+    <header>
+        <!-- Top navbar -->
+        <nav class="nav-extended text-shadow cyan lighten-1">
+            <div class="nav-wrapper">
+                <a href="{{ url_for('get_datasets') }}" class="brand-logo center">DataSetBucket</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
+                <ul class="left hide-on-med-and-down">
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">New Entry</a></li>
+                </ul>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="#">Register</a></li>
+                    <li><a href="#">Log In</a></li>
+                    <li><a href="#">Log Out</a></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <!-- Mobile navbar -->
+        <ul class="sidenav" id="mobile-demo">
+            <li><a href="{{ url_for('get_datasets') }}"><h4 class="center-align cyan-text text-lighten-1">DataSetBucket</h4></a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">New Entry</a></li>
+            <li><a href="#">Register</a></li>
+            <li><a href="#">Log In</a></li>
+            <li><a href="#">Log Out</a></li>
+        </ul>
+    </header>
+    
     {% block content %}
     {% endblock %}
 

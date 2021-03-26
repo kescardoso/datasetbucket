@@ -1,5 +1,11 @@
 # datasetbucket
 
+This is a python-flask application build upon a CRUD system (Create, Read, Update and Delete) 
+with the purpose of store and display information about dataset structures based on Machine Learning models.
+
+You will be able to find and read reports from a wiki styled list of information 
+about data containing population and demographic subjects.
+
 ## Python and Flask installation via VSCode
 
 ### Prior to install our project in your local environment, follow these steps to make sure all the requirements are in place and working
