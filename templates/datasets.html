@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h2>Hi! I am extending the base template!</h2>
+
+    {% for dataset in datasets %}
+        {{ dataset.dataset_name }}<br>
+        {{ dataset.dataset_description }}<br>
+        {{ dataset.category_name }}<br>
+        {{ dataset.is_fixed }}<br>
+        {{ dataset.last_update }}<br>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="center-align">Register</h3>
+
+<!-- Card turned into registration form -->
+<div class="row">
+    <!-- Center column with offset -->
+    <!-- Add method and action for dynamic form -->
+    <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}"> 
+        <div class="card-panel">
+
+            <!-- Username field -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-user-plus prefix cyan-text text-darken-1"></i>
+                    <!-- Use a regex pattern for defensive programing -->
+                    <!-- Python RegEx info: https://www.w3schools.com/python/python_regex.asp -->
+                    <input id="username" 
+                           name="username" 
+                           type="text" 
+                           minlength="4"
+                           maxlength="16"
+                           pattern="^[a-zA-Z0-9]{4,16}$"
+                           class="validate"
+                           required>
+                    <label for="username">Username</label>
+                </div>
+            </div>
+
+            <!-- Password field -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-user-lock prefix cyan-text text-darken-1"></i>
+                    <!-- Use a regex pattern for defensive programing -->
+                    <!-- Python RegEx info: https://www.w3schools.com/python/python_regex.asp -->
+                    <input id="password" 
+                           name="password" 
+                           type="password" 
+                           minlength="4"
+                           maxlength="16"
+                           pattern="^[a-zA-Z0-9]{4,16}$"
+                           class="validate"
+                           required>
+                    <label for="password">Password</label>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="row">
+                <button type="submit" class="col s12 btn-large cyan darken-1 text-shadow">
+                    Register <i class="fas fa-sign-in-alt"></i>
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+{% endblock %}
