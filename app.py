@@ -1,4 +1,5 @@
 import os
+import re
 
 from flask import (
     Flask, flash, render_template,
@@ -33,6 +34,28 @@ def get_datasets():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    if request.method == "POST":
+        """Check if username already exists in db"""
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()}
+        )
+
+        if existing_user:
+            """If username exists and was found in db"""
+            flash("Username already exists")
+            return redirect(url_for("register"))
+
+        register = {
+            """If username was not found in db, invite to register"""
+            "username": request.form.get("username").lower(),
+            "password": generate_password_hash(request.form.get("password"))
+        }
+        """Insert new user in db"""
+        mongo.db.users.insert_one(register)
+
+        """Put the new user into a session cookie"""
+        session["user"] = request.form.get("username").lower()
+        flash("Registration Seccessful")
     return render_template("register.html")
 
 
