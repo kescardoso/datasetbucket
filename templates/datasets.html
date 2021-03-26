@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DataSets Bucket</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
+
+    <h2>Hi! I am extending the base template!</h2>
+
     {% for dataset in datasets %}
         {{ dataset.dataset_name }}<br>
         {{ dataset.dataset_description }}<br>
@@ -14,5 +10,5 @@
         {{ dataset.is_fixed }}<br>
         {{ dataset.last_update }}<br>
     {% endfor %}
-</body>
-</html>
+
+{% endblock %}
