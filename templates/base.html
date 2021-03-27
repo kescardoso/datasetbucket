@@ -33,14 +33,20 @@
                 <a href="{{ url_for('datasets') }}" class="brand-logo center">DataSetBucket</a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
                 <ul class="left hide-on-med-and-down">
-                    <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-                    <li><a href="#">Categories</a></li>
-                    <li><a href="#">New Entry</a></li>
+                    {% if session.user %}
+                        <li><a href="#">New Entry</a></li>
+                    {% endif %}
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="{{ url_for('datasets') }}">Datasets</a></li>
                 </ul>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="{{ url_for('register') }}">Register</a></li>
-                    <li><a href="{{ url_for('login') }}">Log In</a></li>
-                    <li><a href="#">Log Out</a></li>
+                    {% if session.user %}
+                        <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+                        <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('register') }}">Register</a></li>
+                        <li><a href="{{ url_for('login') }}">Log In</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
@@ -48,12 +54,17 @@
         <!-- Mobile navbar -->
         <ul class="sidenav" id="mobile-demo">
             <li><a href="{{ url_for('datasets') }}"><h4 class="center-align cyan-text text-lighten-1">DataSetBucket</h4></a></li>
-            <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
             <li><a href="#">Categories</a></li>
-            <li><a href="#">New Entry</a></li>
-            <li><a href="{{ url_for('register') }}">Register</a></li>
-            <li><a href="{{ url_for('login') }}">Log In</a></li>
-            <li><a href="#">Log Out</a></li>
+            <li><a href="{{ url_for('datasets') }}">Datasets</a></li>
+            {% if session.user %}
+                <li><a href="#">New Entry</a></li>
+                <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+            {% else %}
+                <li><a href="{{ url_for('register') }}">Register</a></li>
+                <li><a href="{{ url_for('login') }}">Log In</a></li>
+            {% endif %}
+                
         </ul>
     </header>
 
