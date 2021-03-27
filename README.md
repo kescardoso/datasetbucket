@@ -170,9 +170,6 @@ Flask-PyMongo is a 3rd-party library that helps connect the MongoDB database and
 
 2. `pip3 install dnspython`
 
-3. `pip3 freeze > requirements.txt`
-
-
 ## Technologies used
 
 - Python - an interpreted, high-level and general-purpose programming language, great for data base structured projects
