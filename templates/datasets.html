@@ -1,28 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
 
-    {% for dataset in datasets %}
-        {{ dataset.dataset_name }}<br>
-        {{ dataset.dataset_description }}<br>
-        {{ dataset.category_name }}<br>
-        {{ dataset.is_fixed }}<br>
-        {{ dataset.last_update }}<br>
-    {% endfor %}
-
     <ul class="collapsible popout">
+        {% for dataset in datasets %}
         <li>
-            <div class="collapsible-header white-text cyan darken-2 text-shadow"><i class="fas fa-caret-down"></i>First</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            <div class="collapsible-header white-text cyan darken-2 text-shadow">
+                <i class="fas fa-caret-down"></i>
+                <strong>{{ dataset.dataset_name }}</strong>
+                {% if dataset.to_do == "on" %}
+                    <i class="fas fa-exclamation-circle cyan-text text-lighten-2 tooltipped"
+                    data-position="right" data-tooltip="To Do!"></i>
+                {% endif %}
+             </div>
+            <div class="collapsible-body">
+                <p>{{ dataset.dataset_description }}</p>
+                <hr>
+                <p class="collapsible-footer"><i class="fas fa-tag"></i> <strong>{{ dataset.category_name }}</strong></p>
+                <p class="collapsible-footer"><i class="fas fa-calendar-check"></i> Last updated : {{ dataset.last_update }}</p>
+                <p class="collapsible-footer"><i class="fas fa-bug"></i> To do ? {{ dataset.to_do }}</p>
+            </div>
         </li>
-        <li>
-            <div class="collapsible-header white-text cyan darken-2 text-shadow"><i class="fas fa-caret-down"></i>Second</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
-        <li>
-            <div class="collapsible-header white-text cyan darken-2 text-shadow"><i class="fas fa-caret-down"></i>Third</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
+        {% endfor %}
     </ul>
             
-
 {% endblock %}
