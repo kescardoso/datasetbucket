@@ -27,10 +27,10 @@ mongo = PyMongo(app)
 
 # Home Page : displays the wiki list of datasets
 @app.route("/")
-@app.route("/datasets")
-def datasets():
+@app.route("/get_datasets")
+def get_datasets():
     datasets = list(mongo.db.datasets.find())
-    return render_template("datasets.html", datasets=datasets)
+    return render_template("get_datasets.html", datasets=datasets)
 
 
 # Registration Page : displays user registration form
@@ -108,6 +108,11 @@ def logout():
     flash("You have been logged out")
     session.pop("user")
     return redirect(url_for("login"))
+
+
+@app.route("/add_dataset")
+def add_dataset():
+    return render_template("add_dataset.html")
 
 
 if __name__ == "__main__":

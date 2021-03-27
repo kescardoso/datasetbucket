@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 
+    <!-- Dataset List : Accordion (Collapsible) -->
     <ul class="collapsible popout">
         {% for dataset in datasets %}
         <li>
+
+            <!-- Head: Dataset name and "if to do" -->
             <div class="collapsible-header white-text cyan darken-2 text-shadow">
                 <i class="fas fa-caret-down"></i>
                 <strong>{{ dataset.dataset_name }}</strong>
@@ -12,13 +15,16 @@
                     data-position="right" data-tooltip="To Do!"></i>
                 {% endif %}
              </div>
+
+            <!-- Body: Dataset descriptions and options/tags -->
             <div class="collapsible-body">
                 <p>{{ dataset.dataset_description }}</p>
                 <hr>
-                <p class="collapsible-footer"><i class="fas fa-tag"></i> <strong>{{ dataset.category_name }}</strong></p>
+                <p class="collapsible-footer"><i class="fas fa-tag"></i> {{ dataset.category_name }}</p>
                 <p class="collapsible-footer"><i class="fas fa-calendar-check"></i> Last updated : {{ dataset.last_update }}</p>
                 <p class="collapsible-footer"><i class="fas fa-bug"></i> To do ? {{ dataset.to_do }}</p>
             </div>
+            
         </li>
         {% endfor %}
     </ul>
