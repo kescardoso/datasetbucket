@@ -29,7 +29,7 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/datasets")
 def datasets():
-    datasets = mongo.db.datasets.find()
+    datasets = list(mongo.db.datasets.find())
     return render_template("datasets.html", datasets=datasets)
 
 

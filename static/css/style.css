@@ -7,3 +7,8 @@
 .flashes h4 {
     line-height: 2;
 }
+
+.collapsible-footer {
+    font-size: 90%;
+    color: #767676;
+}
