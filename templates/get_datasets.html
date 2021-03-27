@@ -20,9 +20,15 @@
             <div class="collapsible-body">
                 <p>{{ dataset.dataset_description }}</p>
                 <hr>
-                <p class="collapsible-footer"><i class="fas fa-tag"></i> {{ dataset.category_name }}</p>
-                <p class="collapsible-footer"><i class="fas fa-calendar-check"></i> Last updated : {{ dataset.last_update }}</p>
-                <p class="collapsible-footer"><i class="fas fa-bug"></i> To do ? {{ dataset.to_do }}</p>
+                <p class="collapsible-footer">
+                    <i class="fas fa-tag prefix cyan-text"></i> 
+                    Category : {{ dataset.category_name }}</p>
+                <p class="collapsible-footer">
+                    <i class="fas fa-calendar-check prefix cyan-text"></i> 
+                    Last updated : {{ dataset.last_update }}</p>
+                <p class="collapsible-footer">
+                    <i class="fas fa-bug prefix cyan-text"></i> 
+                    To do : {{ dataset.to_do }}</p>
             </div>
             
         </li>
