@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h2>Hi! I am extending the base template!</h2>
-
     {% for dataset in datasets %}
         {{ dataset.dataset_name }}<br>
         {{ dataset.dataset_description }}<br>
@@ -10,5 +8,21 @@
         {{ dataset.is_fixed }}<br>
         {{ dataset.last_update }}<br>
     {% endfor %}
+
+    <ul class="collapsible popout">
+        <li>
+            <div class="collapsible-header white-text cyan darken-2 text-shadow"><i class="fas fa-caret-down"></i>First</div>
+            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+        </li>
+        <li>
+            <div class="collapsible-header white-text cyan darken-2 text-shadow"><i class="fas fa-caret-down"></i>Second</div>
+            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+        </li>
+        <li>
+            <div class="collapsible-header white-text cyan darken-2 text-shadow"><i class="fas fa-caret-down"></i>Third</div>
+            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+        </li>
+    </ul>
+            
 
 {% endblock %}
