@@ -81,7 +81,7 @@ about data containing population and demographic subjects.
 
     `    return 'Hello, World!’`
 
-    Check the Hello Flask by going to Play Debug menu on VSCode
+    Check the Hello Flask by going to Debug menu on VSCode
 
     Click on Run and Debug
 
@@ -92,7 +92,11 @@ about data containing population and demographic subjects.
     Click on it, and a new window will open with your Hello Flask
 
 ## Local Deployment via VSCode
-### Download the project folders to your local environment and before you commit your changes to Github for the first time, follow these steps:
+### Before you commit your changes to Github for the first time, follow these steps:
+
+NOTE: before downloading the project folders to your IDE, make sure you delete your current testing files: app.py and hello.py.
+
+Download datasetbucket project folders to your environment and follow the instructions bellow.
 
 1. If you can't locate these folders in your workspace, make sure you create an env.py and .gitignore files to keep your sensitive data secret
 
@@ -126,9 +130,9 @@ about data containing population and demographic subjects.
 
     This information will help create the integration between mongoBD and python-flask and redirect debug to your main terminal via the command `python3 app.py` (this will give you a port at 5000 to open a new window and run the app on your browser). 
     
-    You can still use vscode debug functionality to run the port, by opening the app.py file, going to the debug menu, click on degug and run, and then chose Flask to run your aplication from the dropdown.
+    You can still use vscode debug functionality to run the port, by opening the app.py file, going to the debug menu, click on "Run and Debug", and selecting Flask from the dropdown.
     
-    If you use `python3 app.py` and open the 5000 port from the command line, and further you need to stop the port to commit changes or use your terminal, in the vscode terminal window type `ctrl+c` to stop running the server and commit your changes.
+    If you use `python3 app.py` and open the 5000 port from the command line, and you further need to stop the port to commit changes or use your terminal, in the vscode terminal window type `ctrl+c` to stop running the port and commit changes.
 
 ## Heroku Deployment
 

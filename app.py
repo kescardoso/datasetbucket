@@ -16,16 +16,16 @@ if os.path.exists("env.py"):
 # Create an instance of Flask (Flask app)
 app = Flask(__name__)
 
-# Connect MongoDb to Flask (via PyMongo), and the env vars from os
+# Connect MongoDb to Flask (via PyMongo), and the secret key from env vars (env.py)
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
-# Connect mongo to communicate with the flask app (instance created above)
+# Connect Mongo to the Flask app (instance created above)
 mongo = PyMongo(app)
 
 
-# Home Page : displays the list of datasets
+# Home Page : displays the wiki list of datasets
 @app.route("/")
 @app.route("/get_datasets")
 def get_datasets():
