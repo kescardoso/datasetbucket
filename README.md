@@ -124,7 +124,11 @@ about data containing population and demographic subjects.
 
     `os.environ.setdefault("MONGO_DBNAME", "value_from mongoDB_here")`
 
-    This information will help create the integration between mongoBD and python-flask and redirect debug to your main terminal via the command `python3 app.py` (this will give you a port at 5000 to open a new window and run the app on your browser).
+    This information will help create the integration between mongoBD and python-flask and redirect debug to your main terminal via the command `python3 app.py` (this will give you a port at 5000 to open a new window and run the app on your browser). 
+    
+    You can still use vscode debug functionality to run the port, by opening the app.py file, going to the debug menu, click on degug and run, and then chose Flask to run your aplication from the dropdown.
+    
+    If you use `python3 app.py` and open the 5000 port from the command line, and further you need to stop the port to commit changes or use your terminal, in the vscode terminal window type `ctrl+c` to stop running the server and commit your changes.
 
 ## Heroku Deployment
 
