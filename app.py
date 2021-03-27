@@ -43,19 +43,17 @@ def register():
         )
 
         if existing_user:
-            """ If username was found in db, warn user """
+            """ If username was found in db, register and insert user to db """
             flash("Username already exists")
             return redirect(url_for("register"))
 
         register = {
-            """ If username was not found in db, invite to register """
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password"))
         }
-        """ Insert new user in db """
         mongo.db.users.insert_one(register)
 
-        """ Put the new user into a session cookie """
+        """ Put the new registered user into a session cookie """
         session["user"] = request.form.get("username").lower()
         flash("Registration Seccessful")
     return render_template("register.html")
@@ -70,7 +68,7 @@ def login():
     
         if existing_user:
             """ If username was found in db: ensure hashed password matches user input """
-            if check_password_hash(exisiting_user["password"], request.form.get("password")):
+            if check_password_hash(existing_user["password"], request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
                 flash("Welcome, {}".format(request.form.get("username")))
             else:
