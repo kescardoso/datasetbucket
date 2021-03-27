@@ -25,6 +25,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
+# Home Page : displays the list of datasets
 @app.route("/")
 @app.route("/get_datasets")
 def get_datasets():
@@ -32,31 +33,56 @@ def get_datasets():
     return render_template("datasets.html", datasets=datasets)
 
 
+# Registration Page : displays user registration form
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        """Check if username already exists in db"""
+        """ Check if username already exists in db """
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()}
         )
 
         if existing_user:
-            """If username exists and was found in db"""
+            """ If username was found in db, warn user """
             flash("Username already exists")
             return redirect(url_for("register"))
 
         register = {
-            """If username was not found in db, invite to register"""
+            """ If username was not found in db, invite to register """
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password"))
         }
-        """Insert new user in db"""
+        """ Insert new user in db """
         mongo.db.users.insert_one(register)
 
-        """Put the new user into a session cookie"""
+        """ Put the new user into a session cookie """
         session["user"] = request.form.get("username").lower()
         flash("Registration Seccessful")
     return render_template("register.html")
+
+
+# Login Page : displays user login form 
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        """ Check if username already exists in db """
+        existing_user = mongo.db.users.find_one({"username": request.form.get("username").lower()})
+    
+        if existing_user:
+            """ If username was found in db: ensure hashed password matches user input """
+            if check_password_hash(exisiting_user["password"], request.form.get("password")):
+                session["user"] = request.form.get("username").lower()
+                flash("Welcome, {}".format(request.form.get("username")))
+            else:
+                """ invalid password match """
+                flash("Incorrect Username and/or Password")
+                return redirect(url_for("login"))
+
+        else:
+            """ If username does not exist, warn user """
+            flash("Incorrect Username and/or Password")
+            return redirect(url_for("login"))
+    return render_template("login.html")
 
 
 if __name__ == "__main__":
