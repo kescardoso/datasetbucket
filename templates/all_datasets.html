@@ -10,11 +10,26 @@
 
             <!-- Head: Dataset name and "if to do" -->
             <div class="collapsible-header white-text cyan darken-2 text-shadow">
-                <i class="fas fa-caret-down"></i>
-                <strong>{{ dataset.dataset_name }}</strong>
-                {% if dataset.is_todo == "On" %}
-                    <i class="fas fa-exclamation-circle cyan-text text-lighten-2 tooltipped todo-alert"
-                    data-position="right" data-tooltip="To Do!"></i>
+                <div class="col s1">
+                    <i class="fas fa-caret-down"></i>
+                </div>
+                <!-- Dataset Name -->
+                <div class="col s-8">
+                    <div class="name-header">
+                        <strong>{{ dataset.dataset_name }}</strong>
+                        {% if session.user %}
+                        {% if dataset.is_todo == "On" %}
+                            <i class="fas fa-exclamation-circle green-text text-lighten-2 tooltipped todo-alert"
+                            data-position="right" data-tooltip="To Do!"></i>
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- Dataset option buttons -->
+                {% if session.user %}
+                <div class="col s-3">
+                    <a href="" class="waves-effect waves-light btn-small blue accent-4 option-button">Edit</a>
+                </div>
                 {% endif %}
              </div>
 

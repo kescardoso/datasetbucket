@@ -22,6 +22,14 @@
     margin-right: 8px;
 }
 
+.option-button {
+    justify-content: space-between;
+    position: absolute;
+    width: 6rem;
+    margin-right: 0;
+    right: 20%;
+}
+
 /* Add New Dataset */
 .todo-form {
     margin-left: 10px;
