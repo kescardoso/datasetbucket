@@ -24,10 +24,10 @@ mongo = PyMongo(app)
 
 # Home : main list of datasets
 @app.route("/")
-@app.route("/get_datasets")
-def get_datasets():
+@app.route("/all_datasets")
+def all_datasets():
     datasets = list(mongo.db.datasets.find())
-    return render_template("get_datasets.html", datasets=datasets)
+    return render_template("all_datasets.html", datasets=datasets)
 
 
 # New User Registration
@@ -123,7 +123,7 @@ def add_dataset():
         }
         mongo.db.datasets.insert_one(dataset)
         flash("New Dataset Successfully Added")
-        return redirect(url_for("get_datasets"))
+        return redirect(url_for("all_datasets"))
 
     """ Wire up the db to dynamically generate the category collection """
     categories = mongo.db.categories.find().sort("category_name")
