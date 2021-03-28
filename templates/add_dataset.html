@@ -3,21 +3,58 @@
 
     <h3 class="cyan-text text-darken-2 center-align">Add New Dataset</h3>
 
-    <div class="row">
+    <div class="row card-panel grey lighten-5">
         <form class="col s12" method="POST" action="">
-          <div class="row">
-            <div class="input-field col s12">
-              <i class="fas fa-user-circle prefix cyan-text text-darken-2"></i>
-              <input id="icon_prefix" type="text" class="validate">
-              <label for="icon_prefix">First Name</label>
+
+            <!-- Input : dataset name -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-pencil-alt prefix cyan-text text-darken-2"></i>
+                    <input id="dataset_name" name="dataset_name" minlength="4" maxlength="40"
+                           type="text" class="validate" required>
+                    <label for="dataset_name">Dataset Name</label>
+                </div>
             </div>
-            <div class="input-field col s12">
-              <i class="fas fa-user-circle prefix cyan-text text-darken-2"></i>
-              <input id="icon_telephone" type="tel" class="validate">
-              <label for="icon_telephone">Telephone</label>
+
+            <!-- Input : dataset description -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-align-left prefix cyan-text text-darken-2"></i>
+                    <textarea id="dataset_description" name="dataset_description" 
+                              class="materialize-textarea validate"
+                              minlength="5" maxlength="500"></textarea>
+                    <label for="dataset_description">Dataset Description</label>
+                </div>
             </div>
+
+            <!-- Datepicker, for "last updated" -->
+            <div class="row">
+              <div class="input-field col s12">
+                  <i class="fas fa-calendar-check prefix cyan-text text-darken-2"></i>
+                  <input id="last_update" name="last_update"
+                         type="text" class="datepicker validate" required>
+                  <label for="last_update">Last Updated</label>
+              </div>
           </div>
+
+            <!-- Switch ("To Do : On / Off") -->
+            <div class="row">
+                <div class="input-field col-s12">
+                    <div class="switch">
+                        <i class="fas fa-exclamation-circle prefix cyan-text text-darken-2 todo-form"></i>
+                        <label for="to_do">
+                            &nbsp;&nbsp; <strong>To Do:</strong> 
+                            &nbsp;&nbsp;&nbsp;&nbsp; 
+                            Off
+                            <input type="checkbox" id="to_do" name="to_do">
+                            <span class="lever"></span>
+                            On
+                        </label>
+                    </div>
+                </div>
+            </div>
+
         </form>
-      </div>
-            
+    </div>
+
 {% endblock %}

@@ -1,4 +1,5 @@
-// jQuery
+// jQuery Customization from Materialize:
+// https://materializecss.com/
 $(document).ready(function(){
     // Mobile hamburger navbar
     $('.sidenav').sidenav({edge: "right"});
@@ -6,4 +7,16 @@ $(document).ready(function(){
     $('.collapsible').collapsible();
     // Dataset list > "To Do" Tooltip
     $('.tooltipped').tooltip();
+    // DatePicker > Add New Dataset form
+    $(document).ready(function(){
+        $('.datepicker').datepicker({
+            // Materialize format options:
+            format: "dd mmmm, yyyy",
+            yearRange: 3,
+            showClearBtn: true,
+            i18n: {
+                done: "Select"
+            }
+        });
+      });
 });
