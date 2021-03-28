@@ -7,46 +7,53 @@
         <form class="col s12" method="POST" 
               action="{{ url_for('edit_dataset', dataset_id=dataset._id) }}">
 
-            <!-- Dropdown : category selection -->
+            <!-- Selected category -->
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-folder-open prefix cyan-text text-darken-2"></i>
                     <select id="category_name" name="category_name" class="validate" required>
-                        <option value="" disabled selected>Choose Category</option>
+                        <option value="" disabled>Choose Category</option>
                         {% for category in categories %}
-                            <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                        {% if category.category_name == dataset.category_name %}
+                            <option value="{{ category.category_name }}" selected>{{ category.category_name }}</option>
+                        {% else %}
+                            <option value="{{ category.category_name }}" >{{ category.category_name }}</option>
+                        {% endif %}
                         {% endfor %}
                     </select>
                     <label for="category_name">Dataset Category</label>
                 </div>
             </div>
 
-            <!-- Input : dataset name -->
+            <!-- Selected dataset name -->
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-pencil-alt prefix cyan-text text-darken-2"></i>
                     <input id="dataset_name" name="dataset_name" minlength="4" maxlength="40"
-                           type="text" class="validate" required>
+                           value="{{ dataset.dataset_name }}" type="text" class="validate" required>
                     <label for="dataset_name">Dataset Name</label>
                 </div>
             </div>
 
-            <!-- Input : dataset description -->
+            <!-- Selected dataset description -->
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-align-left prefix cyan-text text-darken-2"></i>
                     <textarea id="dataset_description" name="dataset_description" 
                               class="materialize-textarea validate"
-                              minlength="5" maxlength="500"></textarea>
+                              minlength="5" maxlength="500">
+                              {{- dataset.dataset_description -}}
+                              <!-- minus sign removes extra whitespace generated from code line-break -->
+                            </textarea>
                     <label for="dataset_description">Dataset Description</label>
                 </div>
             </div>
 
-            <!-- Datepicker, for "last updated" -->
+            <!-- Selected Datepicker ("last updated") -->
             <div class="row">
               <div class="input-field col s12">
                   <i class="fas fa-calendar-check prefix cyan-text text-darken-2"></i>
-                  <input id="last_update" name="last_update"
+                  <input id="last_update" name="last_update" value="{{ dataset.last_update }}"
                          type="text" class="datepicker validate" required>
                   <label for="last_update">Last Updated</label>
               </div>
@@ -58,10 +65,14 @@
                     <div class="switch">
                         <i class="fas fa-exclamation-circle prefix cyan-text text-darken-2 todo-form"></i>
                         <label for="is_todo" class="todo-switch">
-                            <strong>To Do:</strong>
-                            &nbsp;&nbsp;&nbsp;&nbsp; 
-                            Off
-                            <input type="checkbox" id="is_todo" name="is_todo">
+                            {% if dataset.is_todo == "On" %}
+                                <input type="checkbox" id="is_todo" name="is_todo" checked>
+                            {% else %}
+                                <strong>To Do:</strong>
+                                &nbsp;&nbsp;&nbsp;&nbsp; 
+                                Off
+                                <input type="checkbox" id="is_todo" name="is_todo">
+                            {% endif %}
                             <span class="lever"></span>
                             On
                         </label>
@@ -71,12 +82,17 @@
 
             <br>
 
-            <!-- Submit Button -->
+            <!-- Submit Button : Save Edits or Cancel -->
             <div class="row">
                 <div class="col s-12">
-                    <button type="submit" class="btn-large cyan darken-1 text-shadow">
-                        Edit Dataset <i class="fas fa-edit right"></i>
+                    <!-- Save Button (submit edits) -->
+                    <button type="submit" class="btn-large blue darken-1 text-shadow">
+                        Save <i class="fas fa-edit right"></i>
                     </button>
+                    <!-- Cancel Button -->
+                    <a href="{{ url_for('all_datasets') }}" class="btn-large grey text-shadow">
+                        Cancel <i class="fas fa-times-circle"></i>
+                    </a>
                 </div>
             </div>
 

@@ -134,8 +134,7 @@ def add_dataset():
 @app.route("/edit_dataset<dataset_id>", methods=["GET", "POST"])
 def edit_dataset(dataset_id):
     """ Retrieve a dataset by its id, and convert it to a bson data type """
-    dataset = mongo.db.dataset.find_one({"_id": ObjectId(dataset_id)})
-
+    dataset = mongo.db.datasets.find_one({"_id": ObjectId(dataset_id)})
     categories = mongo.db.categories.find().sort("category_name")
     return render_template("edit_dataset.html", dataset=dataset, categories=categories)
 
