@@ -9,12 +9,28 @@
 }
 
 /* Accordion */
+.todo-alert {
+    margin-left: 10px;
+}
+
 .collapsible-footer {
     font-size: 90%;
     color: #767676;
 }
 
+.collapsible-footer-icon {
+    margin-right: 8px;
+}
+
 /* Add New Dataset */
 .todo-form {
     margin-left: 10px;
+}
+
+.todo-switch {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: -20px;
+    padding-left: 12px;
+    font-size: 100%;
 }

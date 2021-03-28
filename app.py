@@ -108,10 +108,24 @@ def logout():
 
 
 # New Entry : add new dataset
-@app.route("/add_dataset")
+@app.route("/add_dataset", methods=["GET", "POST"])
 def add_dataset():
-    """ Wire up the db to dynamivally generate the category collections, 
-    by alphabetical ascending order """
+    """ Insert new informatiom from the form into the db """
+    if request.method == "POST":
+        is_todo = "On" if request.form.get("is_todo") else "Off"
+        dataset = {
+            "category_name": request.form.get("category_name"),
+            "dataset_name": request.form.get("dataset_name"),
+            "dataset_description": request.form.get("dataset_description"),
+            "is_todo": is_todo,
+            "last_update": request.form.get("last_update"),
+            "created_by": session["user"]
+        }
+        mongo.db.datasets.insert_one(dataset)
+        flash("New Dataset Successfully Added")
+        return redirect(url_for("get_datasets"))
+
+    """ Wire up the db to dynamically generate the category collection """
     categories = mongo.db.categories.find().sort("category_name")
     return render_template("add_dataset.html", categories=categories)
 
