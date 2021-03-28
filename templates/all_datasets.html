@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 
+<h3 class="cyan-text text-darken-2 center-align">All Datasets</h3>
+
     <!-- Dataset List : Accordion (Collapsible) -->
     <ul class="collapsible popout">
         {% for dataset in datasets %}
@@ -10,8 +12,8 @@
             <div class="collapsible-header white-text cyan darken-2 text-shadow">
                 <i class="fas fa-caret-down"></i>
                 <strong>{{ dataset.dataset_name }}</strong>
-                {% if dataset.to_do == "On" %}
-                    <i class="fas fa-exclamation-circle cyan-text text-lighten-2 tooltipped"
+                {% if dataset.is_todo == "On" %}
+                    <i class="fas fa-exclamation-circle cyan-text text-lighten-2 tooltipped todo-alert"
                     data-position="right" data-tooltip="To Do!"></i>
                 {% endif %}
              </div>
@@ -21,14 +23,17 @@
                 <p>{{ dataset.dataset_description }}</p>
                 <hr>
                 <p class="collapsible-footer">
-                    <i class="fas fa-tag prefix cyan-text"></i> 
+                    <i class="fas fa-tag prefix cyan-text collapsible-footer-icon"></i> 
                     Category : {{ dataset.category_name }}</p>
                 <p class="collapsible-footer">
-                    <i class="fas fa-calendar-check prefix cyan-text"></i> 
+                    <i class="fas fa-calendar-check prefix cyan-text collapsible-footer-icon"></i> 
                     Last updated : {{ dataset.last_update }}</p>
                 <p class="collapsible-footer">
-                    <i class="fas fa-exclamation-circle prefix cyan-text"></i> 
-                    To do : {{ dataset.to_do }}</p>
+                    <i class="fas fa-exclamation-circle prefix cyan-text collapsible-footer-icon"></i> 
+                    To do : {{ dataset.is_todo }}</p>
+                <p class="collapsible-footer">
+                    <i class="fas fa-user-edit prefix cyan-text collapsible-footer-icon"></i> 
+                    Author : {{ dataset.created_by }}</p>
             </div>
             
         </li>

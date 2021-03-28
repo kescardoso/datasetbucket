@@ -24,10 +24,10 @@ mongo = PyMongo(app)
 
 # Home : main list of datasets
 @app.route("/")
-@app.route("/get_datasets")
-def get_datasets():
+@app.route("/all_datasets")
+def all_datasets():
     datasets = list(mongo.db.datasets.find())
-    return render_template("get_datasets.html", datasets=datasets)
+    return render_template("all_datasets.html", datasets=datasets)
 
 
 # New User Registration
@@ -108,10 +108,24 @@ def logout():
 
 
 # New Entry : add new dataset
-@app.route("/add_dataset")
+@app.route("/add_dataset", methods=["GET", "POST"])
 def add_dataset():
-    """ Wire up the db to dynamivally generate the category collections, 
-    by alphabetical ascending order """
+    """ Insert new informatiom from the form into the db """
+    if request.method == "POST":
+        is_todo = "On" if request.form.get("is_todo") else "Off"
+        dataset = {
+            "category_name": request.form.get("category_name"),
+            "dataset_name": request.form.get("dataset_name"),
+            "dataset_description": request.form.get("dataset_description"),
+            "is_todo": is_todo,
+            "last_update": request.form.get("last_update"),
+            "created_by": session["user"]
+        }
+        mongo.db.datasets.insert_one(dataset)
+        flash("New Dataset Successfully Added")
+        return redirect(url_for("all_datasets"))
+
+    """ Wire up the db to dynamically generate the category collection """
     categories = mongo.db.categories.find().sort("category_name")
     return render_template("add_dataset.html", categories=categories)
 
