@@ -6,6 +6,20 @@
     <div class="row card-panel grey lighten-5">
         <form class="col s12" method="POST" action="">
 
+            <!-- Dropdown : category selection -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-folder-open prefix cyan-text text-darken-2"></i>
+                    <select id="category_name" name="category_name" class="validate" required>
+                        <option value="" disabled selected>Choose Category</option>
+                        {% for category in categories %}
+                            <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="category_name">Dataset Category</label>
+                </div>
+            </div>
+
             <!-- Input : dataset name -->
             <div class="row">
                 <div class="input-field col s12">

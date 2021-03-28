@@ -1,10 +1,7 @@
 import os
 import re
 
-from flask import (
-    Flask, flash, render_template,
-    redirect, request, session, url_for
-    )
+from flask import Flask, flash, render_template, redirect, request, session, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -25,7 +22,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
-# Home Page : displays the wiki list of datasets
+# Home : main list of datasets
 @app.route("/")
 @app.route("/get_datasets")
 def get_datasets():
@@ -33,7 +30,7 @@ def get_datasets():
     return render_template("get_datasets.html", datasets=datasets)
 
 
-# Registration Page : displays user registration form
+# New User Registration
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """ Check if username already exists in db """
@@ -62,7 +59,7 @@ def register():
     return render_template("register.html")
 
 
-# Login Page : displays user login form 
+# User Login 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """ Check if username already exists in db """
@@ -88,7 +85,7 @@ def login():
     return render_template("login.html")
 
 
-# User Profile Page
+# User Profile
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     """ Grab the session user's username from db (ignore the password) """
@@ -101,7 +98,7 @@ def profile(username):
     return redirect(url_for("login"))
 
 
-# User Profile Page
+# User Logout
 @app.route("/logout")
 def logout():
     """ Remove user from session cookies """
@@ -110,9 +107,13 @@ def logout():
     return redirect(url_for("login"))
 
 
+# New Entry : add new dataset
 @app.route("/add_dataset")
 def add_dataset():
-    return render_template("add_dataset.html")
+    """ Wire up the db to dynamivally generate the category collections, 
+    by alphabetical ascending order """
+    categories = mongo.db.categories.find().sort("category_name")
+    return render_template("add_dataset.html", categories=categories)
 
 
 if __name__ == "__main__":
