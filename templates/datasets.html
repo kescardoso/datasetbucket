@@ -14,10 +14,11 @@
                     <i class="fas fa-caret-down"></i>
                 </div>
                 <!-- Dataset Name -->
+                <!-- Only post author is able to edit or delete dataset -->
                 <div class="col s-8">
                     <div class="name-header">
                         <strong>{{ dataset.dataset_name }}</strong>
-                        {% if session.user %}
+                        {% if session.user|lower == datset.created_by|lower %}
                         {% if dataset.is_todo == "On" %}
                             <i class="fas fa-exclamation-circle green-text text-lighten-2 tooltipped todo-alert"
                             data-position="right" data-tooltip="To Do!"></i>
