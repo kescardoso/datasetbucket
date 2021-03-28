@@ -130,6 +130,16 @@ def add_dataset():
     return render_template("add_dataset.html", categories=categories)
 
 
+# Edit Dataset (edit and/or delete information from the db)
+@app.route("/edit_dataset<dataset_id>", methods=["GET", "POST"])
+def edit_dataset(dataset_id):
+    """ Retrieve a dataset by its id, and convert it to a bson data type """
+    dataset = mongo.db.dataset.find_one({"_id": ObjectId(dataset_id)})
+
+    categories = mongo.db.categories.find().sort("category_name")
+    return render_template("edit_dataset.html", dataset=dataset, categories=categories)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

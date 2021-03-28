@@ -28,7 +28,10 @@
                 <!-- Dataset option buttons -->
                 {% if session.user %}
                 <div class="col s-3">
-                    <a href="" class="waves-effect waves-light btn-small blue accent-4 option-button">Edit</a>
+                    <a href="{{ url_for('edit_dataset', dataset_id=dataset._id) }}" 
+                       class="waves-effect waves-light btn-small blue accent-4 option-button">
+                       Edit
+                    </a>
                 </div>
                 {% endif %}
              </div>

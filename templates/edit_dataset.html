@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3 class="cyan-text text-darken-2 center-align">Edit Dataset</h3>
+
+    <div class="row card-panel grey lighten-5">
+        <form class="col s12" method="POST" 
+              action="{{ url_for('edit_dataset', dataset_id=dataset._id) }}">
+
+            <!-- Dropdown : category selection -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-folder-open prefix cyan-text text-darken-2"></i>
+                    <select id="category_name" name="category_name" class="validate" required>
+                        <option value="" disabled selected>Choose Category</option>
+                        {% for category in categories %}
+                            <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="category_name">Dataset Category</label>
+                </div>
+            </div>
+
+            <!-- Input : dataset name -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-pencil-alt prefix cyan-text text-darken-2"></i>
+                    <input id="dataset_name" name="dataset_name" minlength="4" maxlength="40"
+                           type="text" class="validate" required>
+                    <label for="dataset_name">Dataset Name</label>
+                </div>
+            </div>
+
+            <!-- Input : dataset description -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-align-left prefix cyan-text text-darken-2"></i>
+                    <textarea id="dataset_description" name="dataset_description" 
+                              class="materialize-textarea validate"
+                              minlength="5" maxlength="500"></textarea>
+                    <label for="dataset_description">Dataset Description</label>
+                </div>
+            </div>
+
+            <!-- Datepicker, for "last updated" -->
+            <div class="row">
+              <div class="input-field col s12">
+                  <i class="fas fa-calendar-check prefix cyan-text text-darken-2"></i>
+                  <input id="last_update" name="last_update"
+                         type="text" class="datepicker validate" required>
+                  <label for="last_update">Last Updated</label>
+              </div>
+          </div>
+
+            <!-- Switch ("To Do : On / Off") -->
+            <div class="row">
+                <div class="input-field col-s12">
+                    <div class="switch">
+                        <i class="fas fa-exclamation-circle prefix cyan-text text-darken-2 todo-form"></i>
+                        <label for="is_todo" class="todo-switch">
+                            <strong>To Do:</strong>
+                            &nbsp;&nbsp;&nbsp;&nbsp; 
+                            Off
+                            <input type="checkbox" id="is_todo" name="is_todo">
+                            <span class="lever"></span>
+                            On
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <!-- Submit Button -->
+            <div class="row">
+                <div class="col s-12">
+                    <button type="submit" class="btn-large cyan darken-1 text-shadow">
+                        Edit Dataset <i class="fas fa-edit right"></i>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+{% endblock %}
