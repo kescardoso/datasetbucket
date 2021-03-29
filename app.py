@@ -152,6 +152,14 @@ def edit_dataset(dataset_id):
     return render_template("edit.html", dataset=dataset, categories=categories)
 
 
+# Delete Dataset and remove it from the db
+@app.route("/delete_dataset/<dataset_id>")
+def delete_dataset(dataset_id):
+    mongo.db.dataset.remove({"_id": ObjectId(dataset_id)})
+    flash("Dataset Successfully Deleted")
+    return redirect(url_for("all_datasets"))
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

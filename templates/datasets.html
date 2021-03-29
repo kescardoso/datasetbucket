@@ -14,20 +14,18 @@
                     <i class="fas fa-caret-down"></i>
                 </div>
                 <!-- Dataset Name -->
-                <!-- Only post author is able to edit or delete dataset -->
                 <div class="col s-8">
                     <div class="name-header">
                         <strong>{{ dataset.dataset_name }}</strong>
-                        {% if session.user|lower == datset.created_by|lower %}
                         {% if dataset.is_todo == "On" %}
                             <i class="fas fa-exclamation-circle green-text text-lighten-2 tooltipped todo-alert"
                             data-position="right" data-tooltip="To Do!"></i>
                         {% endif %}
-                        {% endif %}
                     </div>
                 </div>
                 <!-- Dataset option buttons -->
-                {% if session.user %}
+                <!-- Only post author is able to access edit option -->
+                {% if session.user|lower == dataset.created_by|lower %}
                 <div class="col s-3">
                     <a href="{{ url_for('edit_dataset', dataset_id=dataset._id) }}" 
                        class="waves-effect waves-light btn-small blue accent-4 option-button">
