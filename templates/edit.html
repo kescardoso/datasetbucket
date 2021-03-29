@@ -82,21 +82,45 @@
             <br>
 
             <!-- Submit Button : Save Edits, Delete or Cancel -->
+            <!-- Only post author and admin are able to access the edit option -->
             <div class="row">
+                {% if session.user|lower == dataset.created_by|lower or session.user == "admin" %}
                 <div class="col s-12">
                     <!-- Save Button (submit edits) -->
-                    <button type="submit" class="btn-large blue darken-1 text-shadow">
-                        Save <i class="fas fa-edit right"></i>
+                    <button type="submit" 
+                            class="btn-large blue darken-1 text-shadow">
+                            Save <i class="fas fa-edit right"></i>
                     </button>
                     <!-- Delete Button -->
-                    <a href="{{ url_for('delete_dataset', dataset_id=dataset._id) }}" class="btn-large red text-shadow">
-                        Cancel <i class="fas fa-times-circle"></i>
+                    <a href="{{ url_for('delete_dataset', dataset_id=dataset._id) }}" 
+                       class="btn-large red text-shadow">
+                       Delete <i class="fas fa-times-circle"></i>
                     </a>
                     <!-- Cancel Button -->
-                    <a href="{{ url_for('all_datasets') }}" class="btn-large grey text-shadow">
-                        Cancel <i class="fas fa-times-circle"></i>
+                    <a href="{{ url_for('all_datasets') }}" 
+                       class="btn-large grey text-shadow">
+                       Cancel <i class="fas fa-times-circle"></i>
                     </a>
                 </div>
+                {% else %}
+                <div class="col s-12">
+                    <!-- Save Button (submit edits) -->
+                    <button type="submit" 
+                            class="disabled btn-large blue darken-1 text-shadow">
+                            Save <i class="fas fa-edit right"></i>
+                    </button>
+                    <!-- Delete Button -->
+                    <a href="{{ url_for('delete_dataset', dataset_id=dataset._id) }}" 
+                       class="disabled btn-large red text-shadow">
+                       Delete <i class="fas fa-times-circle"></i>
+                    </a>
+                    <!-- Cancel Button -->
+                    <a href="{{ url_for('all_datasets') }}" 
+                       class="disabled btn-large grey text-shadow">
+                       Cancel <i class="fas fa-times-circle"></i>
+                    </a>
+                </div>
+                {% endif %}
             </div>
 
         </form>
