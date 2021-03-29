@@ -10,11 +10,28 @@
 
             <!-- Head: Dataset name and "if to do" -->
             <div class="collapsible-header white-text cyan darken-2 text-shadow">
-                <i class="fas fa-caret-down"></i>
-                <strong>{{ dataset.dataset_name }}</strong>
-                {% if dataset.is_todo == "On" %}
-                    <i class="fas fa-exclamation-circle cyan-text text-lighten-2 tooltipped todo-alert"
-                    data-position="right" data-tooltip="To Do!"></i>
+                <div class="col s1">
+                    <i class="fas fa-caret-down"></i>
+                </div>
+                <!-- Dataset Name -->
+                <div class="col s-8">
+                    <div class="name-header">
+                        <strong>{{ dataset.dataset_name }}</strong>
+                        {% if dataset.is_todo == "On" %}
+                            <i class="fas fa-exclamation-circle green-text text-lighten-2 tooltipped todo-alert"
+                            data-position="right" data-tooltip="To Do!"></i>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- Dataset option buttons -->
+                <!-- Only post author and admin are able to access the edit option -->
+                {% if session.user|lower == dataset.created_by|lower or session.user == "admin" %}
+                <div class="col s-3">
+                    <a href="{{ url_for('edit_dataset', dataset_id=dataset._id) }}" 
+                       class="waves-effect waves-light btn-small blue accent-4 option-button">
+                       Edit
+                    </a>
+                </div>
                 {% endif %}
              </div>
 

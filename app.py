@@ -27,7 +27,7 @@ mongo = PyMongo(app)
 @app.route("/all_datasets")
 def all_datasets():
     datasets = list(mongo.db.datasets.find())
-    return render_template("all_datasets.html", datasets=datasets)
+    return render_template("datasets.html", datasets=datasets)
 
 
 # New User Registration
@@ -107,7 +107,7 @@ def logout():
     return redirect(url_for("login"))
 
 
-# New Entry : add new dataset
+# Add new dataset
 @app.route("/add_dataset", methods=["GET", "POST"])
 def add_dataset():
     """ Insert new informatiom from the form into the db """
@@ -127,7 +127,37 @@ def add_dataset():
 
     """ Wire up the db to dynamically generate the category collection """
     categories = mongo.db.categories.find().sort("category_name")
-    return render_template("add_dataset.html", categories=categories)
+    return render_template("add.html", categories=categories)
+
+
+# Edit Dataset (edit and/or delete information from the db)
+@app.route("/edit_dataset<dataset_id>", methods=["GET", "POST"])
+def edit_dataset(dataset_id):
+    if request.method == "POST":
+        is_todo = "On" if request.form.get("is_todo") else "Off"
+        save_edit = {
+            "category_name": request.form.get("category_name"),
+            "dataset_name": request.form.get("dataset_name"),
+            "dataset_description": request.form.get("dataset_description"),
+            "is_todo": is_todo,
+            "last_update": request.form.get("last_update"),
+            "created_by": session["user"]
+        }
+        mongo.db.datasets.update({"_id": ObjectId(dataset_id)}, save_edit)
+        flash("Dataset Successfully Updated")
+
+    """ Retrieve a dataset by its id, and convert it to a bson data type """
+    dataset = mongo.db.datasets.find_one({"_id": ObjectId(dataset_id)})
+    categories = mongo.db.categories.find().sort("category_name")
+    return render_template("edit.html", dataset=dataset, categories=categories)
+
+
+# Delete Dataset and remove it from the db
+@app.route("/delete_dataset/<dataset_id>")
+def delete_dataset(dataset_id):
+    mongo.db.dataset.remove({"_id": ObjectId(dataset_id)})
+    flash("Dataset Successfully Deleted")
+    return redirect(url_for("all_datasets"))
 
 
 if __name__ == "__main__":
