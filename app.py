@@ -27,7 +27,8 @@ mongo = PyMongo(app)
 @app.route("/all_datasets")
 def all_datasets():
     datasets = list(mongo.db.datasets.find())
-    return render_template("datasets.html", datasets=datasets)
+    categories = list(mongo.db.categories.find())
+    return render_template("datasets.html", datasets=datasets, categories=categories)
 
 
 # New User Registration
@@ -114,7 +115,7 @@ def add_dataset():
     if request.method == "POST":
         is_todo = "On" if request.form.get("is_todo") else "Off"
         dataset = {
-            "category_name": request.form.get("category_name"),
+            "category_name": request.form.getlist("category_name"),
             "dataset_name": request.form.get("dataset_name"),
             "dataset_description": request.form.get("dataset_description"),
             "is_todo": is_todo,
@@ -136,7 +137,7 @@ def edit_dataset(dataset_id):
     if request.method == "POST":
         is_todo = "On" if request.form.get("is_todo") else "Off"
         save_edit = {
-            "category_name": request.form.get("category_name"),
+            "category_name": request.form.getlist("category_name"),
             "dataset_name": request.form.get("dataset_name"),
             "dataset_description": request.form.get("dataset_description"),
             "is_todo": is_todo,
