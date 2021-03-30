@@ -8,95 +8,50 @@ about data containing population and demographic subjects.
 
 ### Check the deployed version on Heroku: https://datasetbucket.herokuapp.com/
 
-## Python and Flask installation via VSCode
+## Installation and Local Deployment via VSCode
 
-### Prior to install this project in your local environment, follow these steps to make sure all the requirements are in place and working
+### Installation
 
-1. Install python in your machine
+1. Install python3 and pip3 in your machine
 
     https://www.python.org
 
-    If on a Mac, you can use home-brew with 
-
-    `brew install python3`
-
-    This command will install python3 and pip3
-
-2. Open a new VSCode workspace (as you usually do) and install the Python extension
+2. Open a new VSCode workspace and install the Python extension
 
     https://marketplace.visualstudio.com/items?itemName=ms-python.python
 
-3. Test a “Hello Python” print statement to see if python is working
-
-    create file: hello.py
-
-    and enter this:
-
-    `msg = “Hello World!`
-
-    `print(msg)`
-
-    Check the terminal for the print.
-
 4. Create a virtual environment
 
-    On the terminal:
+    On the vscode terminal:
 
     `Python3 -m venv venv`
 
-    The folders will be automatically set up on your workspace
+    After running the command, the folders will be automatically set up on your workspace
 
-5. Accept vscode tip to use this folder as your workspace
+    And then run:
 
-6. Before installing Linter pylint
+    `source venv/bin/activate`
 
-    On the terminal:
+    And only now accept or install pylint
 
-    ` source venv/bin/activate `
 
-    And the accept or install pylint
+5. Install Flask
 
-7. Install Flask
-
-    On the terminal:
+    On the vscode terminal:
 
     ` pip3 install flask `
+    
+    Write a "Hello Flask" to see if Flask is working
 
-8. Test a "Hello Flask" to see if Flask is working
-
-    https://flask.palletsprojects.com/en/1.1.x/quickstart/
-
-    create file: app.py
-
-    enter this:
-
-    `from flask import Flask`
-
-    `app = Flask(__name__)`
-
-
-    `@app.route(‘/‘)`
-
-    `def hello_world():`
-
-    `    return 'Hello, World!’`
-
-    Check the Hello Flask by going to Debug menu on VSCode
-
-    Click on Run and Debug
-
-    and choose to run as Flask
+    Click on Run and Debug and choose to run as Flask
 
     watch the command line for the local web server address to appear
 
     Click on it, and a new window will open with your Hello Flask
 
-## Local Deployment via VSCode
-### Before you commit your changes to Github for the first time, follow these steps:
+### Local Deployment
 
-NOTE: before downloading the project folders to your IDE, make sure you delete your current testing files: app.py and hello.py.
-
-Download datasetbucket project folders to your environment and follow the instructions bellow.
+Before you commit your changes to Github for the first time, download datasetbucket project folders to your environment and follow the instructions bellow.
 
 1. If you can't locate these folders in your workspace, make sure you create an env.py and .gitignore files to keep your sensitive data secret
 
@@ -127,48 +82,6 @@ Download datasetbucket project folders to your environment and follow the instru
     `os.environ.setdefault("MONGO_URI", "value_from mongoDB_here")`
 
     `os.environ.setdefault("MONGO_DBNAME", "value_from mongoDB_here")`
-
-    This information will help create the integration between mongoBD and python-flask and redirect debug to your main terminal via the command `python3 app.py` (this will give you a port at 5000 to open a new window and run the app on your browser). 
-    
-    You can still use vscode debug functionality to run the port, by opening the app.py file, going to the debug menu, click on "Run and Debug", and selecting Flask from the dropdown.
-    
-    If you use `python3 app.py` and open the 5000 port from the command line, and you further need to stop the port to commit changes or use your terminal, in the vscode terminal window type `ctrl+c` to stop running the port and commit changes.
-
-## Heroku Deployment
-
-1. Fulfil all Heroku requirements by freezing your dependencies and creating a Procfile:
-
-    On the terminal (vscode):
-
-    `pip3 freeze > requirements.txt`
-
-    `echo web: python app.py > Procfile`
-
-    Commit and push your changes.
-
-2. Open your Heroku Dashboard and create a new app. Name your app and choose your region.
-
-3. Connect your heroku app to your git repository, by going to:
-
-    - "Deploy" Menu > "Deployment method" > Click: "Connect to GitHub"
-
-    - "Connect to GitHub" > search your repo from the dropdown, and connect
-
-    - Choose a branch to deploy your changes
-
-4. Add your Config Vars to Heroku.
-
-    Navigate to the settings menu, and then to Config Vars session, and enter here the sensitive information from your env.py file.
-
-5. Connect your GitHub Repo
-
-## Connect MongoDB with Flask via flask-pymongo
-
-Flask-PyMongo is a 3rd-party library that helps connect the MongoDB database and the datasetbucket application by using a database url. On the vscode terminal, install:
-
-1. `pip3 install flask-pymongo`
-
-2. `pip3 install dnspython`
 
 ## Technologies used
 
