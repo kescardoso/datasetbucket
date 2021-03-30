@@ -170,6 +170,31 @@ Flask-PyMongo is a 3rd-party library that helps connect the MongoDB database and
 
 2. `pip3 install dnspython`
 
+## Connect to Kaggle
+
+Kaggle API allows the developer to download datasets directly from the terminal/command-line
+
+1. Create a kaggle account at https://kaggle.com
+
+2. `pip install kaggle`
+
+3. Go to 'Account' tab in your kaggle profile a scroll to 'API' section. Click 'Creat new API Token' and add the kaggle.json file that will download to your project structure.
+
+For more complete instructions on how to use the Kaggle API, go to https://www.kaggle.com/docs/api#getting-started-installation-&-authentication
+
+## Libraires you might need to install
+
+`pip install os`
+`pip install time`
+`pip install sys`
+`pip install json`
+`pip install csv`
+`pip install reportlab`
+`pip install numpy`
+`pip install statistics`
+`pip install sklearn.linear_model`
+
+
 ## Technologies used
 
 - Python - an interpreted, high-level and general-purpose programming language, great for data base structured projects
