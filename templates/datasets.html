@@ -39,9 +39,18 @@
             <div class="collapsible-body">
                 <p>{{ dataset.dataset_description }}</p>
                 <hr>
+                <!-- Display Categories as string or list -->
                 <p class="collapsible-footer">
                     <i class="fas fa-tag prefix cyan-text collapsible-footer-icon"></i> 
-                    Category : {{ dataset.category_name }}</p>
+                    Category : 
+                    {% if dataset.category_name is string %}
+                        {{ dataset.category_name }}  
+                    {% else %}
+                        {% for category in dataset.category_name %}
+                            {{ category }}
+                        {% endfor %}
+                    {% endif %}
+                </p>
                 <p class="collapsible-footer">
                     <i class="fas fa-calendar-check prefix cyan-text collapsible-footer-icon"></i> 
                     Last updated : {{ dataset.last_update }}</p>
