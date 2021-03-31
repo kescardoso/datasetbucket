@@ -59,19 +59,19 @@ about data containing population and demographic subjects.
 
     Kaggle API allows the developer to download datasets directly from the terminal/command-line
 
-        1. Create a [kaggle account](https://kaggle.com)
+    1. Create a [kaggle account](https://kaggle.com)
 
-        2. Run: `pip install kaggle`
+    2. Run: `pip install kaggle`
 
-        3. Go to the 'Account' tab in your Kaggle profile and scroll to the 'API' section. Click 'Create new API Token' and add the `kaggle.json` file, which will download to your project structure.
+    3. Go to the 'Account' tab in your Kaggle profile and scroll to the 'API' section. Click 'Create new API Token' and add the `kaggle.json` file, which will download to your project structure.
 
-        4. You may need to install the following packages to enable all the commands and functionalities:
+    4. You may need to install the following packages to enable all the commands and functionalities:
 
-        `pip install reportlab`
+    `pip install reportlab`
 
-        `pip install statistics`
+    `pip install statistics`
 
-        `pip install sklearn`
+    `pip install sklearn`
 
     For more complete and detailed instructions on how to use the Kaggle API, visit [Kaggle's documentation](https://www.kaggle.com/docs/api#getting-started-installation-&-authentication)
 
