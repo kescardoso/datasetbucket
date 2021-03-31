@@ -8,6 +8,17 @@ about data containing population and demographic subjects.
 
 [Click here to view the deployed app on Heroku](https://datasetbucket.herokuapp.com/)
 
+## Technologies used
+
+- [MongoDB](https://www.mongodb.com/) - a document database (stores data in JSON-like documents) with a horizontal, scale-out architecture that can support huge volumes of both data and traffic.
+- [Materialize](https://materializecss.com/) - a modern front-end framework (responsive and mobile-first, similar to Bootstrap) that helps developers build a stylish and responsive application.
+- [Python](https://www.python.org/) - an interpreted, high-level and general-purpose programming language, great for data base structured projects.
+- [Pip](https://pypi.org/project/pip/) - a package manager for Python, that allows developers to install and manage additional libraries and dependencies that are not distributed as part of the standard library.
+- [Flask](https://flask.palletsprojects.com/) - a Python framework that depends on the Jinja template engine and the Werkzeug WSGI toolkit.
+- [Heroku](https://www.heroku.com/) - used for the app deployment, Heroku is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
+- [Git](https://git-scm.com/) - a version control system for for source code management; it allows tracking file changes and coordinating work on those files among multiple people and machines.
+- [GitHub](https://github.com/) - a open-source code hosting platform for version control and collaboration. It lets developers work remotely and together on projects from anywhere.
+
 ## Project Installation and Local Deployment
 
 ### Installation
@@ -44,15 +55,55 @@ about data containing population and demographic subjects.
 
     `pip3 install dnspython`
 
-4. Run the `app.py` in debug mode as a flask application to see the project in your locally deployed http address.
+4. Wire up Kaggle
 
-## Technologies used
+    Kaggle API allows the developer to download datasets directly from the terminal/command-line
 
-- [MongoDB](https://www.mongodb.com/) - a document database (stores data in JSON-like documents) with a horizontal, scale-out architecture that can support huge volumes of both data and traffic.
-- [Materialize](https://materializecss.com/) - a modern front-end framework (responsive and mobile-first, similar to Bootstrap) that helps developers build a stylish and responsive application.
-- [Python](https://www.python.org/) - an interpreted, high-level and general-purpose programming language, great for data base structured projects.
-- [Pip](https://pypi.org/project/pip/) - a package manager for Python, that allows developers to install and manage additional libraries and dependencies that are not distributed as part of the standard library.
-- [Flask](https://flask.palletsprojects.com/) - a Python framework that depends on the Jinja template engine and the Werkzeug WSGI toolkit.
-- [Heroku](https://www.heroku.com/) - used for the app deployment, Heroku is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
-- [Git](https://git-scm.com/) - a version control system for for source code management; it allows tracking file changes and coordinating work on those files among multiple people and machines.
-- [GitHub](https://github.com/) - a open-source code hosting platform for version control and collaboration. It lets developers work remotely and together on projects from anywhere.
+    1. Create a [kaggle account](https://kaggle.com)
+
+    2. Run: `pip install kaggle`
+
+    3. Go to the 'Account' tab in your Kaggle profile and scroll to the 'API' section. Click 'Create new API Token' and add the `kaggle.json` file, which will download to your project structure.
+
+    4. You may need to install the following packages to enable all the commands and functionalities:
+
+    `pip install reportlab`
+
+    `pip install statistics`
+
+    `pip install sklearn`
+
+    For more complete and detailed instructions on how to use the Kaggle API, visit [Kaggle's documentation](https://www.kaggle.com/docs/api#getting-started-installation-&-authentication)
+
+5. Run the `app.py` in debug mode as a flask application to see the project in your locally deployed http address.
+
+## Heroku Deployment
+
+1. Fulfil all Heroku requirements by freezing your dependencies and creating a Procfile:
+
+    Run these two commands:
+
+    `pip3 freeze > requirements.txt`
+
+    `echo web: python app.py > Procfile`
+
+    Commit and push your changes.
+
+2. Create a new app from your Heroku dashboard.
+
+3. Add your Config Vars to Heroku, by going to 'Settings', and then to the 'Config Vars', and enter the sensitive information from MongoDb and your env.py file:
+
+    `import os`
+
+    `os.environ.setdefault("SECRET_KEY", "your_secret_key_here")`
+
+    `os.environ.setdefault("MONGO_URI", "value_from mongoDB_here")`
+
+    `os.environ.setdefault("MONGO_DBNAME", "value_from mongoDB_here")`
+
+5. From your Heroku dashboard, wire up your heroku app to your git repository, by going to:
+
+    - "Deploy" > "Deployment Method" > and click: "Connect to GitHub"
+    - Search your repo from the dropdown, and connect
+    - Choose a branch to deploy your changes
+    - Deploy your branch and view app

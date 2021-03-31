@@ -5,8 +5,6 @@
 
     <h5 class="cyan-text text-darken-2 center-align">All Datasets in: {{category}}</h5>
 
-    <br>
-
     <!-- List: query datasets by category -->
     <ul class="collapsible popout">
         {% for dataset in datasets %}
@@ -59,21 +57,31 @@
                     <!-- Dataset last updated -->
                     <p class="collapsible-footer">
                         <i class="fas fa-calendar-check prefix cyan-text collapsible-footer-icon"></i> 
-                        Last updated : {{ dataset.last_update }}</p>
+                        Last updated : {{ dataset.last_update }}
+                    </p>
                     <!-- Dataset "is to do" (on or off) -->
                     <p class="collapsible-footer">
                         <i class="fas fa-exclamation-circle prefix cyan-text collapsible-footer-icon"></i> 
-                        To do : {{ dataset.is_todo }}</p>
+                        To do : {{ dataset.is_todo }}
+                    </p>
                     <!-- Dataset author -->
                     <p class="collapsible-footer">
                         <i class="fas fa-user-edit prefix cyan-text collapsible-footer-icon"></i> 
-                        Author : {{ dataset.created_by }}</p>
-                </div>
+                        Author : {{ dataset.created_by }}
+                    </p>
+            </div>
                 
-            </li>
+        </li>
             {% endfor %}
-        </ul>
+    </ul>
 
-    </div>
-    
+    <h5 class="cyan-text text-darken-2 center-align">The End</h5>
+
+    <p class="center-align">
+        <a href="{{ url_for('all_categories') }}" 
+           class="cyan-text text-darken-4">
+           Go back to all categories
+        </a>
+    </p>
+  
 {% endblock %}
