@@ -34,14 +34,14 @@
                 {% if session.user %}
                 <ul id="dropdown_datasets" class="dropdown-content">
                     <li><a href="{{ url_for('all_datasets') }}">View Datasets</a></li>
-                    <li><a href="{{ url_for('add_dataset') }}">Add New Dataset</a></li>
+                    <li><a href="{{ url_for('add_dataset') }}">Add Dataset</a></li>
                 </ul>
                 {% endif %}
             <!-- Category Dropdown -->
             <ul id="dropdown_categories" class="dropdown-content">
                 {% if session.user %}
                     <li><a href="{{ url_for('all_categories') }}">View Categories</a></li>
-                    <li><a href="#">Add New Category</a></li>
+                    <li><a href="{{ url_for('add_category') }}">Add Category</a></li>
                 {% endif %}
             </ul>
 

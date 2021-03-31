@@ -3,11 +3,22 @@
 
 <h3 class="cyan-text text-darken-2 center-align">All Categories</h3>
 
+{% if session.user %}
+    <div class="row">
+        <div class="col s12 center-align">
+            <a href="{{ url_for('add_category') }}" 
+               class="btn cyan darken-1 text-shadow">
+               Add New Category <i class="fas fa-plus-square right"></i>
+            </a>
+        </div>
+    </div>
+{% endif %}
+
 <div class="row">
     {% for category in categories %}
         <div class="row">
             <div class="col s12 m3">
-            <div class="card cyan darken-2 text-shadow center-align">
+            <div class="card cyan darken-1 text-shadow center-align">
                 <div class="card-content white-text">
                     <span class="card-title">{{ category.category_name }}</span>
                 </div>
@@ -18,7 +29,7 @@
                     View</a>
                     <!-- Edit this category -->
                     <!-- Only author and admin are able to edit -->
-                    {% if session.user|lower == category.created_by|lower or session.user == "admin" %}
+                    {% if session.user|lower == category.created_by|lower or session.user == "admin"|lower %}
                         <a href="#" 
                         class="waves-effect waves-light btn-small blue accent-4">
                         Edit</a>
