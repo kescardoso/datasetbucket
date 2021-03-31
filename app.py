@@ -157,7 +157,7 @@ def edit_dataset(dataset_id):
 # Delete Dataset
 @app.route("/delete_dataset/<dataset_id>")
 def delete_dataset(dataset_id):
-    mongo.db.dataset.remove({"_id": ObjectId(dataset_id)})
+    mongo.db.datasets.remove({"_id": ObjectId(dataset_id)})
     flash("Dataset Successfully Deleted")
     return redirect(url_for("all_datasets"))
 
@@ -202,7 +202,7 @@ def edit_category(category_id):
 # Delete Category
 @app.route("/delete_category/<category_id>")
 def delete_category(category_id):
-    mongo.db.category.remove({"_id": ObjectId(category_id)})
+    mongo.db.categories.remove({"_id": ObjectId(category_id)})
     flash("Category Successfully Deleted")
     return redirect(url_for("all_categories"))
 
