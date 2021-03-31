@@ -37,7 +37,7 @@ about data containing population and demographic subjects.
 
 ### Local Deployment
 
-1. Create an `env.py` file to keep your sensitive data secret
+1. Create an `env.py` file to keep your sensitive data secret.
 
 2. Open `env.py` and enter the following:
 
@@ -57,21 +57,21 @@ about data containing population and demographic subjects.
 
 4. Wire up Kaggle
 
-    Kaggle API allows the developer to download datasets directly from the terminal/command-line
+    Kaggle API allows the developer to download datasets directly from the terminal.
 
     1. Create a [kaggle account](https://kaggle.com)
 
-    2. Run: `pip install kaggle`
+    2. Run: `pip3 install kaggle`
 
     3. Go to the 'Account' tab in your Kaggle profile and scroll to the 'API' section. Click 'Create new API Token' and add the `kaggle.json` file, which will download to your project structure.
 
     4. You may need to install the following packages to enable all the commands and functionalities:
 
-    `pip install reportlab`
+    `pip3 install reportlab`
 
-    `pip install statistics`
+    `pip3 install statistics`
 
-    `pip install sklearn`
+    `pip3 install sklearn`
 
     For more complete and detailed instructions on how to use the Kaggle API, visit [Kaggle's documentation](https://www.kaggle.com/docs/api#getting-started-installation-&-authentication)
 
@@ -91,7 +91,7 @@ about data containing population and demographic subjects.
 
 2. Create a new app from your Heroku dashboard.
 
-3. Add your Config Vars to Heroku, by going to 'Settings', and then to the 'Config Vars', and enter the sensitive information from MongoDb and your env.py file:
+3. Add your environmental variables to Heroku, by going to 'Settings', and then to 'Config Vars', and enter the sensitive information from your MongoDB and your `env.py` file:
 
     `import os`
 
