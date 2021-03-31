@@ -10,19 +10,19 @@ if os.path.exists("env.py"):
     import env
 
 
-# Create an instance of Flask (Flask app)
+# Create an instance of Flask (the Flask app)
 app = Flask(__name__)
 
-# Connect Mongo to Flask (via PyMongo), and the secret key from env.py
+# Connect Mongo to Flask (via PyMongo) and config vars from env.py
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
-# Connect Mongo to the Flask app (instance created above)
+# Connect MongoDB to the Flask app (instance created above)
 mongo = PyMongo(app)
 
 
-# Home : main list of datasets
+# Home : Show All Datasets
 @app.route("/")
 @app.route("/all_datasets")
 def all_datasets():
@@ -108,7 +108,7 @@ def logout():
     return redirect(url_for("login"))
 
 
-# Add new dataset
+# Add New Dataset
 @app.route("/add_dataset", methods=["GET", "POST"])
 def add_dataset():
     """ Insert new informatiom from the form into the db """
@@ -131,7 +131,7 @@ def add_dataset():
     return render_template("add_dataset.html", categories=categories)
 
 
-# Edit Dataset (edit and/or delete information from the db)
+# Edit Dataset
 @app.route("/edit_dataset<dataset_id>", methods=["GET", "POST"])
 def edit_dataset(dataset_id):
     if request.method == "POST":
@@ -162,14 +162,14 @@ def delete_dataset(dataset_id):
     return redirect(url_for("all_datasets"))
 
 
-# Show all categories
+# Show All Categories
 @app.route("/all_categories")
 def all_categories():
     categories = list(mongo.db.categories.find().sort("category_name"))
     return render_template("categories.html", categories=categories)
 
 
-# Add category
+# Add Category
 @app.route("/add_category", methods=["GET", "POST"])
 def add_category():
     if request.method == "POST":
@@ -184,7 +184,7 @@ def add_category():
     return render_template("add_category.html")
 
 
-# Edit category
+# Edit Category
 @app.route("/edit_category/<category_id>", methods=["GET", "POST"])
 def edit_category(category_id):
     if request.method == "POST":
@@ -207,7 +207,7 @@ def delete_category(category_id):
     return redirect(url_for("all_categories"))
 
 
-# Show datasets by category
+# Show Datasets by Categories
 @app.route('/datasets_in/<category>')
 def datasets_in(category):
     """ Query datasets by each category """
@@ -219,4 +219,4 @@ def datasets_in(category):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True)  # update to False prior to submission
+            debug=True)  # set to False prior to submission
