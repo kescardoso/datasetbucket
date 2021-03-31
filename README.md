@@ -73,7 +73,7 @@ about data containing population and demographic subjects.
 
     `pip3 install sklearn`
 
-    For more complete and detailed instructions on how to use the Kaggle API, visit [Kaggle's documentation](https://www.kaggle.com/docs/api#getting-started-installation-&-authentication)
+    For more complete and detailed instructions on how to use the Kaggle API, visit [Kaggle's documentation](https://www.kaggle.com/docs/api#getting-started-installation-&-authentication).
 
 5. Run the `app.py` in debug mode as a flask application to see the project in your locally deployed http address.
 
