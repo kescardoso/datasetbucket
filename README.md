@@ -14,13 +14,13 @@ about data containing population and demographic subjects.
 
 1. Install [python3 and pip3](https://www.python.org) in your machine
     
-2. Download or clone the datasetbucket project folders into your local workspace
+2. Download or clone [the datasetbucket project folders](https://github.com/kescardoso/datasetbucket) into your local workspace
 
 3. Create a virtual environment: `Python3 -m venv venv`
 
-    After running this command, the folders will be automatically set up on your workspace
+    After running this command, the folders will be automatically set up on your workspace.
 
-    Then run: `source venv/bin/activate`
+4. Run: `source venv/bin/activate`
 
 5. Install Flask: `pip3 install flask`
 
@@ -38,13 +38,13 @@ about data containing population and demographic subjects.
 
     `os.environ.setdefault("MONGO_DBNAME", "value_from mongoDB_here")`
 
-3. Wire up MongoDB and its functionalities with Flask, by installing flask-pymongo and dnspython
+3. Wire up MongoDB and its functionalities with Flask, by installing `flask-pymongo` and `dnspython`
 
     `pip3 install flask-pymongo`
 
     `pip3 install dnspython`
 
-4. Run the app.py in debug mode as a flask application to see the project in your local deployed http address.
+4. Run the `app.py` in debug mode as a flask application to see the project in your local deployed http address.
 
 ## Technologies used
 
