@@ -24,15 +24,18 @@
                 </div>
                 <div class="card-action">
                     <!-- View all datasets in this category -->
-                    <a href="#" 
-                    class="waves-effect waves-light btn-small green accent-4">
-                    View</a>
+                    <a href="{{ url_for('datasets_in', category=category.category_name) }}" 
+                       alt="See all terms from this category" 
+                       class="waves-effect waves-light btn-small green accent-4">
+                       View
+                    </a>
                     <!-- Edit this category -->
                     <!-- Only author and admin are able to edit -->
                     {% if session.user|lower == category.created_by|lower or session.user == "admin"|lower %}
                         <a href="{{ url_for('edit_category', category_id=category._id) }}" 
-                        class="waves-effect waves-light btn-small blue accent-4">
-                        Edit</a>
+                           class="waves-effect waves-light btn-small blue accent-4">
+                           Edit
+                        </a>
                     {% endif %}
                 </div>
             </div>
