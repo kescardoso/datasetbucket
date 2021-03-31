@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="cyan-text text-darken-2 center-align">All Categories</h3>
+
+<div class="row">
+    {% for category in categories %}
+        <div class="row">
+            <div class="col s12 m3">
+            <div class="card cyan darken-2 text-shadow center-align">
+                <div class="card-content white-text">
+                    <span class="card-title">{{ category.category_name }}</span>
+                </div>
+                <div class="card-action">
+                    <!-- View all datasets in this category -->
+                    <a href="#" 
+                    class="waves-effect waves-light btn-small green accent-4">
+                    View</a>
+                    <!-- Edit this category -->
+                    <!-- Only author and admin are able to edit -->
+                    {% if session.user|lower == category.created_by|lower or session.user == "admin" %}
+                        <a href="#" 
+                        class="waves-effect waves-light btn-small blue accent-4">
+                        Edit</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+            
+{% endblock %}

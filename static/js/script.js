@@ -6,6 +6,9 @@ $(document).ready(function(){
     // Mobile hamburger navbar
     $('.sidenav').sidenav({edge: "right"});
 
+    // Navbar dropdown
+    $(".dropdown-trigger").dropdown();
+
     // Collapsible accordion list
     $('.collapsible').collapsible();
 
