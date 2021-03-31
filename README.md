@@ -44,7 +44,28 @@ about data containing population and demographic subjects.
 
     `pip3 install dnspython`
 
-4. Run the `app.py` in debug mode as a flask application to see the project in your locally deployed http address.
+4. Wire up Kaggle
+
+    Kaggle API allows the developer to download datasets directly from the terminal/command-line
+
+        1. Create a kaggle account at https://kaggle.com
+
+        2. `pip install kaggle`
+
+        3. Go to 'Account' tab in your kaggle profile a scroll to 'API' section. Click 'Create new API Token' and add the kaggle.json file that will download to your project structure.
+
+        4. You may need to install the following packages to enable all the commands and functionalities:
+
+        `pip install reportlab`
+
+        `pip install statistics`
+
+        `pip install sklearn`
+
+    For more complete instructions on how to use the Kaggle API, go to https://www.kaggle.com/docs/api#getting-started-installation-&-authentication
+
+
+5. Run the `app.py` in debug mode as a flask application to see the project in your locally deployed http address.
 
 ## Technologies used
 
