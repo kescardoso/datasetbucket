@@ -207,6 +207,15 @@ def delete_category(category_id):
     return redirect(url_for("all_categories"))
 
 
+# Show datasets by category
+@app.route('/datasets_in/<category>')
+def datasets_in(category):
+    """ Query datasets by each category """
+    return render_template('datasets_by_category.html',
+                           category=category,
+                           datasets=mongo.db.datasets.find({'category_name': category}).sort('dataset_name'))
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
