@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <!-- Selected dataset name -->
+            <!-- Change previous dataset name -->
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-pencil-alt prefix cyan-text text-darken-2"></i>
@@ -35,20 +35,29 @@
                 </div>
             </div>
 
-            <!-- Selected dataset description -->
+            <!-- Change previous dataset description -->
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-align-left prefix cyan-text text-darken-2"></i>
                     <textarea id="dataset_description" name="dataset_description" 
                               class="materialize-textarea validate"
                               minlength="5" maxlength="500">
-                              {{- dataset.dataset_description -}}
-                            </textarea>
+                              {{- dataset.dataset_description -}}</textarea>
                     <label for="dataset_description">Dataset Description</label>
                 </div>
             </div>
 
-            <!-- Selected Datepicker ("last updated") -->
+            <!-- Change or upload pdf report (file) -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-file-pdf prefix cyan-text text-darken-2"></i>
+                    <label for="dataset_report">Dataset Report (upload pdf or csv file)</label>
+                    <input id="dataset_report" name="dataset_report"
+                           type="file" class="validate" required>
+                </div>
+            </div>
+
+            <!-- Change selected Datepicker ("last updated") -->
             <div class="row">
               <div class="input-field col s12">
                   <i class="fas fa-calendar-check prefix cyan-text text-darken-2"></i>

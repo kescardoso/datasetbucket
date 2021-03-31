@@ -3,6 +3,7 @@
 
     <h3 class="cyan-text text-darken-2 center-align">Add New Dataset</h3>
 
+    <!-- Form: Add Dataset -->
     <div class="row card-panel grey lighten-5">
         <form class="col s12" method="POST" action="{{ url_for('add_dataset') }}">
 
@@ -38,6 +39,16 @@
                               class="materialize-textarea validate"
                               minlength="5" maxlength="500"></textarea>
                     <label for="dataset_description">Dataset Description</label>
+                </div>
+            </div>
+
+            <!-- Input : upload pdf report (file) -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-file-pdf prefix cyan-text text-darken-2"></i>
+                    <label for="dataset_report">Dataset Report (upload pdf or csv file)</label>
+                    <input id="dataset_report" name="dataset_report"
+                           type="file" class="validate" required>
                 </div>
             </div>
 

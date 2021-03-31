@@ -8,12 +8,12 @@
         {% for dataset in datasets %}
         <li>
 
-            <!-- Head: Dataset name and "if to do" -->
+            <!-- Collapsible Head -->
             <div class="collapsible-header white-text cyan darken-2 text-shadow">
                 <div class="col s1">
                     <i class="fas fa-caret-down"></i>
                 </div>
-                <!-- Dataset Name -->
+                <!-- Dataset name and "if to do" exclamation warning -->
                 <div class="col s-8">
                     <div class="name-header">
                         <strong>{{ dataset.dataset_name }}</strong>
@@ -23,8 +23,8 @@
                         {% endif %}
                     </div>
                 </div>
-                <!-- Dataset option buttons -->
-                <!-- Only post author and admin are able to access the edit option -->
+                <!-- Dataset Edit Button -->
+                <!-- Only author and admin are able to access the edit option -->
                 {% if session.user|lower == dataset.created_by|lower or session.user == "admin" %}
                 <div class="col s-3">
                     <a href="{{ url_for('edit_dataset', dataset_id=dataset._id) }}" 
@@ -35,11 +35,12 @@
                 {% endif %}
              </div>
 
-            <!-- Body: Dataset descriptions and options/tags -->
+            <!-- Collapsible Body -->
+            <!-- Dataset description -->
             <div class="collapsible-body">
                 <p>{{ dataset.dataset_description }}</p>
                 <hr>
-                <!-- Display Categories as string or list -->
+                <!-- Dataset Categories: display as string or list -->
                 <p class="collapsible-footer">
                     <i class="fas fa-tag prefix cyan-text collapsible-footer-icon"></i> 
                     Category : 
@@ -51,12 +52,15 @@
                         {% endfor %}
                     {% endif %}
                 </p>
+                <!-- Dataset last updated -->
                 <p class="collapsible-footer">
                     <i class="fas fa-calendar-check prefix cyan-text collapsible-footer-icon"></i> 
                     Last updated : {{ dataset.last_update }}</p>
+                <!-- Dataset "is to do" (on or off) -->
                 <p class="collapsible-footer">
                     <i class="fas fa-exclamation-circle prefix cyan-text collapsible-footer-icon"></i> 
                     To do : {{ dataset.is_todo }}</p>
+                <!-- Dataset author -->
                 <p class="collapsible-footer">
                     <i class="fas fa-user-edit prefix cyan-text collapsible-footer-icon"></i> 
                     Author : {{ dataset.created_by }}</p>

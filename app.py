@@ -128,7 +128,7 @@ def add_dataset():
 
     """ Wire up the db to dynamically generate the category collection """
     categories = mongo.db.categories.find().sort("category_name")
-    return render_template("add.html", categories=categories)
+    return render_template("add_dataset.html", categories=categories)
 
 
 # Edit Dataset (edit and/or delete information from the db)
@@ -140,6 +140,7 @@ def edit_dataset(dataset_id):
             "category_name": request.form.getlist("category_name"),
             "dataset_name": request.form.get("dataset_name"),
             "dataset_description": request.form.get("dataset_description"),
+            "dataset_report": request.form.get("dataset_report"),
             "is_todo": is_todo,
             "last_update": request.form.get("last_update"),
             "created_by": session["user"]
@@ -150,7 +151,7 @@ def edit_dataset(dataset_id):
     """ Retrieve a dataset by its id, and convert it to a bson data type """
     dataset = mongo.db.datasets.find_one({"_id": ObjectId(dataset_id)})
     categories = mongo.db.categories.find().sort("category_name")
-    return render_template("edit.html", dataset=dataset, categories=categories)
+    return render_template("edit_dataset.html", dataset=dataset, categories=categories)
 
 
 # Delete Dataset and remove it from the db
