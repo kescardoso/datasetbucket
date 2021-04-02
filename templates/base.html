@@ -27,17 +27,48 @@
 <body>
 
     <header>
+
         <!-- Top navbar -->
         <nav class="nav-extended text-shadow cyan lighten-1">
+            <!-- Datasets Dropdown -->
+                {% if session.user %}
+                <ul id="dropdown_datasets" class="dropdown-content">
+                    <li><a href="{{ url_for('all_datasets') }}">View Datasets</a></li>
+                    <li><a href="{{ url_for('add_dataset') }}">Add Dataset</a></li>
+                </ul>
+                {% endif %}
+            <!-- Category Dropdown -->
+            <ul id="dropdown_categories" class="dropdown-content">
+                {% if session.user %}
+                    <li><a href="{{ url_for('all_categories') }}">View Categories</a></li>
+                    <li><a href="{{ url_for('add_category') }}">Add Category</a></li>
+                {% endif %}
+            </ul>
+
             <div class="nav-wrapper">
                 <a href="{{ url_for('all_datasets') }}" class="brand-logo center">DataSetBucket</a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
                 <ul class="left hide-on-med-and-down">
+                    <!-- Datasets Dropdown Trigger -->
                     {% if session.user %}
-                        <li><a href="{{ url_for('add_dataset') }}">New Entry</a></li>
-                    {% endif %}
-                        <li><a href="#">Categories</a></li>
+                        <li><a class="dropdown-trigger"
+                               data-target="dropdown_datasets">
+                                Datasets
+                            </a>
+                        </li>
+                    {% else %}
                         <li><a href="{{ url_for('all_datasets') }}">Datasets</a></li>
+                    {% endif %}
+                    <!-- Categories Dropdown Trigger -->
+                    {% if session.user %}
+                        <li><a class="dropdown-trigger"
+                            data-target="dropdown_categories">
+                             Categories
+                        </a>
+                 </li>
+                    {% else %}
+                        <li><a href="{{ url_for('all_categories') }}">Categories</a></li>
+                    {% endif %} 
                 </ul>
                 <ul class="right hide-on-med-and-down">
                     {% if session.user %}
@@ -54,7 +85,7 @@
         <!-- Mobile navbar -->
         <ul class="sidenav" id="mobile-demo">
             <li><a href="{{ url_for('all_datasets') }}"><h4 class="center-align cyan-text text-lighten-1">DataSetBucket</h4></a></li>
-            <li><a href="#">Categories</a></li>
+            <li><a href="{{ url_for('all_categories') }}">Categories</a></li>
             <li><a href="{{ url_for('all_datasets') }}">Datasets</a></li>
             {% if session.user %}
                 <li><a href="{{ url_for('add_dataset') }}">New Entry</a></li>
