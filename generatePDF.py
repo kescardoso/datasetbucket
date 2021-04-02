@@ -7,18 +7,19 @@ canvas = Canvas("report.pdf", pagesize=LETTER)
 
 
 
-def generatePDFReport ( title, subtitle, dataResults ):
+def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
     # values to use for margin/formatting:
     centerPageWidth = 305
     centerPageHeight = 395
     marginTopBottom = 40
     marginLeftRight = 20
     lineSpacing = 20
+    maxLenOfLine = 99
 
     currentFontSize = 16
     currentLine = 750
 
-    if dataResults is None:
+    if dataResultsCSV is None and dataResultsJSON is None:
         return False
     # test fields:
     # title = "Test PDF Generation"
@@ -44,16 +45,79 @@ def generatePDFReport ( title, subtitle, dataResults ):
     
     currentLine = currentLine - ( lineSpacing * 1.5 )
     canvas.setFont('Helvetica', currentFontSize-1)
-
-    for var in dataResults: # var is the category
-        canvas.drawString(marginLeftRight, currentLine, var)
-        canvas.line( marginLeftRight, currentLine-3, centerPageWidth, currentLine-4)
-        currentLine = currentLine - lineSpacing
-        
-        for v in dataResults.get(var): # v is the data/results in a specific category 
-            canvas.drawString(marginLeftRight*2, currentLine, v)
+    if dataResultsCSV is not None:
+        if currentLine < marginTopBottom+20:
+                        canvas.showPage()
+                        currentLine = 730
+        for var in dataResultsCSV: # var is the category
+            canvas.drawString(marginLeftRight, currentLine, var)
+            canvas.line( marginLeftRight, currentLine-3, centerPageWidth, currentLine-4)
             currentLine = currentLine - lineSpacing
+            if isinstance(dataResultsCSV.get(var), dict):
+                for v in dataResultsCSV.get(var):
+                    print(dataResultsCSV.get(var)[v])
+                    if currentLine < marginTopBottom:
+                        canvas.showPage()
+                        currentLine = 730
+                    try:
+                        isNumber = float(dataResultsCSV.get(var)[v])
+                        canvas.drawString(marginLeftRight*2, currentLine, "Count: " + v + " is " + str(dataResultsCSV.get(var)[v]))
+                        currentLine = currentLine - lineSpacing 
+                    except:
+                        canvas.drawString(marginLeftRight*2, currentLine, v + " " + str(dataResultsCSV.get(var)[v]))
+                        currentLine = currentLine - lineSpacing 
+                    
+            else:
+                for v in dataResultsCSV.get(var): # v is the data/results in a specific category 
+                    if currentLine < marginTopBottom:
+                            canvas.showPage()
+                            currentLine = 730
+                    if(len(v) == 1):
+                        canvas.drawString(marginLeftRight*2, currentLine, v)
+                        currentLine = currentLine - lineSpacing
+                    if(len(v) == 0):
+                        break
+                    else:
+                        for i in v:
+                            if isinstance(i, list):
+                                print(i)
+                            else:
+                                canvas.drawString(marginLeftRight*2, currentLine, v)
+                                currentLine = currentLine - lineSpacing 
+                                break
+            
+    # TODO: need to check if current line runs off the page. If is does, need to make a new page
+
         
+    if dataResultsJSON is not None:
+        for var in dataResultsJSON: # var is the category
+            if len(dataResultsJSON.get(var)) > 1: 
+                if currentLine < marginTopBottom + 20:
+                        canvas.showPage()
+                        currentLine = 730
+                canvas.drawString(marginLeftRight, currentLine, var)
+                canvas.line( marginLeftRight, currentLine-3, centerPageWidth, currentLine-4)
+                currentLine = currentLine - lineSpacing
+                
+                for v in dataResultsJSON.get(var): # v is the data/results in a specific category 
+                    if currentLine < marginTopBottom:
+                        canvas.showPage()
+                        currentLine = 730
+                    if(len(v) == 1):
+                        canvas.drawString(marginLeftRight*2, currentLine, v+  ", " + str(dataResultsJSON.get(var)[v]))
+                        currentLine = currentLine - lineSpacing
+                    if(len(v) == 0):
+                        break
+                    else:
+                        for i in v:
+                            if isinstance(i, list):
+                                print(i)
+                            else:
+                                canvas.drawString(marginLeftRight*2, currentLine, v +  ", " + str(dataResultsJSON.get(var)[v]))
+                                currentLine = currentLine - lineSpacing 
+                                break
+            
+    # TODO: need to check if current line runs off the page. If is does, need to make a new page
 
-
+        #canvas.save() # save the pdf as report.pdf and return
     canvas.save() # save the pdf as report.pdf and return
