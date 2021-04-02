@@ -29,3 +29,17 @@ def calcLinearReg(npArray):
     # TODO need to figure out what parameters to predict >>:>> (np.array([])) array-like or sparse matrix, shape (n_samples, n_features)
     return reg.predict(np.array([[3, 5]]))
     # returns prdicted values: array, shape(n_samples)
+
+# calculates how many unique values are in an array
+# TODO: make it work for a dict too
+def calcUniquieValues(data):
+    if data is None:
+        return
+    array = np.array(data)
+    count = 0
+    temparray = []
+    for d in array:
+        if d not in temparray:
+            temparray.append(d)
+            count += 1
+    return count

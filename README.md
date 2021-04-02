@@ -178,7 +178,7 @@ Kaggle API allows the developer to download datasets directly from the terminal/
 
 2. `pip install kaggle`
 
-3. Go to 'Account' tab in your kaggle profile a scroll to 'API' section. Click 'Creat new API Token' and add the kaggle.json file that will download to your project structure.
+3. Go to 'Account' tab in your kaggle profile a scroll to 'API' section. Click 'Create new API Token' and add the kaggle.json file that will download to your project structure.
 
 For more complete instructions on how to use the Kaggle API, go to https://www.kaggle.com/docs/api#getting-started-installation-&-authentication
 
