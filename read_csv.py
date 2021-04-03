@@ -1,6 +1,8 @@
 # importing csv module
 import csv
 
+import sys
+
 import calculations
 
 def readCSV(path, filename): 
@@ -49,53 +51,114 @@ def readCSV(path, filename):
 
 	# for each row, get the value at each valid index and add to array OR dict AND increase count 
 	# (lowercase variables are arrays, capitalized variables are dicts)
-	for row in rows:
-		for vR in validRowsIndex:
-			if len(row) > vR and row[vR] is not None:
-				if 'age' in validRowsName[vR]: 
-					a = float(row[vR])
-					aCount += 1
-					age.append(a)
-				elif 'sex' in validRowsName[vR]:
-					s = float(row[vR])
-					sCount += 1
-					sex.append(s)
-				elif 'income' in validRowsName[vR]:
-					i = float(row[vR])
-					iCount += 1
-					income.append(i)
-				elif 'location' in validRowsName[vR]:
-					if "." not in row[vR]:
-						if Location.get(row[vR]) is not None:
-							count = Location.get(row[vR])+1
-							Location.update({row[vR]: count})
-						else:
-							Location.update({row[vR]:1})
-				elif 'ethnicity' in validRowsName[vR].lower():
-					if Ethnicity.get(row[vR]) is not None:
-						count = Ethnicity.get(row[vR])+1
-						Ethnicity.update({row[vR]: count})
-					else:
-						Ethnicity.update({row[vR]:1})
-				elif 'gender' in validRowsName[vR].lower():
-					if Gender.get(row[vR]) is not None:
-						count = Gender.get(row[vR])+1
-						Gender.update({row[vR]: count})
-					else:
-						Gender.update({row[vR]:1})
-				elif 'religion' in validRowsName[vR].lower():
-					if Religion.get(row[vR]) is not None:
-						count = Religion.get(row[vR])+1
-						Religion.update({row[vR]: count})
-					else:
-						Religion.update({row[vR]:1})
-				elif 'education' in validRowsName[vR].lower():
-					if Education.get(row[vR]) is not None:
-						count = Education.get(row[vR])+1
-						Education.update({row[vR]: count})
-					else:
-						Education.update({row[vR]:1})
 	
+	print(validRowsName)
+
+	############## Sakshi's Code###############
+	texts = [each_string.lower() for each_string in validRowsName]
+
+	# print(texts)
+	if sys.platform.startswith('win32'):
+		for row in rows:
+			for vR in validRowsIndex:
+				if len(row) > vR and row[vR] is not None:
+					if 'age' in validRowsName: 
+						a = float(row[vR])
+						aCount += 1
+						age.append(a)
+					if 'sex' in validRowsName:
+						s = float(row[vR])
+						sCount += 1
+						sex.append(s)
+					if 'income' in validRowsName:
+						i = float(row[vR])
+						iCount += 1
+						income.append(i)
+					if 'location' in validRowsName:
+						if "." not in row[vR]:
+							if Location.get(row[vR]) is not None:
+								count = Location.get(row[vR])+1
+								Location.update({row[vR]: count})
+							else:
+								Location.update({row[vR]:1})
+					if 'ethnicity' in texts:
+						if Ethnicity.get(row[vR]) is not None:
+							count = Ethnicity.get(row[vR])+1
+							Ethnicity.update({row[vR]: count})
+						else:
+							Ethnicity.update({row[vR]:1})
+					if 'gender' in texts:
+						if Gender.get(row[vR]) is not None:
+							count = Gender.get(row[vR])+1
+							Gender.update({row[vR]: count})
+						else:
+							Gender.update({row[vR]:1})
+					if 'religion' in texts:
+						if Religion.get(row[vR]) is not None:
+							count = Religion.get(row[vR])+1
+							Religion.update({row[vR]: count})
+						else:
+							Religion.update({row[vR]:1})
+					if 'education' in texts:
+						if Education.get(row[vR]) is not None:
+							count = Education.get(row[vR])+1
+							Education.update({row[vR]: count})
+						else:
+							Education.update({row[vR]:1})
+
+### Elizabeth's Code ###
+	if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
+		for row in rows:
+			for vR in validRowsIndex:
+				if len(row) > vR and row[vR] is not None:
+					print("[vR]: " + str(vR))
+					if 'age' in validRowsName[vR]: 
+						a = float(row[vR])
+						aCount += 1
+						age.append(a)
+					elif 'sex' in validRowsName[vR]:
+						s = float(row[vR])
+						sCount += 1
+						sex.append(s)
+					elif 'income' in validRowsName[vR]:
+						i = float(row[vR])
+						iCount += 1
+						income.append(i)
+					elif 'location' in validRowsName[vR]:
+						if "." not in row[vR]:
+							if Location.get(row[vR]) is not None:
+								count = Location.get(row[vR])+1
+								Location.update({row[vR]: count})
+							else:
+								Location.update({row[vR]:1})
+					elif 'ethnicity' in validRowsName[vR].lower():
+						if Ethnicity.get(row[vR]) is not None:
+							count = Ethnicity.get(row[vR])+1
+							Ethnicity.update({row[vR]: count})
+						else:
+							Ethnicity.update({row[vR]:1})
+					elif 'gender' in validRowsName[vR].lower():
+						if Gender.get(row[vR]) is not None:
+							count = Gender.get(row[vR])+1
+							Gender.update({row[vR]: count})
+						else:
+							Gender.update({row[vR]:1})
+					elif 'religion' in validRowsName[vR].lower():
+						if Religion.get(row[vR]) is not None:
+							count = Religion.get(row[vR])+1
+							Religion.update({row[vR]: count})
+						else:
+							Religion.update({row[vR]:1})
+					elif 'education' in validRowsName[vR].lower():
+						if Education.get(row[vR]) is not None:
+							count = Education.get(row[vR])+1
+							Education.update({row[vR]: count})
+						else:
+							Education.update({row[vR]:1})
+
+
+
+
 	labelDict = {} # dict to return to runTerminalCommands
 	# TODO : do analysis on string values
 	if len(age) > 1:

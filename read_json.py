@@ -10,8 +10,8 @@ def readJSON(path, filename):
     LocCount = 0
     dataList = {}
     if ".json" in filename:
-        # opening JSON file
-        filedata = [json.loads(line) for line in open("./dataFiles/"+filename, 'r')]
+        # opening JSON file (while opening files on windows it's advisable to enter the encoding format)
+        filedata = [json.loads(line) for line in open("./dataFiles/"+filename, 'r', encoding = "utf8")]
         # create pandas dataframe
         df = pd.DataFrame(filedata)
         cols = df.columns

@@ -9,6 +9,10 @@ canvas = Canvas("report.pdf", pagesize=LETTER)
 
 def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
     # values to use for margin/formatting:
+
+    # Debug points
+    # print(dataResultsCSV)
+    # print(dataResultsJSON)
     centerPageWidth = 305
     centerPageHeight = 395
     marginTopBottom = 40
