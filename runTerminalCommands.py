@@ -20,8 +20,8 @@ os.makedirs("dataFiles") # creating a temp directory in runtime
 
 os.system("cd ./dataFiles")
 
-filename = "ronitf/heart-disease-uci"       # .csv dataset
-# filename = "dataturks/resume-entities-for-ner"    # .json dataset
+# filename = "ronitf/heart-disease-uci"       # .csv dataset
+filename = "dataturks/resume-entities-for-ner"    # .json dataset
 #filename = "dataturks/vehicle-number-plate-detection" # not very useful .json
 #filename = "gabrielaltay/georgia-voter-list-202011" # csv dataset - very large - in a new folder - 
 
