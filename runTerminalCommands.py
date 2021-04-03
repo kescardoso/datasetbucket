@@ -20,8 +20,8 @@ os.makedirs("dataFiles") # creating a temp directory in runtime
 
 os.system("cd ./dataFiles")
 
-#filename = "ronitf/heart-disease-uci"       # .csv dataset
-filename = "dataturks/resume-entities-for-ner"    # .json dataset
+filename = "ronitf/heart-disease-uci"       # .csv dataset
+# filename = "dataturks/resume-entities-for-ner"    # .json dataset
 #filename = "dataturks/vehicle-number-plate-detection" # not very useful .json
 #filename = "gabrielaltay/georgia-voter-list-202011" # csv dataset - very large - in a new folder - 
 
@@ -75,7 +75,13 @@ def findReadableFiles():    # find .json or .csv files in ./dataFiles folder
                         file.extractall("./dataFiles") # extracting files in the dataFiles directory
 
                         for name in file.namelist():
+                            print(name)
                             data = file.read(name)
+                            # print(data)
+
+                            if ".json" in name: 
+                                print(".json")
+                                dataResultsFoundJSON = read_json.readJSON("./dataFiles/", name)
                             
                             if ".csv" in name:
                                 dataResultsFoundCSV = read_csv.readCSV("./dataFiles/", name)
