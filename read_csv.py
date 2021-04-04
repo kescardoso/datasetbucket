@@ -39,62 +39,64 @@ def readCSV(path, filename):
 	validRowsName = []
 	
 	# TODO need to check if a value is a string or number
-
+	countFieldNum = 0 # finding the index of field was causing problems. 
 	for field in fields:
 		for var in demographicsToSearch: # get the index and name of all values in the file that match the labels we are looking for
 			if var in field:
-				print(var)
-				validRowsIndex.append(field.index(var))
+				validRowsIndex.append(countFieldNum)
 				validRowsName.append(var.lower())
-
+		countFieldNum += 1
+	print(validRowsIndex)
+	print(validRowsName)
 	# for each row, get the value at each valid index and add to array OR dict AND increase count 
 	# (lowercase variables are arrays, capitalized variables are dicts)
 	for row in rows:
 		for vR in validRowsIndex:
 			if len(row) > validRowsIndex[vR] and row[validRowsIndex[vR]] is not None:
+				print(vR, validRowsIndex[vR], validRowsName[vR], row[validRowsIndex[vR]])
 				if 'age' in validRowsName[vR]: 
-					a = float(row[vR])
+					a = float(row[validRowsIndex[vR]])
 					aCount += 1
 					age.append(a)
 				elif 'sex' in validRowsName[vR]:
-					s = float(row[vR])
+					s = float(row[validRowsIndex[vR]])
 					sCount += 1
 					sex.append(s)
 				elif 'income' in validRowsName[vR]:
-					i = float(row[vR])
+					i = float(row[validRowsIndex[vR]])
 					iCount += 1
 					income.append(i)
 				elif 'location' in validRowsName[vR]:
-					if "." not in row[vR]:
-						if Location.get(row[vR]) is not None:
-							count = Location.get(row[vR])+1
-							Location.update({row[vR]: count})
+					if "." not in row[validRowsIndex[vR]]:
+						if Location.get(row[validRowsIndex[vR]]) is not None:
+							count = Location.get(row[validRowsIndex[vR]])+1
+							Location.update({row[validRowsIndex[vR]]: count})
 						else:
-							Location.update({row[vR]:1})
+							Location.update({row[validRowsIndex[vR]]:1})
 				elif 'ethnicity' in validRowsName[vR].lower():
-					if Ethnicity.get(row[vR]) is not None:
-						count = Ethnicity.get(row[vR])+1
-						Ethnicity.update({row[vR]: count})
+					if Ethnicity.get(row[validRowsIndex[vR]]) is not None:
+						count = Ethnicity.get(row[validRowsIndex[vR]])+1
+						Ethnicity.update({row[validRowsIndex[vR]]: count})
 					else:
-						Ethnicity.update({row[vR]:1})
+						Ethnicity.update({row[validRowsIndex[vR]]:1})
 				elif 'gender' in validRowsName[vR].lower():
-					if Gender.get(row[vR]) is not None:
-						count = Gender.get(row[vR])+1
-						Gender.update({row[vR]: count})
+					if Gender.get(row[validRowsIndex[vR]]) is not None:
+						count = Gender.get(row[validRowsIndex[vR]])+1
+						Gender.update({row[validRowsIndex[vR]]: count})
 					else:
-						Gender.update({row[vR]:1})
+						Gender.update({row[validRowsIndex[vR]]:1})
 				elif 'religion' in validRowsName[vR].lower():
-					if Religion.get(row[vR]) is not None:
-						count = Religion.get(row[vR])+1
-						Religion.update({row[vR]: count})
+					if Religion.get(row[validRowsIndex[vR]]) is not None:
+						count = Religion.get(row[validRowsIndex[vR]])+1
+						Religion.update({row[validRowsIndex[vR]]: count})
 					else:
-						Religion.update({row[vR]:1})
+						Religion.update({row[validRowsIndex[vR]]:1})
 				elif 'education' in validRowsName[vR].lower():
-					if Education.get(row[vR]) is not None:
-						count = Education.get(row[vR])+1
-						Education.update({row[vR]: count})
+					if Education.get(row[validRowsIndex[vR]]) is not None:
+						count = Education.get(row[validRowsIndex[vR]])+1
+						Education.update({row[validRowsIndex[vR]]: count})
 					else:
-						Education.update({row[vR]:1})
+						Education.update({row[validRowsIndex[vR]]:1})
 	
 	labelDict = {} # dict to return to runTerminalCommands
 	# TODO : do analysis on string values
