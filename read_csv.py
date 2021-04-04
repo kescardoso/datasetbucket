@@ -51,7 +51,7 @@ def readCSV(path, filename):
 	# (lowercase variables are arrays, capitalized variables are dicts)
 	for row in rows:
 		for vR in validRowsIndex:
-			if len(row) > vR and row[vR] is not None:
+			if len(row) > validRowsIndex[vR] and row[validRowsIndex[vR]] is not None:
 				if 'age' in validRowsName[vR]: 
 					a = float(row[vR])
 					aCount += 1
