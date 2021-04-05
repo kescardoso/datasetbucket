@@ -113,7 +113,7 @@ def logout():
 
 
 # Analyse dataset from Kaggle
-@app.route("/analyse_data")
+@app.route("/analyse_data", methods=["GET", "POST"])
 def analyse_data():
     return render_template("analyse.html")
 
