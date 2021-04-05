@@ -126,8 +126,14 @@ def analyse_data():
             if reportMade:
                 time.sleep(5)
                 # with open('/Users/mac/IdeaProjects/datasetbucket/report.pdf', 'rb') as static_file:
-                return send_file('/Users/mac/IdeaProjects/datasetbucket/report.pdf', as_attachment=True)
+                try:
+                    return send_file('/Users/mac/IdeaProjects/datasetbucket/report.pdf', as_attachment=True)
+                except:
+                    return render_template("analyse.html", dataToRender="Unable able to generate report")
+            else:
+                return render_template("analyse.html", dataToRender="Unable able to generate report")
     return render_template("analyse.html")
+
 
 
 # Add New Dataset

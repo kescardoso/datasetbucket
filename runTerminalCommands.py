@@ -17,17 +17,27 @@ import shutil
 
 # creating the dataFiles directory
 
-try: 
-    os.makedirs("dataFiles") # creating a temp directory in runtime
-    os.system("cd ./dataFiles")
-except: # need to delete temp folder if an error occured and it wasn't deleted before         
-    try:
-        shutil.rmtree("./dataFiles/") # deleting the temp directory
-        time.sleep(3)
-        os.makedirs("dataFiles") # make a new/clean dataFiles folder
+def makeFilesDir():
+    try: 
+        os.makedirs("dataFiles") # creating a temp directory in runtime
         os.system("cd ./dataFiles")
-    except:
-        print("dataFiles not empty")
+        return True
+    except: # need to delete temp folder if an error occured and it wasn't deleted before         
+        try:
+            shutil.rmtree("./dataFiles/") # deleting the temp directory
+            time.sleep(3)
+            os.makedirs("dataFiles") # make a new/clean dataFiles folder
+            os.system("cd ./dataFiles")
+            return True
+        except:
+            try: # sometimes an error ocurrs and dataFiles is made, but not as a directory. So delete it and remake it
+                os.remove("dataFiles") 
+                time.sleep(3)
+                os.makedirs("dataFiles")
+                return True
+            except:
+                print("dataFiles not empty")
+                return False
     
 
 
@@ -101,7 +111,7 @@ def findReadableFiles(filename):
                                 dataResultsFoundCSV = read_csv.readCSV("./dataFiles/", name)
 # -- till here --
 
-    generatePDF.generatePDFReport( zipFile , None, dataResultsFoundCSV, dataResultsFoundJSON) # generate the PDF report
+    reportMade = generatePDF.generatePDFReport( zipFile , None, dataResultsFoundCSV, dataResultsFoundJSON) # generate the PDF report
 
  # results from parsing + calculations, will be passed into >>  generatePDF.generatePDFReport()
 
@@ -125,20 +135,23 @@ def findReadableFiles(filename):
 # copy zip to dataFiles folder and open the zip to get the data files
 def openFiles(filename):  
     print("filename", filename)
+
     if os.system("kaggle datasets download -d " + filename) == 0 :
         indexOfSlash = filename.find("/") # kaggle names dataset like: [creator of dataset]/[name of dataset]
         zip = filename[(indexOfSlash+1):len(filename)]
 
         # checking for macOS or linux
         if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
-            os.system("cp " + zip + ".zip dataFiles") # copy to dataFiles folder
+            if makeFilesDir():
+                os.system("cp " + zip + ".zip dataFiles") # copy to dataFiles folder
 
         # checking for windows
         if sys.platform.startswith('win32'):
-            os.system("copy " + zip + ".zip dataFiles") # copy to dataFiles folder
+            if makeFilesDir():
+                os.system("copy " + zip + ".zip dataFiles") # copy to dataFiles folder
 
         time.sleep(3)
-
+        
         for root, dirs, files in os.walk("./dataFiles"): # find the .zip file in the folder
             for fn in files:
 
@@ -163,16 +176,11 @@ def startCommands(filenameToDownload):
 
     if findReadableFiles(filename):  # >>>>> protects from multithreading woes :,(
     # remove the dataFiles folder
-        shutil.rmtree("./dataFiles/") # deleting the temp directory
+        try:
+            shutil.rmtree("./dataFiles/") # deleting the temp directory
+        except:
+            x = 0
+        os.remove(zipFile + ".zip") # delete original downloaded zip file
         return True
     else:
         return False
-    
-
-
-
-############### Elizabeth's code #####################
-# if findReadableFiles():  # >>>>> if statement protects from multithreading woes :,(
-#     os.remove(zipFile + ".zip")
-#     os.remove("./dataFiles/" + zipFile + ".zip") # dont need the copied zip anymore! ( still need to delete the zip in the main file system )
-

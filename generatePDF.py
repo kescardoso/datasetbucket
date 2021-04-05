@@ -1,6 +1,6 @@
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.pagesizes import LETTER
-
+from flask import flash
 print(LETTER)
 canvas = Canvas("report.pdf", pagesize=LETTER)
 
@@ -20,13 +20,17 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
     currentLine = 750
 
     if dataResultsCSV is None and dataResultsJSON is None:
+        flash('No data found', 'error')
+        return False
+    if len(dataResultsCSV) == 0 and len(dataResultsJSON) == 0:
+        flash('No data found', 'error')
         return False
     # test fields:
     # title = "Test PDF Generation"
     # subtitle = "This is a report of suspected bias in your dataset"
     # dataResults = { "Sex assignment at birth": ["male 50", "female 40", "intersex 5", "unknown 5"], "Ethincity": ["African-American 30.6", "Asian-American 10.5", "Caucasian-American 50.8%", "Native-American/Indigenous 1.8%"] }
     
-    if title is None:
+    if title is None or title == "":
         title = "Analysis of your Data"
     if subtitle is None:
         subtitle = "A report of possible bias in your dataset"
@@ -45,7 +49,7 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
     
     currentLine = currentLine - ( lineSpacing * 1.5 )
     canvas.setFont('Helvetica', currentFontSize-1)
-    if dataResultsCSV is not None:
+    if dataResultsCSV is not None or len(dataResultsCSV) == 0:
         if currentLine < marginTopBottom+20:
                         canvas.showPage()
                         currentLine = 730
@@ -89,7 +93,7 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
     # TODO: need to check if current line runs off the page. If is does, need to make a new page
 
         
-    if dataResultsJSON is not None:
+    if dataResultsJSON is not None or len(dataResultsJSON) == 0:
         for var in dataResultsJSON: # var is the category
             if len(dataResultsJSON.get(var)) > 1: 
                 if currentLine < marginTopBottom + 20:
@@ -120,4 +124,11 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
     # TODO: need to check if current line runs off the page. If is does, need to make a new page
 
         # save the pdf as report.pdf and return
-    canvas.save() # save the pdf as report.pdf and return
+    try:
+        canvas.save() # save the pdf as report.pdf and return
+        return True
+    except: 
+        flash('could not generate repot', 'error')
+        return False
+    
+    

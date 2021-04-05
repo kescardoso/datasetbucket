@@ -1,5 +1,6 @@
 # importing csv module
 import csv
+import os
 
 import calculations
 
@@ -24,16 +25,36 @@ def readCSV(path, filename):
 	sCount = 0
 
 	# reading csv file
-	with open(path+filename, 'r') as csvfile:
-		# creating a csv reader object
-		csvreader = csv.reader(csvfile)
-		
-		# extracting field names through first row
-		fields = next(csvreader)
+	try:
+		with open(path+filename, 'r') as csvfile:
+			# creating a csv reader object
+			csvreader = csv.reader(csvfile)
+			
+			# extracting field names through first row
+			fields = next(csvreader)
 
-		# extracting each data row one by one
-		for row in csvreader:
-			rows.append(row)
+			# extracting each data row one by one
+			for row in csvreader:
+				rows.append(row)
+	except:
+		for dirs in os.walk(path):
+			for d in dirs:
+				if isinstance(d, str):
+					
+					try:
+						print("try",d, filename)
+						with open( d + "/" +filename, 'r') as csvfile:
+						# creating a csv reader object
+							csvreader = csv.reader(csvfile)
+			
+						# extracting field names through first row
+							fields = next(csvreader)
+
+						# extracting each data row one by one
+							for row in csvreader:
+								rows.append(row)
+					except:
+						print("except", d, filename)
 			
 	validRowsIndex = []
 	validRowsName = []
