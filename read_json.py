@@ -11,7 +11,7 @@ def readJSON(path, filename):
     dataList = {}
     if ".json" in filename:
         # opening JSON file
-        filedata = [json.loads(line) for line in open("./dataFiles/"+filename, 'r')]
+        filedata = [json.loads(line) for line in open("./dataFiles/"+filename, 'r', encoding = 'utf-8')]
         # create pandas dataframe
         df = pd.DataFrame(filedata)
         cols = df.columns
