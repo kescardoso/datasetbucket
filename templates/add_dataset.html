@@ -10,7 +10,7 @@
             <!-- Dropdown : category selection -->
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-folder-open prefix cyan-text text-darken-2"></i>
+                    <i class="fas fa-tags prefix cyan-text text-darken-2"></i>
                     <select multiple id="category_name" name="category_name" class="validate"  required>
                         <option value="" disabled selected>Choose Category</option>
                         {% for category in categories %}
@@ -18,6 +18,20 @@
                         {% endfor %}
                     </select>
                     <label for="category_name">Dataset Category</label>
+                </div>
+            </div>
+
+            <!-- Dropdown : location selection -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-map-pin prefix cyan-text text-darken-2"></i>
+                    <select id="location_name" name="location_name" class="validate"  required>
+                        <option value="" disabled selected>Choose Location</option>
+                        {% for location in locations %}
+                            <option value="{{ location.location_name }}">{{ location.location_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="location_name">Dataset Location</label>
                 </div>
             </div>
 

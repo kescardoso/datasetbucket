@@ -43,8 +43,8 @@
             </ul>
             <!-- Locations Dropdown -->
             <ul id="dropdown_locations" class="dropdown-content">
-                <li><a href="">View All Locations</a></li>
-                <li><a href="">Add New Location</a></li>
+                <li><a href="{{ url_for('all_locations') }}">View All Locations</a></li>
+                <li><a href="{{ url_for('add_location') }}">Add New Location</a></li>
             </ul>
 
             <!-- Desktop nav -->
@@ -60,7 +60,7 @@
                     {% else %}
                         <li><a href="{{ url_for('all_datasets') }}">Datasets</a></li>
                         <li><a href="{{ url_for('all_categories') }}">Categories</a></li>
-                        <li><a href="">Locations</a></li>
+                        <li><a href="{{ url_for('all_locations') }}">Locations</a></li>
                     {% endif %}
                 </ul>
                 <ul class="right hide-on-med-and-down">
@@ -81,21 +81,20 @@
             <li><a href="{{ url_for('all_datasets') }}"><h4 class="center-align cyan-text text-lighten-1">DataSetBucket</h4></a></li>
             <li><a href="{{ url_for('all_datasets') }}">View Datasets</a></li>
             <li><a href="{{ url_for('all_categories') }}">View Categories</a></li>
-            <li><a href="">View Locations</a></li>
+            <li><a href="{{ url_for('all_locations') }}">View Locations</a></li>
             <li class="divider" tabindex="-1"></li>
             {% if session.user %}
                 <li><a href="{{ url_for('analyse_data') }}">Analyse New Dataset</a></li>
                 <li><a href="{{ url_for('add_dataset') }}">Add New Dataset</a></li>
                 <li><a href="{{ url_for('add_category') }}">Add New Category</a></li>
-                <li><a href="">Add New Location</a></li>
+                <li><a href="{{ url_for('add_location') }}">Add New Location</a></li>
                 <li class="divider" tabindex="-1"></li>
                 <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
                 <li><a href="{{ url_for('logout') }}">Log Out</a></li>
             {% else %}
                 <li><a href="{{ url_for('register') }}">Register</a></li>
                 <li><a href="{{ url_for('login') }}">Log In</a></li>
-            {% endif %}
-                
+            {% endif %}        
         </ul>
     </header>
 
