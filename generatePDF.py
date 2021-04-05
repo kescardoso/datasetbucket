@@ -119,5 +119,5 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
             
     # TODO: need to check if current line runs off the page. If is does, need to make a new page
 
-        #canvas.save() # save the pdf as report.pdf and return
+        # save the pdf as report.pdf and return
     canvas.save() # save the pdf as report.pdf and return

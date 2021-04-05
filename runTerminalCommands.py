@@ -16,23 +16,35 @@ import shutil
 # TODO: connect to frontend / get user-specified Kaggle dataset instead of the hard-coded one in the filename variable
 
 # creating the dataFiles directory
-os.makedirs("dataFiles") # creating a temp directory in runtime
 
-os.system("cd ./dataFiles")
+try: 
+    os.makedirs("dataFiles") # creating a temp directory in runtime
+    os.system("cd ./dataFiles")
+except: # need to delete temp folder if an error occured and it wasn't deleted before         
+    try:
+        shutil.rmtree("./dataFiles/") # deleting the temp directory
+        time.sleep(3)
+        os.makedirs("dataFiles") # make a new/clean dataFiles folder
+        os.system("cd ./dataFiles")
+    except:
+        print("dataFiles not empty")
+    
 
-# filename = "ronitf/heart-disease-uci"       # .csv dataset
-filename = "dataturks/resume-entities-for-ner"    # .json dataset
+
+
+## file name is no longer global. It should be passed to each function. The start() function is called in 
+## app.py when: @app.route("/analyse_data", methods=["GET", "POST"]), 
+## which is where the url is retrieved from the user when they input it in the textbox 
+## from the analyse.html page
+
 # filename = "ronitf/heart-disease-uci"       # .csv dataset
 #filename = "dataturks/resume-entities-for-ner"    # .json dataset
-#filename = "dataturks/vehicle-number-plate-detection" # not very useful .json
-#filename = "gabrielaltay/georgia-voter-list-202011" # csv dataset - very large - in a new folder - 
 
 zipFile = ""    # needed for report title later
 
-
-def findReadableFiles():    # find .json or .csv files in ./dataFiles folder
-    #dataResultsFound = {} # results from parsing + calculations, will be passed into >>  generatePDF.generatePDFReport()
-    dataResultsFoundCSV = {}
+ # find .json or .csv files in ./dataFiles folder
+def findReadableFiles(filename):   
+    dataResultsFoundCSV = {} # results from parsing + calculations, will be passed into >>  generatePDF.generatePDFReport()
     dataResultsFoundJSON = {}
     for root, dirs, files in os.walk("./dataFiles/"):
             
@@ -111,18 +123,19 @@ def findReadableFiles():    # find .json or .csv files in ./dataFiles folder
     return True
 
 # copy zip to dataFiles folder and open the zip to get the data files
-def openFiles():  
+def openFiles(filename):  
+    print("filename", filename)
     if os.system("kaggle datasets download -d " + filename) == 0 :
         indexOfSlash = filename.find("/") # kaggle names dataset like: [creator of dataset]/[name of dataset]
-        zipFile = filename[(indexOfSlash+1):len(filename)]
+        zip = filename[(indexOfSlash+1):len(filename)]
 
         # checking for macOS or linux
         if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
-            os.system("cp " + zipFile + ".zip dataFiles") # copy to dataFiles folder
+            os.system("cp " + zip + ".zip dataFiles") # copy to dataFiles folder
 
         # checking for windows
         if sys.platform.startswith('win32'):
-            os.system("copy " + zipFile + ".zip dataFiles") # copy to dataFiles folder
+            os.system("copy " + zip + ".zip dataFiles") # copy to dataFiles folder
 
         time.sleep(3)
 
@@ -131,21 +144,31 @@ def openFiles():
 
                 # checking for macOS or linux
                 if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
-                    os.system("open ./dataFiles/" + zipFile + ".zip") # open the file in a designated folder so we know where the files are!
+                    os.system("open ./dataFiles/" + zip + ".zip") # open the file in a designated folder so we know where the files are!
 
                 # checking for windows
                 if sys.platform.startswith('win32'):
-                    os.system("start ./dataFiles/" + zipFile + ".zip") # open the file in a designated folder so we know where the files are!
+                    os.system("start ./dataFiles/" + zip + ".zip") # open the file in a designated folder so we know where the files are!
         
-    return zipFile
-    
-zipFile = openFiles() # save zipFiles so it can be accessed in findReadableFiles()
-time.sleep(7) # >>>>> protects from multithreading woes :,(
+        return zip
 
+def startCommands(filenameToDownload):
+    filename = filenameToDownload
+    time.sleep(3)
+    if filename is not None:
+        print('filename in filenameReady', filename)
+        zipFile = openFiles(filename) # save zipFiles so it can be accessed in findReadableFiles()
+        print('zipFile', zipFile)
+        time.sleep(7) # >>>>> protects from multithreading woes :,(
 
-if findReadableFiles():  # >>>>> protects from multithreading woes :,(
+    if findReadableFiles(filename):  # >>>>> protects from multithreading woes :,(
     # remove the dataFiles folder
-    shutil.rmtree("./dataFiles/") # deleting the temp directory
+        shutil.rmtree("./dataFiles/") # deleting the temp directory
+        return True
+    else:
+        return False
+    
+
 
 
 ############### Elizabeth's code #####################

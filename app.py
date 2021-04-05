@@ -1,10 +1,12 @@
 import os
 import re
-
-from flask import Flask, flash, render_template, redirect, request, session, url_for
+import time
+from flask import Flask, flash, render_template, redirect, request, session, url_for, send_file
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+
+from runTerminalCommands import startCommands # only importing this function prevents the whole .py file from executing on startup
 
 if os.path.exists("env.py"):
     import env
@@ -115,6 +117,16 @@ def logout():
 # Analyse dataset from Kaggle
 @app.route("/analyse_data", methods=["GET", "POST"])
 def analyse_data():
+    if request.method == "POST":
+        fileString = request.form.get("file_name")
+        if fileString is not None:
+            split_filename = fileString.split('.com/')
+            fileString = split_filename[1]
+            reportMade = startCommands(fileString) # startCommands is the function in runTerminalCommands.py that starts the download/running/analysis of the dataset
+            if reportMade:
+                time.sleep(5)
+                # with open('/Users/mac/IdeaProjects/datasetbucket/report.pdf', 'rb') as static_file:
+                return send_file('/Users/mac/IdeaProjects/datasetbucket/report.pdf', as_attachment=True)
     return render_template("analyse.html")
 
 
