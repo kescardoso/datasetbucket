@@ -51,6 +51,7 @@
             <div class="collapsible-body">
                 <p>{{ dataset.dataset_description }}</p>
                 <hr>
+
                 <!-- Dataset Categories: display as string or list -->
                 <p class="collapsible-footer">
                     <i class="fas fa-tag prefix cyan-text collapsible-footer-icon"></i> 
@@ -63,14 +64,23 @@
                         {% endfor %}
                     {% endif %}
                 </p>
+
+                <!-- Dataset Locations -->
+                <p class="collapsible-footer">
+                    <i class="fas fa-tag prefix cyan-text collapsible-footer-icon"></i> 
+                    Location : {{ dataset.location_name }}
+                </p>
+
                 <!-- Dataset last updated -->
                 <p class="collapsible-footer">
                     <i class="fas fa-calendar-check prefix cyan-text collapsible-footer-icon"></i> 
                     Last updated : {{ dataset.last_update }}</p>
+
                 <!-- Dataset "is to do" (on or off) -->
                 <p class="collapsible-footer">
                     <i class="fas fa-exclamation-circle prefix cyan-text collapsible-footer-icon"></i> 
                     To do : {{ dataset.is_todo }}</p>
+
                 <!-- Dataset author -->
                 <p class="collapsible-footer">
                     <i class="fas fa-user-edit prefix cyan-text collapsible-footer-icon"></i> 

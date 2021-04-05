@@ -28,7 +28,11 @@ mongo = PyMongo(app)
 def all_datasets():
     datasets = list(mongo.db.datasets.find())
     categories = list(mongo.db.categories.find())
-    return render_template("datasets.html", datasets=datasets, categories=categories)
+    locations = list(mongo.db.locations.find())
+    return render_template("datasets.html", 
+                            datasets=datasets, 
+                            categories=categories,
+                            locations=locations)
 
 
 # New User Registration
@@ -122,7 +126,7 @@ def add_dataset():
         is_todo = "On" if request.form.get("is_todo") else "Off"
         dataset = {
             "category_name": str(request.form.getlist("category_name")),
-            "location_name": request.form.getlist("location_name"),
+            "location_name": request.form.get("location_name"),
             "dataset_name": request.form.get("dataset_name"),
             "dataset_description": request.form.get("dataset_description"),
             "is_todo": is_todo,
@@ -148,7 +152,7 @@ def edit_dataset(dataset_id):
         is_todo = "On" if request.form.get("is_todo") else "Off"
         save_edit = {
             "category_name": request.form.getlist("category_name"),
-            "location_name": request.form.getlist("location_name"),
+            "location_name": request.form.get("location_name"),
             "dataset_name": request.form.get("dataset_name"),
             "dataset_description": request.form.get("dataset_description"),
             "dataset_report": request.form.get("dataset_report"),
