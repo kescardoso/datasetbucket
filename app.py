@@ -108,6 +108,12 @@ def logout():
     return redirect(url_for("login"))
 
 
+# Analyse dataset from Kaggle
+@app.route("/analyse_data")
+def analyse_data():
+    return render_template("analyse.html")
+
+
 # Add New Dataset
 @app.route("/add_dataset", methods=["GET", "POST"])
 def add_dataset():
