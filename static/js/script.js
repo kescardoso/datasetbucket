@@ -1,9 +1,13 @@
 // jQuery Customization from Materialize:
 // https://materializecss.com/
+
 $(document).ready(function(){
 
     // Mobile hamburger navbar
     $('.sidenav').sidenav({edge: "right"});
+
+    // Navbar dropdown
+    $(".dropdown-trigger").dropdown();
 
     // Collapsible accordion list
     $('.collapsible').collapsible();
@@ -11,20 +15,20 @@ $(document).ready(function(){
     // Dataset list > "To Do" Tooltip
     $('.tooltipped').tooltip();
 
+    // DatePicker > Add New Dataset form
+    $('.datepicker').datepicker({
+        format: "dd mmmm, yyyy",
+        yearRange: 3,
+        showClearBtn: true,
+        i18n: {
+            done: "Select"
+        }
+    });
+
     // Category Selection > Add New Dataset form
     $('select').formSelect();
-    
-    // DatePicker > Add New Dataset form
-    $(document).ready(function(){
-        $('.datepicker').datepicker({
-            format: "dd mmmm, yyyy",
-            yearRange: 3,
-            showClearBtn: true,
-            i18n: {
-                done: "Select"
-            }
-        });
-    }); 
+        var instance = M.FormSelect.getInstance($('select'));
+        instance.getSelectedValues();
 
     // Fix Materialize required validation on category selector
     // Code credit: Code Institute's class project > https://codeinstitute.net
