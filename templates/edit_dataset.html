@@ -10,18 +10,36 @@
             <!-- Selected category -->
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-folder-open prefix cyan-text text-darken-2"></i>
+                    <i class="fas fa-tags prefix cyan-text text-darken-2"></i>
                     <select multiple id="category_name" name="category_name" class="validate" required>
                         <option value="" disabled>Choose Category</option>
                         {% for category in categories %}
-                        {% if category.category_name == dataset.category_name %}
-                            <option value="{{ category.category_name }}" selected>{{ category.category_name }}</option>
-                        {% else %}
-                            <option value="{{ category.category_name }}" >{{ category.category_name }}</option>
-                        {% endif %}
+                            {% if category.category_name == dataset.category_name %}
+                                <option value="{{ category.category_name }}" selected>{{ category.category_name }}</option>
+                            {% else %}
+                                <option value="{{ category.category_name }}" >{{ category.category_name }}</option>
+                            {% endif %}
                         {% endfor %}
                     </select>
                     <label for="category_name">Dataset Category</label>
+                </div>
+            </div>
+
+            <!-- Selected location -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-map-pin prefix cyan-text text-darken-2"></i>
+                    <select id="location_name" name="location_name" class="validate" required>
+                        <option value="" disabled>Choose Location</option>
+                        {% for location in locations %}
+                        {% if location.location_name == dataset.location_name %}
+                            <option value="{{ location.location_name }}" selected>{{ location.location_name }}</option>
+                        {% else %}
+                            <option value="{{ location.location_name }}" >{{ location.location_name }}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    <label for="location_name">Dataset Location</label>
                 </div>
             </div>
 
@@ -53,7 +71,7 @@
                     <i class="fas fa-file-pdf prefix cyan-text text-darken-2"></i>
                     <label for="dataset_report">Dataset Report (upload pdf or csv file)</label>
                     <input id="dataset_report" name="dataset_report"
-                           type="file" class="validate" required>
+                           type="file" class="validate">
                 </div>
             </div>
 

@@ -108,6 +108,12 @@ def logout():
     return redirect(url_for("login"))
 
 
+# Analyse dataset from Kaggle
+@app.route("/analyse_data")
+def analyse_data():
+    return render_template("analyse.html")
+
+
 # Add New Dataset
 @app.route("/add_dataset", methods=["GET", "POST"])
 def add_dataset():
@@ -115,7 +121,8 @@ def add_dataset():
     if request.method == "POST":
         is_todo = "On" if request.form.get("is_todo") else "Off"
         dataset = {
-            "category_name": request.form.getlist("category_name"),
+            "category_name": str(request.form.getlist("category_name")),
+            "location_name": request.form.getlist("location_name"),
             "dataset_name": request.form.get("dataset_name"),
             "dataset_description": request.form.get("dataset_description"),
             "is_todo": is_todo,
@@ -126,9 +133,12 @@ def add_dataset():
         flash("New Dataset Successfully Added")
         return redirect(url_for("all_datasets"))
 
-    """ Wire up the db to dynamically generate the category collection """
+    """ Wire up the db to dynamically generate the category and location collection """
     categories = mongo.db.categories.find().sort("category_name")
-    return render_template("add_dataset.html", categories=categories)
+    locations = mongo.db.locations.find().sort("location_name")
+    return render_template("add_dataset.html", 
+                            categories=categories, 
+                            locations=locations)
 
 
 # Edit Dataset
@@ -138,6 +148,7 @@ def edit_dataset(dataset_id):
         is_todo = "On" if request.form.get("is_todo") else "Off"
         save_edit = {
             "category_name": request.form.getlist("category_name"),
+            "location_name": request.form.getlist("location_name"),
             "dataset_name": request.form.get("dataset_name"),
             "dataset_description": request.form.get("dataset_description"),
             "dataset_report": request.form.get("dataset_report"),
@@ -151,7 +162,12 @@ def edit_dataset(dataset_id):
     """ Retrieve a dataset by its id, and convert it to a bson data type """
     dataset = mongo.db.datasets.find_one({"_id": ObjectId(dataset_id)})
     categories = mongo.db.categories.find().sort("category_name")
-    return render_template("edit_dataset.html", dataset=dataset, categories=categories)
+    locations = mongo.db.locations.find().sort("location_name")
+
+    return render_template("edit_dataset.html", 
+                            dataset=dataset, 
+                            categories=categories,
+                            locations=locations)
 
 
 # Delete Dataset
@@ -211,9 +227,61 @@ def delete_category(category_id):
 @app.route('/datasets_in/<category>')
 def datasets_in(category):
     """ Query datasets by each category """
-    return render_template('datasets_by_category.html',
-                           category=category,
+    return render_template('by_category.html', category=category,
                            datasets=mongo.db.datasets.find({'category_name': category}).sort('dataset_name'))
+
+
+# Show All Locations
+@app.route("/all_locations")
+def all_locations():
+    locations = list(mongo.db.locations.find().sort("location_name"))
+    return render_template("locations.html", locations=locations)
+
+
+# Add Location
+@app.route("/add_location", methods=["GET", "POST"])
+def add_location():
+    if request.method == "POST":
+        location ={
+            "location_name": request.form.get("location_name"),
+            "created_by": session["user"]
+        }
+        mongo.db.locations.insert_one(location)
+        flash("New Location Added")
+        return redirect(url_for("all_locations"))
+
+    return render_template("add_location.html")
+
+
+# Edit Location
+@app.route("/edit_location/<location_id>", methods=["GET", "POST"])
+def edit_location(location_id):
+    if request.method == "POST":
+        save_edit = {
+            "location_name": request.form.get("location_name")
+        }
+        mongo.db.locations.update({"_id": ObjectId(location_id)}, save_edit)
+        flash("Location Successfully Updated")
+        return redirect(url_for("all_locations"))
+
+    location = mongo.db.locations.find_one({"_id": ObjectId(location_id)})
+    return render_template("edit_location.html", location=location)
+
+
+# Delete Location
+@app.route("/delete_location/<location_id>")
+def delete_location(location_id):
+    mongo.db.locations.remove({"_id": ObjectId(location_id)})
+    flash("LOcation Successfully Deleted")
+    return redirect(url_for("all_locations"))
+
+
+# Show Datasets by Locations
+@app.route('/datasets_at/<location>')
+def datasets_at(location):
+    """ Query datasets by each location """
+    return render_template('by_location.html', location=location,
+                           datasets=mongo.db.datasets.find({'location_name': location}).sort('dataset_name'))
 
 
 if __name__ == "__main__":
