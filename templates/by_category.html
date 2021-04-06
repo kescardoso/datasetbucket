@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h3 class="teal-text text-darken-2 center-align">Datasets by Category</h3>
+    <h3 class="teal-text text-darken-2 center-align">DataSets by DataTags</h3>
 
-    <h5 class="teal-text text-darken-2 center-align">All Datasets in: {{category}}</h5>
+    <h5 class="all_dt_in teal-text text-darken-2 center-align">All Data Sets in: 
+        <span class="by_tag_tag">{{category}}</span></h5>
 
     <!-- List: query datasets by category -->
     <ul class="collapsible popout">
@@ -30,7 +31,7 @@
                     {% if session.user|lower == dataset.created_by|lower or session.user == "admin"|lower %}
                     <div class="col s-3">
                         <a href="{{ url_for('edit_dataset', dataset_id=dataset._id) }}" 
-                        class="waves-effect waves-light btn-small blue accent-4 option-button">
+                        class="waves-effect waves-light btn-small cyan darken-2 option-button">
                         Edit
                         </a>
                     </div>
@@ -54,12 +55,6 @@
                                 {{ category }}
                             {% endfor %}
                         {% endif %}
-                    </p>
-
-                    <!-- Dataset Locations -->
-                    <p class="collapsible-footer">
-                        <i class="fas fa-tag prefix teal-text collapsible-footer-icon"></i> 
-                        Location : {{ dataset.location_name }}  
                     </p>
 
                     <!-- Dataset last updated -->
