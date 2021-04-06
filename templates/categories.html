@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h3 class="teal-text text-darken-2 center-align">All Categories</h3>
+<h3 class="teal-text text-darken-2 center-align">All Data Tags</h3>
 
 {% if session.user %}
     <div class="row">
         <div class="col s12 center-align">
             <a href="{{ url_for('add_category') }}" 
                class="btn teal darken-1 text-shadow">
-               Add New Category <i class="fas fa-plus-square right"></i>
+               Add New DataTag <i class="fas fa-plus-square right"></i>
             </a>
         </div>
     </div>

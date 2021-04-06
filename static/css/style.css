@@ -28,7 +28,11 @@ main {
 
 /* Flash messages */
 .flashes h4 {
-    line-height: 2px;
+    line-height: 45px;
+}
+
+.call-to-add {
+    margin-top: 5px;
 }
 
 /* Navbar */
@@ -37,6 +41,10 @@ nav li,
     font-family: 'Abel', sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
+}
+
+.brand-logo {
+    margin-top: 2px;
 }
 
 /* Accordion */
@@ -80,22 +88,35 @@ nav li,
     font-size: 100%;
 }
 
+/* By Category */
+.by_tag_tag {
+    background-color:#e0f2f1;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.all_dt_in {
+    margin-bottom: 20px;
+}
+
+
 /* Footer */
 footer {
     text-transform: uppercase;
     margin-top: 40px;
 }
 
-footer a {
-    color: #00695c;
-    text-decoration: solid;
-}
-
-.footer-pitch {
+footer h6 {
+    font-size: 20px;
     letter-spacing: 2px;
 }
 
 .small-text {
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 2px;
+}
+
+footer a {
+    color: #00695c;
+    text-decoration: solid;
 }

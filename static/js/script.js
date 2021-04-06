@@ -29,9 +29,6 @@ $(document).ready(function(){
         }
     });
 
-    // Category Selection > Add/Edit Dataset form
+    // Select Dropdown (Categories)
     $('select').formSelect();
-        var instance = M.FormSelect.getInstance($('select'));
-        instance.getSelectedValues();
-
 });

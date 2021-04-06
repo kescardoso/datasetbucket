@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h3 class="teal-text text-darken-2 center-align">All Datasets</h3>
+<h3 class="teal-text text-darken-2 center-align">All Data Sets</h3>
 
 {% if session.user %}
     <div class="row">
         <div class="col s12 center-align">
             <a href="{{ url_for('add_dataset') }}" 
-               class="btn teal darken-1 text-shadow">
+               class="call-to-add btn teal darken-1 text-shadow">
                Add New Dataset <i class="fas fa-plus-square right"></i>
             </a>
         </div>
@@ -55,7 +55,7 @@
                 <!-- Dataset Categories: display as string or list -->
                 <p class="collapsible-footer">
                     <i class="fas fa-tag prefix teal-text collapsible-footer-icon"></i> 
-                    Category : 
+                    Tag(s) : 
                     {% if dataset.category_name is string %}
                         {{ dataset.category_name }}  
                     {% else %}
@@ -63,12 +63,6 @@
                             {{ category }}
                         {% endfor %}
                     {% endif %}
-                </p>
-
-                <!-- Dataset Locations -->
-                <p class="collapsible-footer">
-                    <i class="fas fa-tag prefix teal-text collapsible-footer-icon"></i> 
-                    Location : {{ dataset.location_name }}
                 </p>
 
                 <!-- Dataset last updated -->
