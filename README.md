@@ -7,7 +7,7 @@ This is a python-flask web application build upon a CRUD data-base system (Creat
 You will be able to find and read reports from a wiki styled list of information 
 about data containing population and demographic subjects.
 
-[Click here to view the deployed app on Heroku](https://datasetbucket.herokuapp.com/)
+[View the deployment on Heroku](https://datasetbucket.herokuapp.com/)
 
 ## Technologies used
 
