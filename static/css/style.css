@@ -1,11 +1,50 @@
-/* Navabar */
-.text-shadow {
-    text-shadow: 2px 2px 2px rgba(0,0,0, 0.5);
+/* Site Typography */
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Open+Sans&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    /* Sticky Footer */
+    height: 100%;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Abel', sans-serif;
+    letter-spacing: 2px;
+}
+
+/* Sticky Footer */
+main {
+    flex: 1 0 auto;
+  }
 
 /* Flash messages */
 .flashes h4 {
-    line-height: 2;
+    line-height: 45px;
+}
+
+.call-to-add {
+    margin-top: 5px;
+}
+
+/* Navbar */
+nav li,
+.brand-logo {
+    font-family: 'Abel', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.brand-logo {
+    margin-top: 2px;
 }
 
 /* Accordion */
@@ -31,6 +70,12 @@
 }
 
 /* Add New Dataset */
+#dataset_report {
+    display: inline-block;
+    position: relative;
+    margin-top: 40px;
+}
+
 .todo-form {
     margin-left: 10px;
 }
@@ -41,4 +86,37 @@
     margin-bottom: -20px;
     padding-left: 12px;
     font-size: 100%;
+}
+
+/* By Category */
+.by_tag_tag {
+    background-color:#e0f2f1;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.all_dt_in {
+    margin-bottom: 20px;
+}
+
+
+/* Footer */
+footer {
+    text-transform: uppercase;
+    margin-top: 40px;
+}
+
+footer h6 {
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.small-text {
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+footer a {
+    color: #00695c;
+    text-decoration: solid;
 }

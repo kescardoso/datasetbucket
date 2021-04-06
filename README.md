@@ -1,144 +1,74 @@
-# datasetbucket
+# Dataset Bucket & Bias Auditor
 
-This is a python-flask application build upon a CRUD system (Create, Read, Update and Delete) 
-with the purpose of store and display information about dataset structures based on Machine Learning models.
+A dataset bucket with a machine learning bias auditor. Built with Python-Flask, MaterializeCSS and the Kaggle API.
+
+This is a python-flask web application build upon a CRUD data-base system (Create, Read, Update and Delete) to generate, store and display dataset structures.
 
 You will be able to find and read reports from a wiki styled list of information 
 about data containing population and demographic subjects.
 
-### Check the deployed version on Heroku: https://datasetbucket.herokuapp.com/
+[View the deployment on Heroku](https://datasetbucket.herokuapp.com/)
 
-## Python and Flask installation via VSCode
+## Technologies used
 
-### Prior to install this project in your local environment, follow these steps to make sure all the requirements are in place and working
+- [MongoDB](https://www.mongodb.com/) - a document database (stores data in JSON-like documents) with a horizontal, scale-out architecture that can support huge volumes of both data and traffic.
+- [Materialize](https://materializecss.com/) - a modern front-end framework (responsive and mobile-first, similar to Bootstrap) that helps developers build a stylish and responsive application.
+- [Python](https://www.python.org/) - an interpreted, high-level and general-purpose programming language, great for data base structured projects.
+- [Pip](https://pypi.org/project/pip/) - a package manager for Python, that allows developers to install and manage additional libraries and dependencies that are not distributed as part of the standard library.
+- [Flask](https://flask.palletsprojects.com/) - a Python framework that depends on the Jinja template engine and the Werkzeug WSGI toolkit.
+- [Heroku](https://www.heroku.com/) - used for the app deployment, Heroku is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
+- [Git](https://git-scm.com/) - a version control system for for source code management; it allows tracking file changes and coordinating work on those files among multiple people and machines.
+- [GitHub](https://github.com/) - a open-source code hosting platform for version control and collaboration. It lets developers work remotely and together on projects from anywhere.
 
-1. Install python in your machine
+## Project Installation and Local Deployment
 
-    https://www.python.org
+### Installation
 
-    If on a Mac, you can use home-brew with 
-
-    `brew install python3`
-
-    This command will install python3 and pip3
-
-2. Open a new VSCode workspace (as you usually do) and install the Python extension
-
-    https://marketplace.visualstudio.com/items?itemName=ms-python.python
-
-3. Test a “Hello Python” print statement to see if python is working
-
-    create file: hello.py
-
-    and enter this:
-
-    `msg = “Hello World!`
-
-    `print(msg)`
-
-    Check the terminal for the print.
-
-4. Create a virtual environment
-
-    On the terminal:
-
-    `Python3 -m venv venv`
-
-    The folders will be automatically set up on your workspace
-
-5. Accept vscode tip to use this folder as your workspace
-
-6. Before installing Linter pylint
-
-    On the terminal:
-
-    ` source venv/bin/activate `
-
-    And the accept or install pylint
-
-7. Install Flask
-
-    On the terminal:
-
-    ` pip3 install flask `
-
-8. Test a "Hello Flask" to see if Flask is working
-
-    https://flask.palletsprojects.com/en/1.1.x/quickstart/
-
-    create file: app.py
-
-    enter this:
-
-    `from flask import Flask`
-
-    `app = Flask(__name__)`
-
-
-    `@app.route(‘/‘)`
-
-    `def hello_world():`
-
-    `    return 'Hello, World!’`
-
-    Check the Hello Flask by going to Debug menu on VSCode
-
-    Click on Run and Debug
-
-    and choose to run as Flask
-
-    watch the command line for the local web server address to appear
-
-    Click on it, and a new window will open with your Hello Flask
-
-## Local Deployment via VSCode
-### Before you commit your changes to Github for the first time, follow these steps:
-
-NOTE: before downloading the project folders to your IDE, make sure you delete your current testing files: app.py and hello.py.
-
-Download datasetbucket project folders to your environment and follow the instructions bellow.
-
-1. If you can't locate these folders in your workspace, make sure you create an env.py and .gitignore files to keep your sensitive data secret
-
-    On the vscode terminal:
-
-    `touch env.py`
-
-    `touch .gitignore`
-
-    Open the .gitignore and insert:
-
-    `env.py`
-
-    `__pycache__`
-
-    Save and close .gitignore
-
-2. Open env.py and enter the following:
-
-    `import os`
-
-    `os.environ.setdefault("IP", "0.0.0.0")`
-
-    `os.environ.setdefault("PORT", "5000")`
-
-    `os.environ.setdefault("SECRET_KEY", "secret_key_here")`
-
-    `os.environ.setdefault("MONGO_URI", "value_from mongoDB_here")`
-
-    `os.environ.setdefault("MONGO_DBNAME", "value_from mongoDB_here")`
-
-    This information will help create the integration between mongoBD and python-flask and redirect debug to your main terminal via the command `python3 app.py` (this will give you a port at 5000 to open a new window and run the app on your browser). 
+1. Install [python3 and pip3](https://www.python.org) in your machine
     
-    You can still use vscode debug functionality to run the port, by opening the app.py file, going to the debug menu, click on "Run and Debug", and selecting Flask from the dropdown.
-    
-    If you use `python3 app.py` and open the 5000 port from the command line, and you further need to stop the port to commit changes or use your terminal, in the vscode terminal window type `ctrl+c` to stop running the port and commit changes.
+2. Download or clone [this project](https://github.com/kescardoso/datasetbucket) into your local workspace
+
+3. Create a virtual environment: `Python3 -m venv venv`
+
+    After running this command, the folders will be automatically set up on your workspace.
+
+4. Run: `source venv/bin/activate`
+
+5. Install Flask and all the required dependencies with: 
+
+`pip3 install -r requirements.txt`
+
+### Local Deployment
+
+1. Create an `env.py` file to keep your sensitive data secret.
+
+2. Open `env.py` and enter the following:
+
+    ```python
+    import os
+
+    os.environ.setdefault("SECRET_KEY", "secret_key_here")
+    os.environ.setdefault("MONGO_URI", "value_from mongoDB_here")
+    os.environ.setdefault("MONGO_DBNAME", "value_from mongoDB_here")
+    ```
+
+3. Wire up Kaggle
+
+    Kaggle API allows the developer to download datasets directly from the terminal.
+
+    1. Create a [kaggle account](https://kaggle.com)
+
+    2. Go to the 'Account' tab in your Kaggle profile and scroll to the 'API' section. Click 'Create new API Token' and add the `kaggle.json` file, which will download to your project structure.
+
+    For more complete and detailed instructions on how to use the Kaggle API, visit [Kaggle's documentation](https://www.kaggle.com/docs/api#getting-started-installation-&-authentication).
+
+5. Run the `app.py` in debug mode as a flask application to see the project in your locally deployed http address.
 
 ## Heroku Deployment
 
-1. Fulfil all Heroku requirements by freezing your dependencies and creating a Procfile:
+1. Fulfil all Heroku requirements by chequing and freezing your dependencies and by creating a Procfile:
 
-    On the terminal (vscode):
+    Run these two commands:
 
     `pip3 freeze > requirements.txt`
 
@@ -146,36 +76,16 @@ Download datasetbucket project folders to your environment and follow the instru
 
     Commit and push your changes.
 
-2. Open your Heroku Dashboard and create a new app. Name your app and choose your region.
+2. Create a new app from your [Heroku dashboard](https://www.heroku.com/).
 
-3. Connect your heroku app to your git repository, by going to:
+3. Add your environmental variables to Heroku, by going to 'Settings', and then to 'Config Vars', and enter the sensitive information from your MongoDB and your `env.py` file:
 
-    - "Deploy" Menu > "Deployment method" > Click: "Connect to GitHub"
+5. From your Heroku dashboard, wire up your heroku app to your git repository, by going to:
 
-    - "Connect to GitHub" > search your repo from the dropdown, and connect
+    - "Deploy" > "Deployment Method" > and click: "Connect to GitHub"
+
+    - Search your repo from the dropdown, and connect
 
     - Choose a branch to deploy your changes
 
-4. Add your Config Vars to Heroku.
-
-    Navigate to the settings menu, and then to Config Vars session, and enter here the sensitive information from your env.py file.
-
-5. Connect your GitHub Repo
-
-## Connect MongoDB with Flask via flask-pymongo
-
-Flask-PyMongo is a 3rd-party library that helps connect the MongoDB database and the datasetbucket application by using a database url. On the vscode terminal, install:
-
-1. `pip3 install flask-pymongo`
-
-2. `pip3 install dnspython`
-
-## Technologies used
-
-- Python - an interpreted, high-level and general-purpose programming language, great for data base structured projects
-- Pip - a package manager for Python, that allows developers to install and manage additional libraries and dependencies that are not distributed as part of the standard library.
-- Flask - a Python framework that depends on the Jinja template engine and the Werkzeug WSGI toolkit
-- MongoDB - a document database (stores data in JSON-like documents) with a horizontal, scale-out architecture that can support huge volumes of both data and traffic.
-- [Materialize](https://materializecss.com/) - a modern front-end framework (responsive and mobile-first, similar to Bootstrap) that helps developers build a stylish and responsive application.
-- Git - a version control system for for source code management; it allows tracking file changes and coordinating work on those files among multiple people and machines.
-- GitHub - a code hosting platform for version control and collaboration. It lets developers work remotely and together on projects from anywhere.
+    - Deploy your branch and view app

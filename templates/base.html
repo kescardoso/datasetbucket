@@ -19,25 +19,52 @@
           href="{{ url_for('static', filename='css/style.css') }}" 
           type="text/css">
 
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
     {% block styles %}
     {% endblock %}
 
-    <title>DataSets Bucket</title>
+    <title>Dataset Bucket + Auditor</title>
 </head>
 <body>
 
     <header>
+
         <!-- Top navbar -->
-        <nav class="nav-extended text-shadow cyan lighten-1">
+        <nav class="nav-extended text-shadow teal lighten-2">
+
+            <!-- Datasets Dropdown -->
+            <ul id="dropdown_datasets" class="dropdown-content" style="width:200px">
+                <li><a href="{{ url_for('all_datasets') }}">View All Datasets</a></li>
+                <li><a href="{{ url_for('analyse_data') }}">Analyse Data</a></li>
+                <li><a href="{{ url_for('add_dataset') }}">Add New Dataset</a></li>
+            </ul>
+            <!-- Categories Dropdown -->
+            <ul id="dropdown_categories" class="dropdown-content">
+                <li><a href="{{ url_for('all_categories') }}">View All Tags</a></li>
+                <li><a href="{{ url_for('add_category') }}">Add New Tag</a></li>
+            </ul>
+
+            <!-- Desktop nav -->
             <div class="nav-wrapper">
-                <a href="{{ url_for('all_datasets') }}" class="brand-logo center">DataSetBucket</a>
+                <a href="{{ url_for('all_datasets') }}" class="brand-logo center">
+                    <img src="{{ url_for('static', filename='images/dbba.png') }}"
+                         width="170px"
+                         alt="Dataset Bucket & Bias Auditor">
+                </a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
                 <ul class="left hide-on-med-and-down">
+                    <!-- Datasets Dropdown Trigger -->
                     {% if session.user %}
-                        <li><a href="{{ url_for('add_dataset') }}">New Entry</a></li>
-                    {% endif %}
-                        <li><a href="#">Categories</a></li>
+                        <li><a class="dropdown-trigger" data-target="dropdown_datasets">DataSets</a></li>
+                        <li><a class="dropdown-trigger" data-target="dropdown_categories">DataTags</a></li>
+                    {% else %}
                         <li><a href="{{ url_for('all_datasets') }}">Datasets</a></li>
+                        <li><a href="{{ url_for('all_categories') }}">DataTags</a></li>
+                    {% endif %}
                 </ul>
                 <ul class="right hide-on-med-and-down">
                     {% if session.user %}
@@ -53,18 +80,21 @@
         
         <!-- Mobile navbar -->
         <ul class="sidenav" id="mobile-demo">
-            <li><a href="{{ url_for('all_datasets') }}"><h4 class="center-align cyan-text text-lighten-1">DataSetBucket</h4></a></li>
-            <li><a href="#">Categories</a></li>
-            <li><a href="{{ url_for('all_datasets') }}">Datasets</a></li>
+            <li><a href="{{ url_for('all_datasets') }}"><h4 class="center-align teal-text text-lighten-1">DataSetBucket</h4></a></li>
+            <li><a href="{{ url_for('all_datasets') }}">View Datasets</a></li>
+            <li><a href="{{ url_for('all_categories') }}">View Categories</a></li>
+            <li class="divider" tabindex="-1"></li>
             {% if session.user %}
-                <li><a href="{{ url_for('add_dataset') }}">New Entry</a></li>
+                <li><a href="{{ url_for('analyse_data') }}">Analyse New Dataset</a></li>
+                <li><a href="{{ url_for('add_dataset') }}">Add New Dataset</a></li>
+                <li><a href="{{ url_for('add_category') }}">Add New Category</a></li>
+                <li class="divider" tabindex="-1"></li>
                 <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
                 <li><a href="{{ url_for('logout') }}">Log Out</a></li>
             {% else %}
                 <li><a href="{{ url_for('register') }}">Register</a></li>
                 <li><a href="{{ url_for('login') }}">Log In</a></li>
-            {% endif %}
-                
+            {% endif %}        
         </ul>
     </header>
 
@@ -74,7 +104,7 @@
             {% if messages %}
                 {% for message in messages %}
                     <div class="row flashes">
-                        <h4 class="cyan lighten-4 center-align">
+                        <h4 class="teal lighten-4 center-align">
                             {{ message }}
                         </h4>
                     </div>
@@ -87,6 +117,31 @@
         {% block content %}
         {% endblock %}
     </main>
+
+    <footer class="page-footer text-shadow teal lighten-2">
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                <h6 class="white-text center">A Dataset Bucket with a Bias Auditor</h6>
+                <h6 class="small-text white-text center">
+                    [ Kes Cardoso + Sakshi Gupta + William Yang + Elizabeth Crouther ]
+                </h6>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container teal-text text-darken-1">
+                © 2021 Built by <a href="https://github.com/goofy-goofy" target="-blank">
+                    The Goofy-Goofy Pod</a>. 
+                    Powered by <a href="https://github.com/MLH-Fellowship" target="-blank">MLH</a>.
+                <span class="teal-text text-darken-1 right">
+                    Check our : 
+                    <a href="https://github.com/kescardoso/datasetbucket" target="_blank">Repo</a> +  
+                    <a href="https://devpost.com/software/datasetbucket" target="_blank">Devpost</a>
+                </span>
+            </div>
+        </div>
+    </footer>
     
     <!-- JQuery : to have Materiliaze JS working properly (loaded first) -->
     <script 
