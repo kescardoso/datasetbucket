@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h3 class="cyan-text text-darken-2 center-align">Add Dataset</h3>
+    <h3 class="teal-text text-darken-2 center-align">Add Dataset</h3>
 
     <!-- Form: Add Dataset -->
     <div class="row card-panel grey lighten-5">
@@ -10,7 +10,7 @@
             <!-- Dropdown : category selection -->
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-tags prefix cyan-text text-darken-2"></i>
+                    <i class="fas fa-tags prefix teal-text text-darken-2"></i>
                     <select multiple id="category_name" name="category_name" class="validate"  required>
                         <option value="" disabled selected>Choose Category</option>
                         {% for category in categories %}
@@ -24,7 +24,7 @@
             <!-- Dropdown : location selection -->
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-map-pin prefix cyan-text text-darken-2"></i>
+                    <i class="fas fa-map-pin prefix teal-text text-darken-2"></i>
                     <select id="location_name" name="location_name" class="validate"  required>
                         <option value="" disabled selected>Choose Location</option>
                         {% for location in locations %}
@@ -38,7 +38,7 @@
             <!-- Input : dataset name -->
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-pencil-alt prefix cyan-text text-darken-2"></i>
+                    <i class="fas fa-pencil-alt prefix teal-text text-darken-2"></i>
                     <input id="dataset_name" name="dataset_name" 
                                minlength="4" maxlength="40"
                                type="text" class="validate" required>
@@ -49,7 +49,7 @@
             <!-- Input : dataset description -->
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-align-left prefix cyan-text text-darken-2"></i>
+                    <i class="fas fa-align-left prefix teal-text text-darken-2"></i>
                     <input id="dataset_description" name="dataset_description" 
                                minlength="5" maxlength="500"
                                type="text" class="validate" required>
@@ -60,7 +60,7 @@
             <!-- Input : upload pdf report (file) -->
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-file-pdf prefix cyan-text text-darken-2"></i>
+                    <i class="fas fa-file-pdf prefix teal-text text-darken-2"></i>
                     <label for="dataset_report">Dataset Report (upload pdf or csv file)</label>
                     <input id="dataset_report" name="dataset_report"
                            type="file" class="validate">
@@ -70,7 +70,7 @@
             <!-- Datepicker, for "last updated" -->
             <div class="row">
               <div class="input-field col s12">
-                  <i class="fas fa-calendar-check prefix cyan-text text-darken-2"></i>
+                  <i class="fas fa-calendar-check prefix teal-text text-darken-2"></i>
                   <input id="last_update" name="last_update"
                          type="text" class="datepicker validate" required>
                   <label for="last_update">Last Updated</label>
@@ -81,7 +81,7 @@
             <div class="row">
                 <div class="input-field col-s12">
                     <div class="switch">
-                        <i class="fas fa-exclamation-circle prefix cyan-text text-darken-2 todo-form"></i>
+                        <i class="fas fa-exclamation-circle prefix teal-text text-darken-2 todo-form"></i>
                         <label for="is_todo" class="todo-switch">
                             <strong>To Do:</strong>
                             &nbsp;&nbsp;&nbsp;&nbsp; 
@@ -99,7 +99,7 @@
             <!-- Submit Button -->
             <div class="row">
                 <div class="col s-12">
-                    <button type="submit" class="btn-large cyan darken-1 text-shadow">
+                    <button type="submit" class="btn-large teal darken-1 text-shadow">
                         Add Dataset <i class="fas fa-plus-square right"></i>
                     </button>
                 </div>

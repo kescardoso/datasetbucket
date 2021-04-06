@@ -4,6 +4,11 @@
 
 body {
     font-family: 'Open Sans', sans-serif;
+    /* Sticky Footer */
+    height: 100%;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
 h1,
@@ -13,17 +18,25 @@ h4,
 h5,
 h6 {
     font-family: 'Abel', sans-serif;
+    letter-spacing: 2px;
 }
+
+/* Sticky Footer */
+main {
+    flex: 1 0 auto;
+  }
 
 /* Flash messages */
 .flashes h4 {
-    line-height: 2;
+    line-height: 2px;
 }
 
 /* Navbar */
 nav li,
 .brand-logo {
+    font-family: 'Abel', sans-serif;
     text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 /* Accordion */
@@ -73,12 +86,12 @@ footer {
     margin-top: 40px;
 }
 
-footer .container {
-    padding-top: 2px;
-}
-
 footer a {
     color: #444;
+}
+
+.footer-pitch {
+    letter-spacing: 2px;
 }
 
 .small-text {

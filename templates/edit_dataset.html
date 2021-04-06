@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h3 class="cyan-text text-darken-2 center-align">Edit Dataset</h3>
+    <h3 class="teal-text text-darken-2 center-align">Edit Dataset</h3>
 
     <div class="row card-panel grey lighten-5">
         <form class="col s12" method="POST" 
@@ -10,7 +10,7 @@
             <!-- Selected category -->
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-tags prefix cyan-text text-darken-2"></i>
+                    <i class="fas fa-tags prefix teal-text text-darken-2"></i>
                     <select multiple id="category_name" name="category_name" class="validate" required>
                         <option value="" disabled>Choose Category</option>
                         {% for category in categories %}
@@ -28,7 +28,7 @@
             <!-- Selected location -->
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-map-pin prefix cyan-text text-darken-2"></i>
+                    <i class="fas fa-map-pin prefix teal-text text-darken-2"></i>
                     <select id="location_name" name="location_name" class="validate" required>
                         <option value="" disabled>Choose Location</option>
                         {% for location in locations %}
@@ -46,7 +46,7 @@
             <!-- Change previous dataset name -->
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-pencil-alt prefix cyan-text text-darken-2"></i>
+                    <i class="fas fa-pencil-alt prefix teal-text text-darken-2"></i>
                     <input id="dataset_name" name="dataset_name" minlength="4" maxlength="40"
                            value="{{ dataset.dataset_name }}" type="text" class="validate" required>
                     <label for="dataset_name">Dataset Name</label>
@@ -56,7 +56,7 @@
             <!-- Change previous dataset description -->
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-align-left prefix cyan-text text-darken-2"></i>
+                    <i class="fas fa-align-left prefix teal-text text-darken-2"></i>
                     <textarea id="dataset_description" name="dataset_description" 
                               class="materialize-textarea validate"
                               minlength="5" maxlength="500">
@@ -68,7 +68,7 @@
             <!-- Change or upload pdf report (file) -->
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-file-pdf prefix cyan-text text-darken-2"></i>
+                    <i class="fas fa-file-pdf prefix teal-text text-darken-2"></i>
                     <label for="dataset_report">Dataset Report (upload pdf or csv file)</label>
                     <input id="dataset_report" name="dataset_report"
                            type="file" class="validate">
@@ -78,7 +78,7 @@
             <!-- Change selected Datepicker ("last updated") -->
             <div class="row">
               <div class="input-field col s12">
-                  <i class="fas fa-calendar-check prefix cyan-text text-darken-2"></i>
+                  <i class="fas fa-calendar-check prefix teal-text text-darken-2"></i>
                   <input id="last_update" name="last_update" value="{{ dataset.last_update }}"
                          type="text" class="datepicker validate" required>
                   <label for="last_update">Last Updated</label>
@@ -89,7 +89,7 @@
             <div class="row">
                 <div class="input-field col-s12">
                     <div class="switch">
-                        <i class="fas fa-exclamation-circle prefix cyan-text text-darken-2 todo-form"></i>
+                        <i class="fas fa-exclamation-circle prefix teal-text text-darken-2 todo-form"></i>
                         <label for="is_todo" class="todo-switch">
                             {% if dataset.is_todo == "On" %}
                                 <input type="checkbox" id="is_todo" name="is_todo" checked>
@@ -114,7 +114,7 @@
                 <div class="col s-12">
                     <!-- Save Button (submit edits) -->
                     <button type="submit" 
-                            class="btn-large cyan darken-1 text-shadow">
+                            class="btn-large teal darken-1 text-shadow">
                             Save <i class="fas fa-edit right"></i>
                     </button>
                     {% if session.user|lower == dataset.created_by|lower or session.user == "admin"|lower %}
@@ -125,7 +125,7 @@
                         </a>
                         <!-- Cancel Button -->
                         <a href="{{ url_for('all_datasets') }}" 
-                        class="btn-large green text-shadow">
+                        class="btn-large grey text-shadow">
                         Cancel <i class="fas fa-times-circle"></i>
                         </a>
                     {% else %}
