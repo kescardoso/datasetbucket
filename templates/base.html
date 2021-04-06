@@ -32,7 +32,7 @@
         <nav class="nav-extended text-shadow cyan lighten-1">
 
             <!-- Datasets Dropdown -->
-            <ul id="dropdown_datasets" class="dropdown-content">
+            <ul id="dropdown_datasets" class="dropdown-content" style="width:200px">
                 <li><a href="{{ url_for('all_datasets') }}">View All Datasets</a></li>
                 <li><a href="{{ url_for('add_dataset') }}">Add New Dataset</a></li>
             </ul>
@@ -117,6 +117,28 @@
         {% block content %}
         {% endblock %}
     </main>
+
+    <footer class="page-footer text-shadow cyan darken">
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                <h6 class="white-text center">A Dataset Bucket with a Bias Auditor</h6>
+                <p class="small-text white-text center">Kes Cardoso + William Yang + Sakshi Gupta + Elizabeth Crouther
+                </h6>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2021 Made by The Goofy-Goofy Pod. Powered by MLH.
+                <span class="grey-text text-lighten-4 right">
+                    Check our : 
+                    <a href="https://github.com/kescardoso/datasetbucket">Repo</a> +  
+                    <a href="https://devpost.com/software/datasetbucket">Devpost</a>
+                </span>
+            </div>
+        </div>
+    </footer>
     
     <!-- JQuery : to have Materiliaze JS working properly (loaded first) -->
     <script 

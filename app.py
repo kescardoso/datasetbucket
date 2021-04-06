@@ -115,6 +115,29 @@ def logout():
 # Analyse dataset from Kaggle
 @app.route("/analyse_data", methods=["GET", "POST"])
 def analyse_data():
+    if request.method == "POST":
+        fileString = request.form.get("file_name")
+
+        """ StartCommands is the function in runTerminalCommands.py 
+            that starts the download/running/analysis of the dataset """
+        if fileString is not None:
+            split_filename = fileString.split('.com/')
+            fileString = split_filename[1]
+            reportMade = startCommands(fileString) 
+            
+            """ With open('/Users/mac/IdeaProjects/datasetbucket/report.pdf', 'rb') 
+                as static_file """
+            if reportMade:
+                time.sleep(5)
+                try:
+                    return send_file('/Users/mac/IdeaProjects/datasetbucket/report.pdf', 
+                                      as_attachment=True)
+                except:
+                    return render_template("analyse.html", 
+                                            dataToRender="Unable able to generate report")
+            else:
+                return render_template("analyse.html", 
+                                        dataToRender="Unable able to generate report")
     return render_template("analyse.html")
 
 
@@ -126,7 +149,7 @@ def add_dataset():
         is_todo = "On" if request.form.get("is_todo") else "Off"
         dataset = {
             "category_name": str(request.form.getlist("category_name")),
-            "location_name": request.form.get("location_name"),
+            "location_name": request.form.getlist("location_name"),
             "dataset_name": request.form.get("dataset_name"),
             "dataset_description": request.form.get("dataset_description"),
             "is_todo": is_todo,
@@ -150,8 +173,9 @@ def add_dataset():
 def edit_dataset(dataset_id):
     if request.method == "POST":
         is_todo = "On" if request.form.get("is_todo") else "Off"
+        category_select = "category_name" if category_name is string else "category"
         save_edit = {
-            "category_name": request.form.getlist("category_name"),
+            "category_select": request.form.getlist("category_select"),
             "location_name": request.form.get("location_name"),
             "dataset_name": request.form.get("dataset_name"),
             "dataset_description": request.form.get("dataset_description"),
@@ -165,7 +189,7 @@ def edit_dataset(dataset_id):
 
     """ Retrieve a dataset by its id, and convert it to a bson data type """
     dataset = mongo.db.datasets.find_one({"_id": ObjectId(dataset_id)})
-    categories = mongo.db.categories.find().sort("category_name")
+    categories = mongo.db.categories.find().sort("category_select")
     locations = mongo.db.locations.find().sort("location_name")
 
     return render_template("edit_dataset.html", 

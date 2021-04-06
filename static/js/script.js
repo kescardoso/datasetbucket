@@ -7,7 +7,11 @@ $(document).ready(function(){
     $('.sidenav').sidenav({edge: "right"});
 
     // Navbar dropdown
-    $(".dropdown-trigger").dropdown();
+    $(".dropdown-trigger").dropdown({
+        constrainWidth: false,
+        coverTrigger: false,
+        alignment: 'center'
+    });
 
     // Dataset List : collapsible accordion
     $('.collapsible').collapsible();
