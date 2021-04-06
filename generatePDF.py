@@ -1,12 +1,10 @@
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.pagesizes import LETTER
-from flask import flash
+
 print(LETTER)
 canvas = Canvas("report.pdf", pagesize=LETTER)
 
-
-
-
+# create and save the pdf report from the dicts, dataResultsCSV, dataResultsJSON
 def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
     # values to use for margin/formatting:
     centerPageWidth = 305
@@ -20,10 +18,8 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
     currentLine = 750
 
     if dataResultsCSV is None and dataResultsJSON is None:
-        flash('No data found', 'error')
         return False
     if len(dataResultsCSV) == 0 and len(dataResultsJSON) == 0:
-        flash('No data found', 'error')
         return False
     # test fields:
     # title = "Test PDF Generation"
@@ -32,7 +28,7 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
     
     if title is None or title == "":
         title = "Analysis of your Data"
-    if subtitle is None:
+    if subtitle is None or subtitle == "":
         subtitle = "A report of possible bias in your dataset"
 
     canvas.setAuthor("Made by UnbiasData") # or whatever we name this project
@@ -49,6 +45,14 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
     
     currentLine = currentLine - ( lineSpacing * 1.5 )
     canvas.setFont('Helvetica', currentFontSize-1)
+
+    canvas.drawString(marginLeftRight, currentLine, "IMPORTANT: This report does not gaurantee that your data is unbiased. This report is not an")
+    currentLine = currentLine - lineSpacing
+    canvas.drawString(marginLeftRight, currentLine, "analysis of you model, you must perform separate analyis to test your model for bias. Use this")
+    currentLine = currentLine - lineSpacing
+    canvas.drawString(marginLeftRight, currentLine, "report as a starting point to help you understand how your data might be biased.")
+    currentLine = currentLine - ( lineSpacing * 1.5 )
+
     if dataResultsCSV is not None or len(dataResultsCSV) == 0:
         if currentLine < marginTopBottom+20:
                         canvas.showPage()
