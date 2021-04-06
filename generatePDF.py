@@ -5,6 +5,7 @@ print(LETTER)
 canvas = Canvas("report.pdf", pagesize=LETTER)
 
 # create and save the pdf report from the dicts, dataResultsCSV, dataResultsJSON
+
 def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
     # values to use for margin/formatting:
     centerPageWidth = 305
@@ -21,6 +22,7 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
         return False
     if len(dataResultsCSV) == 0 and len(dataResultsJSON) == 0:
         return False
+
     # test fields:
     # title = "Test PDF Generation"
     # subtitle = "This is a report of suspected bias in your dataset"
@@ -29,6 +31,7 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
     if title is None or title == "":
         title = "Analysis of your Data"
     if subtitle is None or subtitle == "":
+
         subtitle = "A report of possible bias in your dataset"
 
     canvas.setAuthor("Made by UnbiasData") # or whatever we name this project
@@ -39,10 +42,8 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
     currentLine = currentLine - lineSpacing  # reset font and move down one line
     currentFontSize = 13
     canvas.setFont('Helvetica', currentFontSize)
-
-     
-    canvas.drawString((centerPageWidth - (len(subtitle)*(currentFontSize/4.5))), currentLine, subtitle) # set subtitle in page
     
+    canvas.drawString((centerPageWidth - (len(subtitle)*(currentFontSize/4.5))), currentLine, subtitle) # set subtitle in page
     currentLine = currentLine - ( lineSpacing * 1.5 )
     canvas.setFont('Helvetica', currentFontSize-1)
 
@@ -54,6 +55,7 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
     currentLine = currentLine - ( lineSpacing * 1.5 )
 
     if dataResultsCSV is not None or len(dataResultsCSV) == 0:
+
         if currentLine < marginTopBottom+20:
                         canvas.showPage()
                         currentLine = 730
@@ -97,7 +99,9 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
     # TODO: need to check if current line runs off the page. If is does, need to make a new page
 
         
+
     if dataResultsJSON is not None or len(dataResultsJSON) == 0:
+
         for var in dataResultsJSON: # var is the category
             if len(dataResultsJSON.get(var)) > 1: 
                 if currentLine < marginTopBottom + 20:
@@ -132,7 +136,5 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
         canvas.save() # save the pdf as report.pdf and return
         return True
     except: 
-        flash('could not generate repot', 'error')
         return False
-    
     

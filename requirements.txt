@@ -20,6 +20,7 @@ pylint==2.7.2
 pymongo==3.11.3
 python-dateutil==2.8.1
 python-slugify==4.0.1
+pytz==2021.1
 reportlab==3.5.66
 requests==2.25.1
 scikit-learn==0.24.1
