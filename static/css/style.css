@@ -1,6 +1,29 @@
+/* Site Typography */
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Open+Sans&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Abel', sans-serif;
+}
+
 /* Flash messages */
 .flashes h4 {
     line-height: 2;
+}
+
+/* Navbar */
+nav li,
+.brand-logo {
+    text-transform: uppercase;
 }
 
 /* Accordion */
@@ -42,4 +65,23 @@
     margin-bottom: -20px;
     padding-left: 12px;
     font-size: 100%;
+}
+
+/* Footer */
+footer {
+    text-transform: uppercase;
+    margin-top: 40px;
+}
+
+footer .container {
+    padding-top: 2px;
+}
+
+footer a {
+    color: #444;
+}
+
+.small-text {
+    font-size: 10px;
+    letter-spacing: 2px;
 }
