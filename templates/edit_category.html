@@ -30,13 +30,13 @@
                 <div class="col s-12">
                     <!-- Save Button (submit edits) -->
                     <button type="submit" 
-                            class="btn-large teal darken-1 text-shadow">
+                            class="btn-large lime darken-3 text-shadow">
                             Save <i class="fas fa-edit right"></i>
                     </button>
                     {% if session.user|lower == category.created_by|lower or session.user == "admin"|lower %}
                         <!-- Delete Button -->
                         <a href="{{ url_for('delete_category', category_id=category._id) }}" 
-                        class="btn-large red text-shadow">
+                        class="btn-large red lighten-1 text-shadow">
                         Delete <i class="fas fa-trash-alt"></i>
                         </a>
                         <!-- Cancel Button -->
