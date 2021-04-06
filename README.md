@@ -70,14 +70,13 @@ about data containing population and demographic subjects.
 
     Run these two commands:
 
-    ````
-    pip3 freeze > requirements.txt
-    echo web: python app.py > Procfile
-    ```
+    `pip3 freeze > requirements.txt`
+
+    `echo web: python app.py > Procfile`
 
     Commit and push your changes.
 
-2. Create a new app from your Heroku dashboard.
+2. Create a new app from your [Heroku dashboard](https://www.heroku.com/).
 
 3. Add your environmental variables to Heroku, by going to 'Settings', and then to 'Config Vars', and enter the sensitive information from your MongoDB and your `env.py` file:
 
@@ -88,5 +87,5 @@ about data containing population and demographic subjects.
     - Search your repo from the dropdown, and connect
 
     - Choose a branch to deploy your changes
-    
+
     - Deploy your branch and view app
