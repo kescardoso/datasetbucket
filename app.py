@@ -117,16 +117,14 @@ def logout():
 def analyse_data():
     if request.method == "POST":
         fileString = request.form.get("file_name")
-
-        """ StartCommands is the function in runTerminalCommands.py 
-            that starts the download/running/analysis of the dataset """
+        # StartCommands is the function in runTerminalCommands.py 
+        # that starts the download/running/analysis of the dataset
         if fileString is not None:
             split_filename = fileString.split('.com/')
             fileString = split_filename[1]
-            reportMade = startCommands(fileString) 
-            
-            """ With open('/Users/mac/IdeaProjects/datasetbucket/report.pdf', 'rb') 
-                as static_file """
+            reportMade = startCommands(fileString)
+            # With open('/Users/mac/IdeaProjects/datasetbucket/report.pdf', 'rb') 
+            # as static_file """
             if reportMade:
                 time.sleep(5)
                 try:
