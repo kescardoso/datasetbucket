@@ -113,6 +113,9 @@ def logout():
     session.pop("user")
     return redirect(url_for("login"))
 
+@app.route("/about", methods=["GET", "POST"])
+def about():
+    return render_template("about.html")
 
 # Analyse dataset from Kaggle
 @app.route("/analyse_data", methods=["GET", "POST"])

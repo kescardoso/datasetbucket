@@ -57,10 +57,12 @@
                         <li><a class="dropdown-trigger" data-target="dropdown_datasets">Datasets</a></li>
                         <li><a class="dropdown-trigger" data-target="dropdown_categories">Categories</a></li>
                         <li><a class="dropdown-trigger" data-target="dropdown_locations">Locations</a></li>
+                        <li><a href="about">About</a></li>
                     {% else %}
                         <li><a href="{{ url_for('all_datasets') }}">Datasets</a></li>
                         <li><a href="{{ url_for('all_categories') }}">Categories</a></li>
                         <li><a href="{{ url_for('all_locations') }}">Locations</a></li>
+                        
                     {% endif %}
                 </ul>
                 <ul class="right hide-on-med-and-down">
