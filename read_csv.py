@@ -1,5 +1,6 @@
 # importing csv module
 import csv
+import os
 
 import calculations
 
@@ -24,16 +25,36 @@ def readCSV(path, filename):
 	sCount = 0
 
 	# reading csv file
-	with open(path+filename, 'r') as csvfile:
-		# creating a csv reader object
-		csvreader = csv.reader(csvfile)
-		
-		# extracting field names through first row
-		fields = next(csvreader)
+  # if there is a folder in dataFiles, walk through that folder too
+	try:
+		with open(path+filename, 'r') as csvfile:
+			# creating a csv reader object
+			csvreader = csv.reader(csvfile)
+			
+			# extracting field names through first row
+			fields = next(csvreader)
 
-		# extracting each data row one by one
-		for row in csvreader:
-			rows.append(row)
+			# extracting each data row one by one
+			for row in csvreader:
+				rows.append(row)
+	except:
+		for dirs in os.walk(path):
+			for d in dirs:
+				if isinstance(d, str):
+					
+					try:
+						with open( d + "/" +filename, 'r') as csvfile:
+						# creating a csv reader object
+							csvreader = csv.reader(csvfile)
+			
+						# extracting field names through first row
+							fields = next(csvreader)
+
+						# extracting each data row one by one
+							for row in csvreader:
+								rows.append(row)
+					except:
+						x = 0
 			
 	validRowsIndex = []
 	validRowsName = []
@@ -53,7 +74,7 @@ def readCSV(path, filename):
 	for row in rows:
 		for vR in validRowsIndex:
 			if len(row) > validRowsIndex[vR] and row[validRowsIndex[vR]] is not None:
-				print(vR, validRowsIndex[vR], validRowsName[vR], row[validRowsIndex[vR]])
+				# print(vR, validRowsIndex[vR], validRowsName[vR], row[validRowsIndex[vR]])
 				if 'age' in validRowsName[vR]: 
 					a = float(row[validRowsIndex[vR]])
 					aCount += 1
@@ -119,8 +140,6 @@ def readCSV(path, filename):
 	if len(Ethnicity) > 0:
 		labelDict.update({'Ethnicity': Ethnicity})
 	if len(Gender) > 0:
-		print(Gender)
-		print(len(Gender))
 		if len(Gender) == 2:
 			Gender.update({'Recommendations: ': "You only have two genders in your data.", '-': "Consider how not including other genders might bias your results and lead to erasure."})
 			labelDict.update({'Gender':Gender})
