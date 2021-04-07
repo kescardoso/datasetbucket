@@ -1,4 +1,5 @@
 # python program to read JSON file
+import os
 import json
 import pandas as pd
 import numpy
@@ -11,10 +12,25 @@ def readJSON(path, filename):
     dataList = {}
     if ".json" in filename:
         # opening JSON file
-        filedata = [json.loads(line) for line in open("./dataFiles/"+filename, 'r', encoding = 'utf-8')]
-        # create pandas dataframe
-        df = pd.DataFrame(filedata)
-        cols = df.columns
+        df = None
+        cols = None
+        try: # need to walk through dataFiles to check if files are in folders
+            filedata = [json.loads(line) for line in open(path+ "/"+filename, 'r', encoding = 'utf-8')]
+            df = pd.DataFrame(filedata)
+            cols = df.columns
+        except:
+            for dirs in os.walk(path):
+                for d in dirs:
+                    if isinstance(d, str):
+                        try:
+                            filedata = [json.loads(line) for line in open(d+ "/" +filename, 'r', encoding = 'utf-8')]
+                            df = pd.DataFrame(filedata)
+                            cols = df.columns
+                        except:
+                            print("couldn't open", d+filename)
+            if df is None or cols is None:
+                return                
+
         # demographicsToSearch is all of the labels we will look for, and the formats we accept them as
         demographicsToSearch = { 'ethnicity':'str', 'gender':'str', 'religion':'str', 'income':'int', 'age':'int', 'education':'str', 'location':'str'}
         # The next 5 dicts are to store the counts of each value found 
@@ -26,6 +42,53 @@ def readJSON(path, filename):
         Age = {} 
         Education = {}
 
+        # i is label, valueFound is value to add to dict
+        def addValueToDict(i, valueFound):
+            # if/elif statements check which label was found and save the value to the corresponding dict with the count as the value in the hashmap/dict
+            if 'location' in i[0].lower():
+                if "." not in valueFound:
+                    if Location.get(valueFound) is not None:
+                        count = Location.get(valueFound)+1
+                        Location.update({valueFound: count})
+                    else:
+                        Location.update({valueFound:1})
+            if 'age' in i[0].lower():
+                if Age.get(valueFound) is not None:
+                    count = Age.get(valueFound)+1
+                    Age.update({valueFound: count})
+                else:
+                                Age.update({valueFound:1})
+            if 'gender' in i[0].lower():
+                if Gender.get(valueFound) is not None:
+                    count = Gender.get(valueFound)+1
+                    Gender.update({valueFound: count})
+                else:
+                    Gender.update({valueFound:1})
+            if 'ethnicity' in i[0].lower():
+                if Ethnicity.get(valueFound) is not None:
+                    count = Ethnicity.get(valueFound)+1
+                    Ethnicity.update({valueFound: count})
+                else:
+                    Ethnicity.update({valueFound:1})
+            if 'religion' in i[0].lower():
+                if Religion.get(valueFound) is not None:
+                    count = Religion.get(valueFound)+1
+                    Religion.update({valueFound: count})
+                else:
+                    Religion.update({valueFound:1})
+            if 'income' in i[0].lower():
+                if Income.get(valueFound) is not None:
+                    count = Income.get(valueFound)+1
+                    Income.update({valueFound: count})
+                else:
+                    Income.update({valueFound:1})
+            if 'education' in i[0].lower():
+                if Education.get(valueFound) is not None:
+                    count = Education.get(valueFound)+1
+                    Education.update({valueFound: count})
+                else:
+                    Education.update({valueFound:1})
+        
         # 3 diffterent formats supported: {'root': {dict}} OR {'content': {}, 'annotation':[{'labels':{}},{'points':{}}], 'extras':{}} OR {'keyword':{}, 'keyword':{}, 'keyword':{}}
         if 'root' in cols[0]: # TODO: need to write support for this format
             print('root')
@@ -47,61 +110,52 @@ def readJSON(path, filename):
                                         for labelIndex in bDict['label']: # all labels in the dict, which we want to match to our demographicsToSearch dict
                                             if len(bDict['label'][labelIndex]) > 0:
                                                 if bDict['label'][labelIndex][0].lower() in demographicsToSearch: # check if this label is a label we want
-                                                    valueFound = bDict['points'][labelIndex][0]['text']
-                                                    valueFound = valueFound.lstrip(punctuation)
-                                                    valueFound = valueFound.rstrip(punctuation) # strip the value of the label of leading/trailing punctuation
+                                                    valueF = bDict['points'][labelIndex][0]['text']
+                                                    valueF = valueF.lstrip(punctuation)
+                                                    valueF = valueF.rstrip(punctuation) # strip the value of the label of leading/trailing punctuation
                                                     try:                                                                
-                                                        valueFound = float(valueFound) # if location is a number, we can parse it so we can analyze it later
+                                                        valueF = float(valueF) # if location is a number, we can parse it so we can analyze it later
                                                     except:
-                                                        valueFound = str(valueFound)
+                                                        valueF = str(valueF)
 
-                                                    # if/elif statements check which label was found and save the value to the corresponding dict with the count as the value in the hashmap/dict
-                                                    if 'Location' in bDict['label'][labelIndex] or 'location' in bDict['label'][labelIndex]:
-                                                        if "." not in valueFound:
-                                                            if Location.get(valueFound) is not None:
-                                                                count = Location.get(valueFound)+1
-                                                                Location.update({valueFound: count})
-                                                            else:
-                                                                Location.update({valueFound:1})
-                                                    elif 'Age' in bDict['label'][labelIndex] or 'age' in bDict['label'][labelIndex]:
-                                                        if Age.get(valueFound) is not None:
-                                                            count = Age.get(valueFound)+1
-                                                            Age.update({valueFound: count})
-                                                        else:
-                                                            Age.update({valueFound:1})
-                                                    elif 'Gender' in bDict['label'][labelIndex] or 'gender' in bDict['label'][labelIndex]:
-                                                        if Gender.get(valueFound) is not None:
-                                                            count = Gender.get(valueFound)+1
-                                                            Gender.update({valueFound: count})
-                                                        else:
-                                                            Gender.update({valueFound:1})
-                                                    elif 'Ethnicity' in bDict['label'][labelIndex] or 'ethnicity' in bDict['label'][labelIndex]:
-                                                        if Ethnicity.get(valueFound) is not None:
-                                                            count = Ethnicity.get(valueFound)+1
-                                                            Ethnicity.update({valueFound: count})
-                                                        else:
-                                                            Ethnicity.update({valueFound:1})
-                                                    elif 'Religion' in bDict['label'][labelIndex] or 'religion' in bDict['label'][labelIndex]:
-                                                        if Religion.get(valueFound) is not None:
-                                                            count = Religion.get(valueFound)+1
-                                                            Religion.update({valueFound: count})
-                                                        else:
-                                                            Religion.update({valueFound:1})
-                                                    elif 'Income' in bDict['label'][labelIndex] or 'income' in bDict['label'][labelIndex]:
-                                                        if Income.get(valueFound) is not None:
-                                                            count = Income.get(valueFound)+1
-                                                            Income.update({valueFound: count})
-                                                        else:
-                                                            Income.update({valueFound:1})
-                                                    elif 'Education' in bDict['label'][labelIndex] or 'education' in bDict['label'][labelIndex]:
-                                                        if Education.get(valueFound) is not None:
-                                                            count = Education.get(valueFound)+1
-                                                            Education.update({valueFound: count})
-                                                        else:
-                                                            Education.update({valueFound:1})
-        else:
-            x = 0
+                                                    addValueToDict(bDict['label'][labelIndex], valueF )
+                                                    
+        else: # for .json format: {'keyword':{}, 'keyword':{ 'keyword':{}, 'keyword':{}}} 
+            for col in cols:
+                for val in df[col]:
+                    if col.lower() in demographicsToSearch:
+                        addValueToDict(col.lower(), val)
+                    elif isinstance(val, list):
+                        for lst in val:
+                            if isinstance(lst, dict):
+                                colsI = lst.keys()
+                                for ii in colsI:
+                                    print('i', ii)
+                                    if ii.lower() in demographicsToSearch:
+                                        addValueToDict(ii, valueF)
+                            elif lst in demographicsToSearch:
+                                valueF = val.get(lst)
+                                addValueToDict(lst, valueF)
+
+            
         #TODO: need to write support for this format
     # return dict of all labels and their dicts
-    return {'Location': Location, 'Ethnicity': Ethnicity, 'Gender': Gender, 'Religion': Religion, 'Income':Income, 'Age':Age, 'Education':Education }
-       
+
+    # check if any values to add to dict we want to return to runTerminalCommands
+    dictToReturn = {}
+    if len(Location) > 0:
+        dictToReturn.update({'Location': Location})
+    if len(Ethnicity) > 0:
+        dictToReturn.update({'Ethnicity': Ethnicity})
+    if len(Gender) > 0:
+        dictToReturn.update({'Gender': Gender})
+    if len(Religion) > 0:
+        dictToReturn.update({'Religion': Religion})
+    if len(Income) > 0:
+        dictToReturn.update({'Income': Income})
+    if len(Age) > 0:
+        dictToReturn.update({'Age': Age})
+    if len(Education) > 0:
+        dictToReturn.update({'Education': Education})
+        
+    return dictToReturn
