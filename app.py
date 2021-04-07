@@ -27,7 +27,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
-# Home : Show All Datasets
+# Home : about
 @app.route("/")
 @app.route("/about")
 def about():
