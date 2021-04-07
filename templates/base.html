@@ -39,7 +39,6 @@
             <!-- Datasets Dropdown -->
             <ul id="dropdown_datasets" class="dropdown-content" style="width:200px">
                 <li><a href="{{ url_for('all_datasets') }}">View All Datasets</a></li>
-                <li><a href="{{ url_for('analyse_data') }}">Analyse Data</a></li>
                 <li><a href="{{ url_for('add_dataset') }}">Add New Dataset</a></li>
             </ul>
             <!-- Categories Dropdown -->
@@ -50,7 +49,7 @@
 
             <!-- Desktop nav -->
             <div class="nav-wrapper">
-                <a href="{{ url_for('all_datasets') }}" class="brand-logo center">
+                <a href="{{ url_for('about') }}" class="brand-logo center">
                     <img src="{{ url_for('static', filename='images/dbba.png') }}"
                          width="170px"
                          alt="Dataset Bucket & Bias Auditor">
@@ -61,6 +60,7 @@
                     {% if session.user %}
                         <li><a class="dropdown-trigger" data-target="dropdown_datasets">DataSets</a></li>
                         <li><a class="dropdown-trigger" data-target="dropdown_categories">DataTags</a></li>
+                        <li><a href="{{ url_for('analyse_data') }}">Analyse</a></li>
                     {% else %}
                         <li><a href="{{ url_for('all_datasets') }}">Datasets</a></li>
                         <li><a href="{{ url_for('all_categories') }}">DataTags</a></li>
@@ -68,6 +68,7 @@
                 </ul>
                 <ul class="right hide-on-med-and-down">
                     {% if session.user %}
+                        <li><a href="{{ url_for('about') }}">About</a></li>
                         <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
                         <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                     {% else %}
@@ -124,7 +125,7 @@
                 <div class="col s12">
                 <h6 class="white-text center">A Dataset Bucket with a Bias Auditor</h6>
                 <h6 class="small-text white-text center">
-                    [ Kes Cardoso + Sakshi Gupta + William Yang + Elizabeth Crouther ]
+                    [ Kes Cardoso + Sakshi Gupta + Elizabeth Crouther + William Yang ]
                 </h6>
                 </div>
             </div>
