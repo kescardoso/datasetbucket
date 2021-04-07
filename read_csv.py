@@ -124,19 +124,23 @@ def readCSV(path, filename):
 	if len(age) > 1:
 		ageVar = calculations.calcVariance(age)
 		ageMean = calculations.calcMean(age)
-		labelDict.update({"Age": ["Count: " + str(aCount), "Variance: " + str(ageVar), "Mean: " + str(ageMean)]})
+		ageHist = calculations.calcHistogram(age, "Age")
+		labelDict.update({"Age": ["Count: " + str(aCount), "Variance: " + str(ageVar), "Mean: " + str(ageMean), ageHist]})
 	if len(sex) > 1:
+		sexCount = calculations.calcBreakDown(sex)
 		sexVar = calculations.calcVariance(sex)
 		sexMean = calculations.calcMean(sex)
-		uniqueValues = calculations.calcUniquieValues(sex)
+		uniqueValues = calculations.calcUniqueValues(sex)
+		sexHist = calculations.calcHistogram(sex, "Sex")
 		if uniqueValues <= 2: # check if only included 2 or less sex data points
-			labelDict.update({"Sex": ["Count: " + str(sCount), "Variance: " + str(sexVar), "Mean: " + str(sexMean), "Recommendations: " +"You only included " + str(uniqueValues) + " Sex data points.", "If you did not include Intersex or Transgender people, consider how this might impact your results."]})
+			labelDict.update({"Sex": ["Breakdown: " + sexCount, "Count: " + str(sCount), "Variance: " + str(sexVar), "Mean: " + str(sexMean), sexHist, "Recommendations: " +"You only included " + str(uniqueValues) + " Sex data points.", "If you did not include Intersex or Transgender people, consider how this might impact your results."]})
 		else:
-			labelDict.update({"Sex": ["Count: " + str(sCount), "Variance: " + str(sexVar), "Mean: " + str(sexMean)]})
+			labelDict.update({"Sex": ["Breakdown: " + sexCount, "Count: " + str(sCount), "Variance: " + str(sexVar), "Mean: " + str(sexMean), sexHist]})
 	if len(income) > 1:
 		incomeVar = calculations.calcVariance(income)
 		incomeMean = calculations.calcMean(income)
-		labelDict.update({"Income": ["Count: " + str(iCount), "Variance: " + str(incomeVar), "Mean: " + str(incomeMean)]})
+		incomeHist = calculations.calcHistogram(income, "Income")
+		labelDict.update({"Income": ["Count: " + str(iCount), "Variance: " + str(incomeVar), "Mean: " + str(incomeMean), incomeHist]})
 	if len(Ethnicity) > 0:
 		labelDict.update({'Ethnicity': Ethnicity})
 	if len(Gender) > 0:
