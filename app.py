@@ -124,14 +124,13 @@ def analyse_data():
             fileString = split_filename[1]
             reportMade = startCommands(fileString) # startCommands is the function in runTerminalCommands.py that starts the download/running/analysis of the dataset
             if reportMade:
-                time.sleep(5)
-                # with open('/Users/mac/IdeaProjects/datasetbucket/report.pdf', 'rb') as static_file:
+                time.sleep(3)
                 try:
-                    return send_file('/Users/mac/IdeaProjects/datasetbucket/report.pdf', as_attachment=True)
+                    return send_file("./reportdir/report.pdf", as_attachment=True) # downloads to user's downloads computer 
                 except:
-                    return render_template("analyse.html", dataToRender="Unable able to generate report")
+                    return render_template("analyse.html", dataToRender="Unable able to send report")
             else:
-                return render_template("analyse.html", dataToRender="Unable able to generate report")
+                return render_template("analyse.html", dataToRender="Demographic data not found, unable to generate report")
     return render_template("analyse.html")
 
 
