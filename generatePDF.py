@@ -6,7 +6,7 @@ import shutil
 import time
 
 print(LETTER)
-canvas = Canvas("report2.pdf", pagesize=LETTER)
+canvas = Canvas("report.pdf", pagesize=LETTER)
 
 # create and save the pdf report from the dicts, dataResultsCSV, dataResultsJSON
 
