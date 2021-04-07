@@ -19,11 +19,6 @@
           href="{{ url_for('static', filename='css/style.css') }}" 
           type="text/css">
 
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-
     {% block styles %}
     {% endblock %}
 
@@ -49,11 +44,20 @@
 
             <!-- Desktop nav -->
             <div class="nav-wrapper">
-                <a href="{{ url_for('about') }}" class="brand-logo center">
-                    <img src="{{ url_for('static', filename='images/dbba.png') }}"
-                         width="170px"
-                         alt="Dataset Bucket & Bias Auditor">
-                </a>
+                {% if session.user %}
+                    <a href="{{ url_for('all_datasets') }}" class="brand-logo center">
+                        <img src="{{ url_for('static', filename='images/dbba.png') }}"
+                            width="170px"
+                            alt="Dataset Bucket & Bias Auditor">
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('about') }}" class="brand-logo center">
+                        <img src="{{ url_for('static', filename='images/dbba.png') }}"
+                            width="170px"
+                            alt="Dataset Bucket & Bias Auditor">
+                    </a>
+                {% endif %}
+                
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
                 <ul class="left hide-on-med-and-down">
                     <!-- Datasets Dropdown Trigger -->
