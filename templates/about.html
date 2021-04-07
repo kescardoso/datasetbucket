@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="teal-text text-darken-2 center-align">Welcome! Read this to get started</h3>
+<h5 class="teal-text text-darken-2 center-align">What is Bias, and how to use our bucket and auditor</h5>
+
+<br>
+
+<ul class="collapsible popout">
+
+    <!-- How to use -->
+    <li>
+        <div class="collapsible-header white-text teal darken-2 text-shadow">
+            <div class="col s1">
+                <i class="fas fa-caret-down"></i>
+            </div>
+            <div class="col s-8">
+                <div class="name-header">
+                    <strong> How To Use this Bucket and Auditor </strong>
+                </div>
+            </div>
+        </div>
+        <div class="collapsible-body">
+            <p>
+                You can view datasets and tags from our bucket when you are logged-out. 
+                The first step to fully use and take advantage of our bucket and auditor is: 
+                you must register and login. 
+                After logged-in, use the form "Analyse Data" to enter the Kaggle URL:
+            </p>
+            <p>
+                << Enter information for USER here on how to get a report from the front end >>
+            </p>
+            <p>
+                Use the form-fields in "Add Data Set" and "Edit Data Set" to enter, classify and update your data entry:
+            </p>
+            <p>
+                The forms contain the fields: "tag(s)" (multi-choice to pick from gender, ethinicity, 
+                location and more to represent your dataset ), "name" (your dataset title), 
+                "description" (a short summary of your dataset report), 
+                "report" (upload your analysis report pdf from the bias auditor), 
+                "date-picker" (select today's date to show when the data was added or last updated),
+                "do do" (toogle on if you are still working on updating the data).
+            </p>
+            <p>
+                Use the form "Add Data Tag" to enter new tags for your data entry.
+            </p>
+        </div>
+    </li>
+
+    <!-- How we analyse -->
+    <li>
+        <div class="collapsible-header white-text teal darken-2 text-shadow">
+            <div class="col s1">
+                <i class="fas fa-caret-down"></i>
+            </div>
+            <div class="col s-8">
+                <div class="name-header">
+                    <strong> How we analyze your data </strong>
+                </div>
+            </div>
+        </div>
+        <div class="collapsible-body">
+            <p> Location:
+                If your data has a Location tag, we look to see if all locations are equally represented.
+                String and number formats accepted.
+            </p>
+            <p> Gender and/or Sex:
+                If your data has a Gender or Sex tag, we look to see if all genders are equally represented.
+                For example, if you only have two genders in your data, we will recommend that you consider adding data
+                to include other genders.
+                Only string inputs are accepted. If values are numbers, they will be treated as strings.
+            </p>
+            <p> Ethnicity:
+                If your data has a Ethnicity tag, we look to see if all ethnicities are equally represented. The
+                distribution of your data should be proportional to the distribution in the population the data is from.
+                Only string inputs are accepted.
+            </p>
+            <p> Religion:
+                If your data has a Religion tag, we look to see if all religions are equally represented. The
+                distribution of your data should be proportional to the distribution in the population the data is from.
+                Only string inputs are accepted.
+            </p>
+            <p> Income:
+                If your data has an Income tag, we look to see if all Income are proportionally represented. The
+                distribution of your data should be proportional to the distribution in the population the data is from.
+                Only number inputs are accepted.
+            </p>
+            <p> Age:
+                If your data has an Age tag, we look to see if all ages are proportionally represented. The distribution
+                of your data should be proportional to the distribution in the population the data is from.
+                Only number inputs are accepted.
+            </p>
+            <p> Education:
+                If your data has an Education tag, we look to see if all education levels are proportionally
+                represented. The distribution of your data should be proportional to the distribution in the population
+                the data is from.
+                Only string inputs are accepted.
+            </p>
+        </div>
+    </li>
+    
+    <!-- Bias -->
+    <li>
+        <div class="collapsible-header white-text teal darken-2 text-shadow">
+            <div class="col s1">
+                <i class="fas fa-caret-down"></i>
+            </div>
+            <div class="col s-8">
+                <div class="name-header">
+                    <strong> Bias </strong>
+                </div>
+            </div>
+        </div>
+        <div class="collapsible-body">
+            <p> Defined as: prejudice in favor of or against one thing, person, or group compared with another, usually
+                in a way considered to be unfair
+            </p>
+        </div>
+    </li>
+
+    <!-- Sample Bias -->
+    <li>
+        <div class="collapsible-header white-text teal darken-2 text-shadow">
+            <div class="col s1">
+                <i class="fas fa-caret-down"></i>
+            </div>
+            <div class="col s-8">
+                <div class="name-header">
+                    <strong> Sample Bias </strong>
+                </div>
+            </div>
+        </div>
+        <div class="collapsible-body">
+            <p> Sample bias occurs when a dataset does not reflect the realities of the environment in which a model
+                will run.
+            </p>
+        </div>
+    </li>
+
+    <!-- Measurement Bias -->
+    <li>
+        <div class="collapsible-header white-text teal darken-2 text-shadow">
+            <div class="col s1">
+                <i class="fas fa-caret-down"></i>
+            </div>
+            <div class="col s-8">
+                <div class="name-header">
+                    <strong> Measurement Bias </strong>
+                </div>
+            </div>
+        </div>
+        <div class="collapsible-body">
+            <p> This type of bias occurs when the data collected for training differs from that collected in the real
+                world, or when faulty measurements result in data distortion.
+            </p>
+        </div>
+    </li>
+
+    <!-- Racial Bias -->
+    <li>
+        <div class="collapsible-header white-text teal darken-2 text-shadow">
+            <div class="col s1">
+                <i class="fas fa-caret-down"></i>
+            </div>
+            <div class="col s-8">
+                <div class="name-header">
+                    <strong> Racial Bias </strong>
+                </div>
+            </div>
+        </div>
+        <div class="collapsible-body">
+            <p> Though not data bias in the traditional sense, this still warrants mentioning due to its prevalence in
+                AI technology of late. Racial bias occurs when data skews in favor of particular demographics.
+                This can also be extended to gender bias.
+            </p>
+        </div>
+    </li>
+
+</ul>
+
+{% endblock %}
