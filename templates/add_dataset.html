@@ -12,12 +12,12 @@
                 <div class="input-field col s12">
                     <i class="fas fa-tags prefix teal-text text-darken-2"></i>
                     <select multiple id="category_name" name="category_name" class="validate"  required>
-                        <option value="" disabled selected>Choose Category</option>
+                        <option value="" disabled selected>Choose Tag(s)</option>
                         {% for category in categories %}
                             <option value="{{ category.category_name }}">{{ category.category_name }}</option>
                         {% endfor %}
                     </select>
-                    <label for="category_name">Dataset Category</label>
+                    <label for="category_name">Dataset Tag</label>
                 </div>
             </div>
 
