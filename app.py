@@ -1,10 +1,15 @@
 import os
 import re
+import time
 
-from flask import Flask, flash, render_template, redirect, request, session, url_for
+from flask import Flask, flash, render_template, redirect, request, session, url_for, send_file
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+
+# only importing this function prevents 
+# the whole .py file from executing on startup
+from runTerminalCommands import startCommands 
 
 if os.path.exists("env.py"):
     import env
@@ -22,8 +27,14 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
-# Home : Show All Datasets
+# Home : about
 @app.route("/")
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
+# Show All Datasets
 @app.route("/all_datasets")
 def all_datasets():
     datasets = list(mongo.db.datasets.find())
