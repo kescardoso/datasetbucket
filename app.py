@@ -2,10 +2,13 @@ import os
 import re
 import time
 
-from flask import Flask, flash, render_template, redirect, request, session, url_for, send_file
+from flask import(Flask, flash, render_template, redirect, 
+                  request, session, url_for, send_file)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 
 # only importing this function prevents 
 # the whole .py file from executing on startup
@@ -14,16 +17,19 @@ from runTerminalCommands import startCommands
 if os.path.exists("env.py"):
     import env
 
-
 # Create an instance of Flask (the Flask app)
 app = Flask(__name__)
 
-# Connect Mongo to Flask (via PyMongo) and config vars from env.py
+# Connect Mongo to Flask (via PyMongo) 
+# and aother config vars from env.py
+app.secret_key = os.environ.get("SECRET_KEY")
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
-app.secret_key = os.environ.get("SECRET_KEY")
+app.config["UPLOAD_FOLDER"] = os.environ.get("UPLOAD_FOLDER")
+app.config["ALLOWED_EXTENSIONS"] = os.environ.get("ALLOWED_EXTENSIONS")
 
-# Connect MongoDB to the Flask app (instance created above)
+# Connect MongoDB to the Flask app 
+# (instance created above)
 mongo = PyMongo(app)
 
 
@@ -34,26 +40,16 @@ def about():
     return render_template("about.html")
 
 
-# Show All Datasets
-@app.route("/all_datasets")
-def all_datasets():
-    datasets = list(mongo.db.datasets.find())
-    categories = list(mongo.db.categories.find())
-    return render_template("datasets.html", 
-                            datasets=datasets, 
-                            categories=categories)
-
-
 # New User Registration
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    """ Check if username already exists in db """
+    # Check if username already exists in db
     if request.method == "POST":
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()}
         )
 
-        """ If username was found in db, register and insert user to db """
+        # If username was found in db, register and insert user to db
         if existing_user:
             flash("Username already exists")
             return redirect(url_for("register"))
@@ -64,8 +60,8 @@ def register():
         }
         mongo.db.users.insert_one(register)
 
-        """ Put the new registered user into a session cookie
-        and redirect user to profile page """
+        # Put the new registered user into a session cookie
+        # and redirect user to profile page
         session["user"] = request.form.get("username").lower()
         flash("Registration Successful")
         return redirect(url_for("profile", username=session["user"]))
@@ -76,23 +72,23 @@ def register():
 # User Login 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    """ Check if username already exists in db """
+    # Check if username already exists in db
     if request.method == "POST":
         existing_user = mongo.db.users.find_one({"username": request.form.get("username").lower()})
 
-        """ If username was found in db: 
-        ensure hashed password matches user input """
+        # If username was found in db: 
+        # ensure hashed password matches user input
         if existing_user:
             if check_password_hash(existing_user["password"], request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
                 flash("Welcome, {}".format(request.form.get("username")))
                 return redirect(url_for("profile", username=session["user"]))
             else:
-                """ Invalid password match """
+                # Invalid password match
                 flash("Incorrect Username and/or Password")
                 return redirect(url_for("login"))
         else:
-            """ If username does not exist, warn user """
+            # If username does not exist, warn user
             flash("Incorrect Username and/or Password")
             return redirect(url_for("login"))
 
@@ -102,10 +98,10 @@ def login():
 # User Profile
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
-    """ Grab the session user's username from db (ignore the password) """
+    # Grab the session user's username from db (ignore the password)
     username = mongo.db.users.find_one({"username": session["user"]})["username"]
 
-    """ Confirm true user session cookie """
+    # Confirm true user session cookie
     if session["user"]:
         return render_template("profile.html", username=username)
 
@@ -115,7 +111,7 @@ def profile(username):
 # User Logout
 @app.route("/logout")
 def logout():
-    """ Remove user from session cookies """
+    # Remove user from session cookies
     flash("You have been logged out")
     session.pop("user")
     return redirect(url_for("login"))
@@ -148,25 +144,56 @@ def analyse_data():
     return render_template("analyse.html")
 
 
+# Show All Datasets
+@app.route("/all_datasets")
+def all_datasets():
+    datasets = list(mongo.db.datasets.find())
+    categories = list(mongo.db.categories.find())
+    return render_template("datasets.html", 
+                            datasets=datasets, 
+                            categories=categories)
+
+
+# Allow file upload
+def allowed_file(filename):
+    # Function for file upload by user (in a folder)
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in os.environ.get("ALLOWED_EXTENSIONS")
+
+
 # Add New Dataset
 @app.route("/add_dataset", methods=["GET", "POST"])
 def add_dataset():
-    """ Insert new informatiom from the form into the db """
+    # Function for creating new datset (in the db)
     if request.method == "POST":
-        is_todo = "On" if request.form.get("is_todo") else "Off"
-        dataset = {
-            "category_name": request.form.getlist("category_name"),
-            "dataset_name": request.form.get("dataset_name"),
-            "dataset_description": request.form.get("dataset_description"),
-            "is_todo": is_todo,
-            "last_update": request.form.get("last_update"),
-            "created_by": session["user"]
-        }
-        mongo.db.datasets.insert_one(dataset)
-        flash("New Dataset Successfully Added")
-        return redirect(url_for("all_datasets"))
+        is_todo = "On" if request.files.get("is_todo") else "Off"
+        target = os.path.join(app.config['UPLOAD_FOLDER'])
+        if not os.path.isdir(target):
+            os.mkdir(target)
 
-    """ Wire up the db to dynamically generate the category collection """
+        file = request.files["dataset_report"]
+        print(file)
+
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            destination = "/".join([target, filename])
+            print(destination)
+            file.save(destination)
+
+            dataset = {
+                "category_name": request.form.getlist("category_name"),
+                "dataset_name": request.form.get("dataset_name"),
+                "dataset_description": request.form.get("dataset_description"),
+                "dataset_report": request(url_for("destination")),
+                "is_todo": is_todo,
+                "last_update": request.form.get("last_update"),
+                "created_by": session["user"]
+            }
+            mongo.db.datasets.insert_one(dataset)
+            flash("New Dataset Successfully Added")
+            return redirect(url_for("all_datasets"))
+
+    # Wire up the db to dynamically generate the category collection
     categories = mongo.db.categories.find().sort("category_name")
     return render_template("add_dataset.html", 
                             categories=categories)
@@ -189,7 +216,7 @@ def edit_dataset(dataset_id):
         mongo.db.datasets.update({"_id": ObjectId(dataset_id)}, save_edit)
         flash("Dataset Successfully Updated")
 
-    """ Retrieve a dataset by its id, and convert it to a bson data type """
+    # Retrieve a dataset by its id, and convert it to a bson data type
     dataset = mongo.db.datasets.find_one({"_id": ObjectId(dataset_id)})
     categories = mongo.db.categories.find().sort("category_select")
 
@@ -255,7 +282,7 @@ def delete_category(category_id):
 # Show Datasets by Categories
 @app.route('/datasets_in/<category>')
 def datasets_in(category):
-    """ Query datasets by each category """
+    # Query datasets by each category
     return render_template('by_category.html', 
                             category=category,
                             datasets=mongo.db.datasets.find(
