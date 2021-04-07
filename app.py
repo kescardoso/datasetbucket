@@ -1,12 +1,15 @@
 import os
 import re
 import time
+
 from flask import Flask, flash, render_template, redirect, request, session, url_for, send_file
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from runTerminalCommands import startCommands # only importing this function prevents the whole .py file from executing on startup
+# only importing this function prevents 
+# the whole .py file from executing on startup
+from runTerminalCommands import startCommands 
 
 if os.path.exists("env.py"):
     import env
@@ -26,15 +29,19 @@ mongo = PyMongo(app)
 
 # Home : Show All Datasets
 @app.route("/")
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
+# Show All Datasets
 @app.route("/all_datasets")
 def all_datasets():
     datasets = list(mongo.db.datasets.find())
     categories = list(mongo.db.categories.find())
-    locations = list(mongo.db.locations.find())
     return render_template("datasets.html", 
                             datasets=datasets, 
-                            categories=categories,
-                            locations=locations)
+                            categories=categories)
 
 
 # New User Registration
@@ -113,9 +120,6 @@ def logout():
     session.pop("user")
     return redirect(url_for("login"))
 
-@app.route("/about", methods=["GET", "POST"])
-def about():
-    return render_template("about.html")
 
 # Analyse dataset from Kaggle
 @app.route("/analyse_data", methods=["GET", "POST"])
@@ -124,25 +128,24 @@ def analyse_data():
         fileString = request.form.get("file_name")
         # StartCommands is the function in runTerminalCommands.py 
         # that starts the download/running/analysis of the dataset
-        if fileString is not None and  'kaggle.com/' in fileString:
-            try:
-                os.remove('report.pdf')
-            except:
-                print(' no report to remove')
+        if fileString is not None:
             split_filename = fileString.split('.com/')
             fileString = split_filename[1]
-            reportMade = startCommands(fileString) # startCommands is the function in runTerminalCommands.py that starts the download/running/analysis of the dataset
+            reportMade = startCommands(fileString)
+            # With open('/Users/mac/IdeaProjects/datasetbucket/report.pdf', 'rb') 
+            # as static_file """
             if reportMade:
-                time.sleep(3)
+                time.sleep(5)
                 try:
-                    return send_file("./reportdir/report.pdf", as_attachment=True) # downloads to user's downloads computer 
+                    return send_file('/Users/mac/IdeaProjects/datasetbucket/report.pdf', 
+                                      as_attachment=True)
                 except:
-                    return render_template("analyse.html", dataToRender="Unable able to send report")
+                    return render_template("analyse.html", 
+                                            dataToRender="Unable able to generate report")
             else:
-                return render_template("analyse.html", dataToRender="Demographic data not found, unable to generate report")
-
+                return render_template("analyse.html", 
+                                        dataToRender="Unable able to generate report")
     return render_template("analyse.html")
-
 
 
 # Add New Dataset
@@ -152,8 +155,7 @@ def add_dataset():
     if request.method == "POST":
         is_todo = "On" if request.form.get("is_todo") else "Off"
         dataset = {
-            "category_name": str(request.form.getlist("category_name")),
-            "location_name": request.form.getlist("location_name"),
+            "category_name": request.form.getlist("category_name"),
             "dataset_name": request.form.get("dataset_name"),
             "dataset_description": request.form.get("dataset_description"),
             "is_todo": is_todo,
@@ -164,12 +166,10 @@ def add_dataset():
         flash("New Dataset Successfully Added")
         return redirect(url_for("all_datasets"))
 
-    """ Wire up the db to dynamically generate the category and location collection """
+    """ Wire up the db to dynamically generate the category collection """
     categories = mongo.db.categories.find().sort("category_name")
-    locations = mongo.db.locations.find().sort("location_name")
     return render_template("add_dataset.html", 
-                            categories=categories, 
-                            locations=locations)
+                            categories=categories)
 
 
 # Edit Dataset
@@ -177,10 +177,8 @@ def add_dataset():
 def edit_dataset(dataset_id):
     if request.method == "POST":
         is_todo = "On" if request.form.get("is_todo") else "Off"
-        category_select = "category_name" if category_name is string else "category"
         save_edit = {
-            "category_select": request.form.getlist("category_select"),
-            "location_name": request.form.get("location_name"),
+            "category_name": request.form.getlist("category_name"),
             "dataset_name": request.form.get("dataset_name"),
             "dataset_description": request.form.get("dataset_description"),
             "dataset_report": request.form.get("dataset_report"),
@@ -194,12 +192,10 @@ def edit_dataset(dataset_id):
     """ Retrieve a dataset by its id, and convert it to a bson data type """
     dataset = mongo.db.datasets.find_one({"_id": ObjectId(dataset_id)})
     categories = mongo.db.categories.find().sort("category_select")
-    locations = mongo.db.locations.find().sort("location_name")
 
     return render_template("edit_dataset.html", 
                             dataset=dataset, 
-                            categories=categories,
-                            locations=locations)
+                            categories=categories,)
 
 
 # Delete Dataset
@@ -237,7 +233,8 @@ def add_category():
 def edit_category(category_id):
     if request.method == "POST":
         save_edit = {
-            "category_name": request.form.get("category_name")
+            "category_name": request.form.get("category_name"),
+            "created_by": session["user"]
         }
         mongo.db.categories.update({"_id": ObjectId(category_id)}, save_edit)
         flash("Category Successfully Updated")
@@ -259,61 +256,10 @@ def delete_category(category_id):
 @app.route('/datasets_in/<category>')
 def datasets_in(category):
     """ Query datasets by each category """
-    return render_template('by_category.html', category=category,
-                           datasets=mongo.db.datasets.find({'category_name': category}).sort('dataset_name'))
-
-
-# Show All Locations
-@app.route("/all_locations")
-def all_locations():
-    locations = list(mongo.db.locations.find().sort("location_name"))
-    return render_template("locations.html", locations=locations)
-
-
-# Add Location
-@app.route("/add_location", methods=["GET", "POST"])
-def add_location():
-    if request.method == "POST":
-        location ={
-            "location_name": request.form.get("location_name"),
-            "created_by": session["user"]
-        }
-        mongo.db.locations.insert_one(location)
-        flash("New Location Added")
-        return redirect(url_for("all_locations"))
-
-    return render_template("add_location.html")
-
-
-# Edit Location
-@app.route("/edit_location/<location_id>", methods=["GET", "POST"])
-def edit_location(location_id):
-    if request.method == "POST":
-        save_edit = {
-            "location_name": request.form.get("location_name")
-        }
-        mongo.db.locations.update({"_id": ObjectId(location_id)}, save_edit)
-        flash("Location Successfully Updated")
-        return redirect(url_for("all_locations"))
-
-    location = mongo.db.locations.find_one({"_id": ObjectId(location_id)})
-    return render_template("edit_location.html", location=location)
-
-
-# Delete Location
-@app.route("/delete_location/<location_id>")
-def delete_location(location_id):
-    mongo.db.locations.remove({"_id": ObjectId(location_id)})
-    flash("LOcation Successfully Deleted")
-    return redirect(url_for("all_locations"))
-
-
-# Show Datasets by Locations
-@app.route('/datasets_at/<location>')
-def datasets_at(location):
-    """ Query datasets by each location """
-    return render_template('by_location.html', location=location,
-                           datasets=mongo.db.datasets.find({'location_name': location}).sort('dataset_name'))
+    return render_template('by_category.html', 
+                            category=category,
+                            datasets=mongo.db.datasets.find(
+                                {'category_name': category}).sort('dataset_name'))
 
 
 if __name__ == "__main__":
