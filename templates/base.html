@@ -19,10 +19,15 @@
           href="{{ url_for('static', filename='css/style.css') }}" 
           type="text/css">
 
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
     {% block styles %}
     {% endblock %}
 
-    <title>DataSets Bucket</title>
+    <title>Dataset Bucket + Auditor</title>
 </head>
 <body>
 
@@ -38,36 +43,32 @@
             </ul>
             <!-- Categories Dropdown -->
             <ul id="dropdown_categories" class="dropdown-content">
-                <li><a href="{{ url_for('all_categories') }}">View All Categories</a></li>
-                <li><a href="{{ url_for('add_category') }}">Add New Category</a></li>
-            </ul>
-            <!-- Locations Dropdown -->
-            <ul id="dropdown_locations" class="dropdown-content">
-                <li><a href="{{ url_for('all_locations') }}">View All Locations</a></li>
-                <li><a href="{{ url_for('add_location') }}">Add New Location</a></li>
+                <li><a href="{{ url_for('all_categories') }}">View All Tags</a></li>
+                <li><a href="{{ url_for('add_category') }}">Add New Tag</a></li>
             </ul>
 
             <!-- Desktop nav -->
             <div class="nav-wrapper">
-                <a href="{{ url_for('all_datasets') }}" class="brand-logo center">DataSetBucket</a>
+                <a href="{{ url_for('about') }}" class="brand-logo center">
+                    <img src="{{ url_for('static', filename='images/dbba.png') }}"
+                         width="170px"
+                         alt="Dataset Bucket & Bias Auditor">
+                </a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
                 <ul class="left hide-on-med-and-down">
                     <!-- Datasets Dropdown Trigger -->
                     {% if session.user %}
-                        <li><a class="dropdown-trigger" data-target="dropdown_datasets">Datasets</a></li>
-                        <li><a class="dropdown-trigger" data-target="dropdown_categories">Categories</a></li>
-                        <li><a class="dropdown-trigger" data-target="dropdown_locations">Locations</a></li>
-                        <li><a href="about">About</a></li>
+                        <li><a class="dropdown-trigger" data-target="dropdown_datasets">DataSets</a></li>
+                        <li><a class="dropdown-trigger" data-target="dropdown_categories">DataTags</a></li>
+                        <li><a href="{{ url_for('analyse_data') }}">Analyse</a></li>
                     {% else %}
                         <li><a href="{{ url_for('all_datasets') }}">Datasets</a></li>
-                        <li><a href="{{ url_for('all_categories') }}">Categories</a></li>
-                        <li><a href="{{ url_for('all_locations') }}">Locations</a></li>
-                        
+                        <li><a href="{{ url_for('all_categories') }}">DataTags</a></li>
                     {% endif %}
                 </ul>
                 <ul class="right hide-on-med-and-down">
                     {% if session.user %}
-                        <li><a href="{{ url_for('analyse_data') }}">Analyse</a></li>
+                        <li><a href="{{ url_for('about') }}">About</a></li>
                         <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
                         <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                     {% else %}
@@ -83,13 +84,11 @@
             <li><a href="{{ url_for('all_datasets') }}"><h4 class="center-align teal-text text-lighten-1">DataSetBucket</h4></a></li>
             <li><a href="{{ url_for('all_datasets') }}">View Datasets</a></li>
             <li><a href="{{ url_for('all_categories') }}">View Categories</a></li>
-            <li><a href="{{ url_for('all_locations') }}">View Locations</a></li>
             <li class="divider" tabindex="-1"></li>
             {% if session.user %}
                 <li><a href="{{ url_for('analyse_data') }}">Analyse New Dataset</a></li>
                 <li><a href="{{ url_for('add_dataset') }}">Add New Dataset</a></li>
                 <li><a href="{{ url_for('add_category') }}">Add New Category</a></li>
-                <li><a href="{{ url_for('add_location') }}">Add New Location</a></li>
                 <li class="divider" tabindex="-1"></li>
                 <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
                 <li><a href="{{ url_for('logout') }}">Log Out</a></li>
@@ -124,7 +123,7 @@
         <div class="container">
             <div class="row">
                 <div class="col s12">
-                <h6 class="footer-pitch white-text center">A Dataset Bucket with a Bias Auditor</h6>
+                <h6 class="white-text center">A Dataset Bucket with a Bias Auditor</h6>
                 <h6 class="small-text white-text center">
                     [ Kes Cardoso + Sakshi Gupta + William Yang + Elizabeth Crouther ]
                 </h6>
@@ -132,11 +131,11 @@
             </div>
         </div>
         <div class="footer-copyright">
-            <div class="container">
+            <div class="container teal-text text-darken-1">
                 © 2021 Built by <a href="https://github.com/goofy-goofy" target="-blank">
                     The Goofy-Goofy Pod</a>. 
                     Powered by <a href="https://github.com/MLH-Fellowship" target="-blank">MLH</a>.
-                <span class="grey-text text-lighten-4 right">
+                <span class="teal-text text-darken-1 right">
                     Check our : 
                     <a href="https://github.com/kescardoso/datasetbucket" target="_blank">Repo</a> +  
                     <a href="https://devpost.com/software/datasetbucket" target="_blank">Devpost</a>
