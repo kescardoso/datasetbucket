@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h3 class="cyan-text text-darken-2 center-align">All Datasets</h3>
+<h3 class="teal-text text-darken-2 center-align">All Datasets</h3>
 
 {% if session.user %}
     <div class="row">
         <div class="col s12 center-align">
             <a href="{{ url_for('add_dataset') }}" 
-               class="btn cyan darken-1 text-shadow">
+               class="btn teal darken-1 text-shadow">
                Add New Dataset <i class="fas fa-plus-square right"></i>
             </a>
         </div>
@@ -20,7 +20,7 @@
         <li>
 
             <!-- Collapsible Head -->
-            <div class="collapsible-header white-text cyan darken-2 text-shadow">
+            <div class="collapsible-header white-text teal darken-2 text-shadow">
                 <div class="col s1">
                     <i class="fas fa-caret-down"></i>
                 </div>
@@ -29,7 +29,7 @@
                     <div class="name-header">
                         <strong>{{ dataset.dataset_name }}</strong>
                         {% if dataset.is_todo == "On" %}
-                            <i class="fas fa-exclamation-circle green-text text-lighten-2 tooltipped todo-alert"
+                            <i class="fas fa-exclamation-circle lime-text text-darken-3 tooltipped todo-alert"
                             data-position="right" data-tooltip="To Do!"></i>
                         {% endif %}
                     </div>
@@ -39,7 +39,7 @@
                 {% if session.user|lower == dataset.created_by|lower or session.user == "admin"|lower %}
                 <div class="col s-3">
                     <a href="{{ url_for('edit_dataset', dataset_id=dataset._id) }}" 
-                       class="waves-effect waves-light btn-small blue accent-4 option-button">
+                       class="waves-effect waves-light btn-small cyan darken-2 option-button">
                        Edit
                     </a>
                 </div>
@@ -54,7 +54,7 @@
 
                 <!-- Dataset Categories: display as string or list -->
                 <p class="collapsible-footer">
-                    <i class="fas fa-tag prefix cyan-text collapsible-footer-icon"></i> 
+                    <i class="fas fa-tag prefix teal-text collapsible-footer-icon"></i> 
                     Category : 
                     {% if dataset.category_name is string %}
                         {{ dataset.category_name }}  
@@ -67,23 +67,23 @@
 
                 <!-- Dataset Locations -->
                 <p class="collapsible-footer">
-                    <i class="fas fa-tag prefix cyan-text collapsible-footer-icon"></i> 
+                    <i class="fas fa-tag prefix teal-text collapsible-footer-icon"></i> 
                     Location : {{ dataset.location_name }}
                 </p>
 
                 <!-- Dataset last updated -->
                 <p class="collapsible-footer">
-                    <i class="fas fa-calendar-check prefix cyan-text collapsible-footer-icon"></i> 
+                    <i class="fas fa-calendar-check prefix teal-text collapsible-footer-icon"></i> 
                     Last updated : {{ dataset.last_update }}</p>
 
                 <!-- Dataset "is to do" (on or off) -->
                 <p class="collapsible-footer">
-                    <i class="fas fa-exclamation-circle prefix cyan-text collapsible-footer-icon"></i> 
+                    <i class="fas fa-exclamation-circle prefix teal-text collapsible-footer-icon"></i> 
                     To do : {{ dataset.is_todo }}</p>
 
                 <!-- Dataset author -->
                 <p class="collapsible-footer">
-                    <i class="fas fa-user-edit prefix cyan-text collapsible-footer-icon"></i> 
+                    <i class="fas fa-user-edit prefix teal-text collapsible-footer-icon"></i> 
                     Author : {{ dataset.created_by }}</p>
             </div>
             

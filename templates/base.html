@@ -29,10 +29,10 @@
     <header>
 
         <!-- Top navbar -->
-        <nav class="nav-extended text-shadow cyan lighten-1">
+        <nav class="nav-extended text-shadow teal lighten-2">
 
             <!-- Datasets Dropdown -->
-            <ul id="dropdown_datasets" class="dropdown-content">
+            <ul id="dropdown_datasets" class="dropdown-content" style="width:200px">
                 <li><a href="{{ url_for('all_datasets') }}">View All Datasets</a></li>
                 <li><a href="{{ url_for('add_dataset') }}">Add New Dataset</a></li>
             </ul>
@@ -78,7 +78,7 @@
         
         <!-- Mobile navbar -->
         <ul class="sidenav" id="mobile-demo">
-            <li><a href="{{ url_for('all_datasets') }}"><h4 class="center-align cyan-text text-lighten-1">DataSetBucket</h4></a></li>
+            <li><a href="{{ url_for('all_datasets') }}"><h4 class="center-align teal-text text-lighten-1">DataSetBucket</h4></a></li>
             <li><a href="{{ url_for('all_datasets') }}">View Datasets</a></li>
             <li><a href="{{ url_for('all_categories') }}">View Categories</a></li>
             <li><a href="{{ url_for('all_locations') }}">View Locations</a></li>
@@ -104,7 +104,7 @@
             {% if messages %}
                 {% for message in messages %}
                     <div class="row flashes">
-                        <h4 class="cyan lighten-4 center-align">
+                        <h4 class="teal lighten-4 center-align">
                             {{ message }}
                         </h4>
                     </div>
@@ -117,6 +117,31 @@
         {% block content %}
         {% endblock %}
     </main>
+
+    <footer class="page-footer text-shadow teal lighten-2">
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                <h6 class="footer-pitch white-text center">A Dataset Bucket with a Bias Auditor</h6>
+                <h6 class="small-text white-text center">
+                    [ Kes Cardoso + Sakshi Gupta + William Yang + Elizabeth Crouther ]
+                </h6>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2021 Built by <a href="https://github.com/goofy-goofy" target="-blank">
+                    The Goofy-Goofy Pod</a>. 
+                    Powered by <a href="https://github.com/MLH-Fellowship" target="-blank">MLH</a>.
+                <span class="grey-text text-lighten-4 right">
+                    Check our : 
+                    <a href="https://github.com/kescardoso/datasetbucket" target="_blank">Repo</a> +  
+                    <a href="https://devpost.com/software/datasetbucket" target="_blank">Devpost</a>
+                </span>
+            </div>
+        </div>
+    </footer>
     
     <!-- JQuery : to have Materiliaze JS working properly (loaded first) -->
     <script 

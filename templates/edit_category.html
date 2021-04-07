@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h3 class="cyan-text text-darken-2 center-align">Edit Category</h3>
+    <h3 class="teal-text text-darken-2 center-align">Edit Category</h3>
 
     <!-- Form: Edit Category -->
     <div class="row card-panel grey lighten-5">
@@ -12,7 +12,7 @@
             <!-- Input : category name -->
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-folder-open prefix cyan-text text-darken-2"></i>
+                    <i class="fas fa-folder-open prefix teal-text text-darken-2"></i>
                     <input id="category_name" 
                            name="category_name" 
                            minlength="3" maxlength="15"
@@ -30,18 +30,18 @@
                 <div class="col s-12">
                     <!-- Save Button (submit edits) -->
                     <button type="submit" 
-                            class="btn-large cyan darken-1 text-shadow">
+                            class="btn-large lime darken-3 text-shadow">
                             Save <i class="fas fa-edit right"></i>
                     </button>
                     {% if session.user|lower == category.created_by|lower or session.user == "admin"|lower %}
                         <!-- Delete Button -->
                         <a href="{{ url_for('delete_category', category_id=category._id) }}" 
-                        class="btn-large red text-shadow">
+                        class="btn-large red lighten-1 text-shadow">
                         Delete <i class="fas fa-trash-alt"></i>
                         </a>
                         <!-- Cancel Button -->
                         <a href="{{ url_for('all_categories') }}" 
-                        class="btn-large green text-shadow">
+                        class="btn-large grey text-shadow">
                         Cancel <i class="fas fa-times-circle"></i>
                         </a>
                     {% else %}

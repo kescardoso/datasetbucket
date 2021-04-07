@@ -25,6 +25,7 @@ def readCSV(path, filename):
 	sCount = 0
 
 	# reading csv file
+  # if there is a folder in dataFiles, walk through that folder too
 	try:
 		with open(path+filename, 'r') as csvfile:
 			# creating a csv reader object

@@ -8,6 +8,7 @@ print(LETTER)
 canvas = Canvas("report.pdf", pagesize=LETTER)
 
 # create and save the pdf report from the dicts, dataResultsCSV, dataResultsJSON
+
 def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
     try:
         os.mkdir('reportdir')
@@ -31,17 +32,18 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
     # if no data was found, return and send an error message to the user
     if dataResultsCSV is None and dataResultsJSON is None:
         return False
+
     if dataResultsCSV is not None and len(dataResultsCSV) == 0:
         if dataResultsJSON is not None and len(dataResultsJSON) == 0:
             return False
         if dataResultsJSON is None:
             return False
-    print(dataResultsCSV)
-    print(dataResultsJSON)
+          
     # if no title or subtitle was passed in, use defualts
     if title is None or title == "":
         title = "Analysis of your Data"
     if subtitle is None or subtitle == "":
+
         subtitle = "A report of possible bias in your dataset"
 
     # set title and subtitle
@@ -55,7 +57,6 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
     canvas.setFont('Helvetica', currentFontSize)
 
     canvas.drawString((centerPageWidth - (len(subtitle)*(currentFontSize/4.5))), currentLine, subtitle) # set subtitle in page
-    
     currentLine = currentLine - ( lineSpacing * 1.5 )
     canvas.setFont('Helvetica', currentFontSize-1)
 
@@ -111,8 +112,10 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
             
     # TODO: need to check if current line runs off the page. If is does, need to make a new page
 
+
      # run through json dict and add each to the page
     if dataResultsJSON is not None and len(dataResultsJSON) > 0:
+
         for var in dataResultsJSON: # var is the category
             if len(dataResultsJSON.get(var)) > 1: 
                 if currentLine < marginTopBottom + 20:
@@ -153,6 +156,5 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
             return True
         except:
             print('file not copied')
+
         return False
-    
-    
