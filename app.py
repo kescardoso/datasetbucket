@@ -121,7 +121,11 @@ def analyse_data():
         fileString = request.form.get("file_name")
         # StartCommands is the function in runTerminalCommands.py 
         # that starts the download/running/analysis of the dataset
-        if fileString is not None:
+        if fileString is not None and  'kaggle.com/' in fileString:
+            try:
+                os.remove('report.pdf')
+            except:
+                print(' no report to remove')
             split_filename = fileString.split('.com/')
             fileString = split_filename[1]
             reportMade = startCommands(fileString) # startCommands is the function in runTerminalCommands.py that starts the download/running/analysis of the dataset

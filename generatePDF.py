@@ -3,6 +3,7 @@ from reportlab.lib.pagesizes import LETTER
 
 import os
 import shutil
+import time
 
 print(LETTER)
 canvas = Canvas("report.pdf", pagesize=LETTER)
@@ -145,16 +146,19 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON ):
 
     # save the pdf as report.pdf and return
     try:
-        
         canvas.save() # save the pdf as report.pdf and return
-        time.sleep(3)
+        time.sleep(6)
         os.system("cp "  + "report.pdf reportdir")
         return True
     except: 
+        time.sleep(5)
         try:
+            canvas.save()
+            time.sleep(5)
             os.system("cp "  + "report.pdf reportdir")
             return True
         except:
             print('file not copied')
+            return False
 
         return False
