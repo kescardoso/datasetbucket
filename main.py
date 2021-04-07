@@ -1,5 +1,5 @@
 import numpy as np
-import cv2
+from cv2 import cv2
 import os
 from matplotlib import pyplot as plt
 import shutil
@@ -28,19 +28,16 @@ def readImage(f):
   dataResultsJSON = {}
   dataResultsIMG = {}
   names = []
-  kaggle_url = "https://www.kaggle.com/jessicali9530/lfw-dataset"
+  kaggle_url = "https://www.kaggle.com/elizabethcrouther/goofyimages"
 
 
   # for root, directories, files in path:
   # for 
   for filename in f:
-    # print(filename)
 
     img_path = filename 
-
     # if '.png' or '.jpeg' or '.jpg' in filename:
     img_copy,faces = detectFace.detect_faces(img_path = img_path)
-
       # profileimagePDF = img_copy.resize(img_copy, (32,32))
 
                 
@@ -136,7 +133,7 @@ def readImage(f):
     # plt.axis("off")
     # plt.imshow(colour_bar)
     # plt.show()
-    # print(info)
+      print('info in main.py line 139', info)
     # os.chdir("dataResults/")
     # imgRes_path = "dataResults/"
     imgName = filename[:-4] +  "_res.jpg"
@@ -155,9 +152,11 @@ def readImage(f):
   
   reportMade = generatePDF.generatePDFReport("ANALYSIS REPORT", None, dataResultsCSV, dataResultsJSON, dataResultsIMG = data)
   
-  print(reportMade)
+  reportMade
   
   for f in names:
     os.remove(f)
     # print(str(f) + " removed!")
+  
+  return reportMade
               

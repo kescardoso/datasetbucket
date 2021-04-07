@@ -59,10 +59,12 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON, dataRe
     canvas.drawString(marginLeftRight, currentLine, "report as a starting point to help you understand how your data might be biased.")
     currentLine = currentLine - ( lineSpacing * 1.5 )
 
-    if dataResultsIMG is not None :
-        # print(dataResultsIMG)
+    if dataResultsIMG is not None and len(dataResultsIMG) > 0:
+        #print(dataResultsIMG)
         canvas.line( marginLeftRight, currentLine-3, centerPageWidth, currentLine-4)
         canvas.drawString(marginLeftRight, currentLine + 1, "Color Pallete       Percentage Share")
+        currentLine = currentLine - lineSpacing
+
         for idx in dataResultsIMG :
             if currentLine < marginTopBottom+20:
                         canvas.showPage()
@@ -163,7 +165,7 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON, dataRe
         canvas.save() # save the pdf as report.pdf and return
         return True
     except: 
-        flash('could not generate report', 'error')
+        #flash('could not generate report', 'error')
         return False
     
     

@@ -80,6 +80,7 @@ def findReadableFiles(filename):
                 if len(dirs) > 0:
                     for d in dirs:
                         for files in os.walk("./dataFiles/"+d+"/"):
+                            
                             for f1 in files:
                                 if isinstance(f1, list):
                                     for fL in f1:
@@ -89,11 +90,21 @@ def findReadableFiles(filename):
                                             dataResultsFoundJSON = read_json.readJSON(stringD, fL)
                                         if ".csv" in fL: 
                                             dataResultsFoundCSV = read_csv.readCSV("./dataFiles/", fL)
-                                        if ".png" or ".jpeg" or ".jpg" in f:
-                                            # res = main.readImage(f)
-                                            file_paths = filePath.getPath()
-                                            res = main.readImage(file_paths)
-                                            return res 
+                                        # if ".png" or ".jpeg" or ".jpg" in f:
+                                        #     # res = main.readImage(f)
+                                        #     file_paths = filePath.getPath()
+                                        #     print(file_paths)
+                                        #     res = main.readImage(file_paths)
+                                        #     return res
+                        fileImg = os.listdir("./dataFiles/"+d)
+                        print('fileImg', fileImg)
+                        for f in fileImg:
+                            if ".png" or ".jpeg" or ".jpg" in f:
+                                # res = main.readImage(f)
+                                file_paths = filePath.getPath(d)
+                                print(file_paths)
+                                res = main.readImage(file_paths)
+                                return res                           
                 elif len(dirs) == 0:
                     for filename in files:
                         # global dataResultsFound
@@ -106,7 +117,6 @@ def findReadableFiles(filename):
 
         # TODO : need to make the folder-walking work for windows
             if sys.platform.startswith('win32'):
-                print("files: " + str(files) )
                 for filename in files:
                     # print("filename: " + str(filename))
                     with zipfile.ZipFile(filename,'r') as file:
@@ -114,7 +124,6 @@ def findReadableFiles(filename):
                         file.extractall("./dataFiles") # extracting files in the dataFiles directory
                         # listOfFileNames = file.namelist()
                     files = os.listdir("./dataFiles")
-                    # print(files)
                     for f in files:
                         if ".zip" not in f:
                             if ".json" in f: 
@@ -126,9 +135,10 @@ def findReadableFiles(filename):
 
                             if ".png" or ".jpeg" or ".jpg" in f:
                                 # res = main.readImage(f)
-                                file_paths = filePath.getPath()
-                                res = main.readImage(file_paths)
-                                return res 
+                                file_paths = filePath.getPath('')
+                                reportMade = main.readImage(file_paths)
+                                
+                                return reportMade
                         # for name in file.namelist():
                         #     print("name = " + str(name))
                         #     data = file.read(name)
