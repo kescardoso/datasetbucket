@@ -5,7 +5,8 @@ import sys
 import read_json
 import read_csv
 import generatePDF
-
+import main
+import filePath
 
 import zipfile
 import shutil
@@ -88,6 +89,11 @@ def findReadableFiles(filename):
                                             dataResultsFoundJSON = read_json.readJSON(stringD, fL)
                                         if ".csv" in fL: 
                                             dataResultsFoundCSV = read_csv.readCSV("./dataFiles/", fL)
+                                        if ".png" or ".jpeg" or ".jpg" in f:
+                                            # res = main.readImage(f)
+                                            file_paths = filePath.getPath()
+                                            res = main.readImage(file_paths)
+                                            return res 
                 elif len(dirs) == 0:
                     for filename in files:
                         # global dataResultsFound
@@ -100,24 +106,48 @@ def findReadableFiles(filename):
 
         # TODO : need to make the folder-walking work for windows
             if sys.platform.startswith('win32'):
+                print("files: " + str(files) )
                 for filename in files:
+                    # print("filename: " + str(filename))
                     with zipfile.ZipFile(filename,'r') as file:
 
                         file.extractall("./dataFiles") # extracting files in the dataFiles directory
-
-                        for name in file.namelist():
-                            print(name)
-                            data = file.read(name)
-                            # print(data)
-
-                            if ".json" in name: 
+                        # listOfFileNames = file.namelist()
+                    files = os.listdir("./dataFiles")
+                    # print(files)
+                    for f in files:
+                        if ".zip" not in f:
+                            if ".json" in f: 
                                 print(".json")
                                 dataResultsFoundJSON = read_json.readJSON("./dataFiles/", name)
-                            
-                            if ".csv" in name:
+                                
+                            elif ".csv" in f:
                                 dataResultsFoundCSV = read_csv.readCSV("./dataFiles/", name)
+
+                            if ".png" or ".jpeg" or ".jpg" in f:
+                                # res = main.readImage(f)
+                                file_paths = filePath.getPath()
+                                res = main.readImage(file_paths)
+                                return res 
+                        # for name in file.namelist():
+                        #     print("name = " + str(name))
+                        #     data = file.read(name)
+                        #     # print(data)
+
+                        #     if ".json" in name: 
+                        #         print(".json")
+                        #         dataResultsFoundJSON = read_json.readJSON("./dataFiles/", name)
+                            
+                        #     if ".csv" in name:
+                        #         dataResultsFoundCSV = read_csv.readCSV("./dataFiles/", name)
+
+                            # if ".png" or ".jpeg" or ".jpg" in name:
+                            #     print("images duh!")
+                            #     dataResultsFoundIMG = main.readImage(name = name)
+                            #     return dataResultsFoundIMG
+
     # results from parsing + calculations, will be passed into >>  generatePDF.generatePDFReport()
-    reportMade = generatePDF.generatePDFReport( zipFile , None, dataResultsFoundCSV, dataResultsFoundJSON) # generate the PDF report
+    reportMade = generatePDF.generatePDFReport( zipFile , None, dataResultsFoundCSV, dataResultsFoundJSON , []) # generate the PDF report
     
     return reportMade
 
