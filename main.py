@@ -1,5 +1,5 @@
 import numpy as np
-import cv2
+from cv2 import cv2
 import os
 from matplotlib import pyplot as plt
 import shutil
@@ -9,26 +9,22 @@ import detectFace
 import extractDominantColor
 import extractSkin
 import getColorInformation
+import imageCalculations
 import plot
 import ROI
 
 import generatePDF
 import passToPDF
 
-def readImage(f):
-  # print("in main")
-  # f_ = 'dataFiles\\' + f  + "\\"
-  # path = os.walk(f_)
-  
-
-    
-  N = 3
+def readImage(f, l):
+      
+  N = 5
   data = []
   dataResultsCSV = {}
   dataResultsJSON = {}
   dataResultsIMG = {}
   names = []
-  kaggle_url = "https://www.kaggle.com/elizabethcrouther/goofyimages"
+  
 
 
   # for root, directories, files in path:
@@ -38,12 +34,8 @@ def readImage(f):
     img_path = filename 
     # if '.png' or '.jpeg' or '.jpg' in filename:
     img_copy,faces = detectFace.detect_faces(img_path = img_path)
-      # profileimagePDF = img_copy.resize(img_copy, (32,32))
-
-                
-      # print(len(faces))
-
-      # if the faces are detected by the haarcascade files
+               
+    # if the faces are detected by the haarcascade files
     if len(faces) != 0:
       image = ROI.region_of_interest(faces = faces, img_copy = img_copy)
 
@@ -54,8 +46,7 @@ def readImage(f):
     # Resize image to a width of 250
 
     scale_percent = 50
-    # print(image.shape)
-
+    
     width = int(image.shape[1] * scale_percent / 100)
     height = int(image.shape[0] * scale_percent / 100)
 
@@ -82,9 +73,6 @@ def readImage(f):
 
     color_bar = plot.plotColorBar(dominantColors)
 
-    # print(type(dominantColors)) # list
-    # print(type(dominantColors[0])) # dict
-
     colors = []
     for clr in dominantColors:
       colors.append(clr['color'])
@@ -92,16 +80,22 @@ def readImage(f):
     if len(colors) != 0:
       c = colors[0]
 
-      r = int(c[0])
+      b = int(c[0])
       g = int(c[1])
-      b = int(c[2])
+      r = int(c[2])
     
     else:
-      r = int(255)
-      g = int(255)
+      # cases where color is not detected, we set it default (white)
       b = int(255)
+      g = int(255)
+      r = int(255)
 
     # print(c, r, g, b)
+    c = np.array([b,g,r])
+    # print(c)
+    
+    # adding the most dominant color to a list for doing statistical analysis
+    imageCalculations.addToList(l = c)
 
     # skin color to test
     skinColor = np.uint8([[[b,g,r]]])
@@ -110,53 +104,65 @@ def readImage(f):
     skinColorHSV = cv2.cvtColor(skinColor,cv2.COLOR_BGR2HSV)
     temp = skinColorHSV[0]
     temp = temp[0]
-    # print(temp)
-
-    
+        
     hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     
 
-    #Show in the dominant color information
+    #Show the dominant color information
     # print("Color Information")
     info = plot.prety_print_data(dominantColors)
-    # print(type(info))
-
+    
+    # dominantColors:[{'cluster_index: int, 'color':[float,float,float], 'color_percentage': float} x N]
+    
     
     #Show in the dominant color as bar
     # print("Color Bar")
-    info = "        "
+
+    info = "             "
+    # clrs = []
     colour_bar = plot.plotColorBar(dominantColors)
     # print(len(dominantColors))
     for clr in dominantColors:
+      
+      
+      # print(color)
+      # clrs.append(color)
       per_age = clr['color_percentage']
       info += str(int(per_age*100)) + "%" + " "
+
+    # print(clrs)
     # plt.axis("off")
     # plt.imshow(colour_bar)
     # plt.show()
-      print('info in main.py line 139', info)
-    # os.chdir("dataResults/")
-    # imgRes_path = "dataResults/"
+    # print('info in main.py line 139', info)
+    
     imgName = filename[:-4] +  "_res.jpg"
     colour_bar = cv2.cvtColor(colour_bar, cv2.COLOR_BGR2RGB)
     cv2.imwrite(imgName, colour_bar)
 
-    profileImage = img_path
+    
+    
+    ## (Maybe Instead of profileImage pass the statistical data to pdf)
+    imageCalculations.stats()
+    analysis = l
+    # print(analysis)
+
     # info = dominantColors
     colorBar = imgName
     names.append(colorBar)
     # colorBar = cv2.cvtColor(colorBar, cv2.COLOR_BGR2RGB)
 
-    data.append(passToPDF.createData(profileImage, info, colorBar))
-# else:
-#   print("No results Found!")
+    data.append(passToPDF.createData(analysis, info, colorBar))
+
   
-  reportMade = generatePDF.generatePDFReport("ANALYSIS REPORT", None, dataResultsCSV, dataResultsJSON, dataResultsIMG = data)
+  reportMade = generatePDF.generatePDFReport(None, None, dataResultsCSV, dataResultsJSON, dataResultsIMG = data)
   
-  reportMade
+  # imageCalculations.printList()
+  
   
   for f in names:
     os.remove(f)
-    # print(str(f) + " removed!")
-  
+
+  os.remove('mean_color.jpg')
+
   return reportMade
-              

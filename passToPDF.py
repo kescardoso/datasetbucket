@@ -1,6 +1,6 @@
 # dataResultsIMG = {'profile image' : img, 'information' : info, 'color bar' : clr}
 
-def createData(profileImage, information, colorBar):
-    data = [profileImage, information, colorBar]
+def createData(analysis, information, colorBar):
+    data = [analysis, information, colorBar]
     
     return data

@@ -123,33 +123,37 @@ def findReadableFiles(filename):
 
                         file.extractall("./dataFiles") # extracting files in the dataFiles directory
                         # listOfFileNames = file.namelist()
-                    files = os.listdir("./dataFiles")
-                    for f in files:
-                        if ".zip" not in f:
-                            if ".json" in f: 
+                        for name in file.namelist():
+                            # print("name = " + str(name))
+                            data = file.read(name)
+                            # print(data)
+
+                            if ".json" in name: 
                                 print(".json")
                                 dataResultsFoundJSON = read_json.readJSON("./dataFiles/", name)
-                                
-                            elif ".csv" in f:
-                                dataResultsFoundCSV = read_csv.readCSV("./dataFiles/", name)
-
-                            if ".png" or ".jpeg" or ".jpg" in f:
-                                # res = main.readImage(f)
-                                file_paths = filePath.getPath('')
-                                reportMade = main.readImage(file_paths)
-                                
-                                return reportMade
-                        # for name in file.namelist():
-                        #     print("name = " + str(name))
-                        #     data = file.read(name)
-                        #     # print(data)
-
-                        #     if ".json" in name: 
-                        #         print(".json")
-                        #         dataResultsFoundJSON = read_json.readJSON("./dataFiles/", name)
                             
-                        #     if ".csv" in name:
-                        #         dataResultsFoundCSV = read_csv.readCSV("./dataFiles/", name)
+                            if ".csv" in name:
+                                dataResultsFoundCSV = read_csv.readCSV("./dataFiles/", name)
+                            if ".zip" not in name:
+                                if ".png" or ".jpeg" or ".jpg" in name:
+                                    # res = main.readImage(f)
+                                    file_paths, l = filePath.getPath('')
+                                    if len(file_paths) != 0:
+                                        reportMade = main.readImage(file_paths, l)
+                                                                
+                                        return reportMade 
+
+                    # files = os.listdir("./dataFiles")
+                    # for f in files:
+                    #     if ".zip" not in f:
+                    #         if ".png" or ".jpeg" or ".jpg" in f:
+                    #             # res = main.readImage(f)
+                    #             file_paths, l = filePath.getPath('')
+                    #             reportMade = main.readImage(file_paths, l)
+                                                               
+                    #             return reportMade
+
+                        
 
                             # if ".png" or ".jpeg" or ".jpg" in name:
                             #     print("images duh!")

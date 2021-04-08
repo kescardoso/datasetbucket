@@ -52,7 +52,7 @@ def detect_faces(img_path):
     # cv2.imshow('image',img)
 
     #Wait for any key before image disappears
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
 
     return img_copy,front_faces

@@ -17,8 +17,6 @@ def plotColorBar(colorInformation):
 
     color = tuple(map(int,(x['color'])))
 
-    # exp
-
     colors.append(list(color))
     # print(colors)
 
