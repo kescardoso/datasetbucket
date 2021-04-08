@@ -90,6 +90,11 @@ nav li,
 
 /* Edit Dataset */
 .saved_report {
+    margin-top: 40px;
+    margin-left: 45px;
+}
+
+.no_change_report {
     margin-left: 45px;
 }
 

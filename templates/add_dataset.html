@@ -7,7 +7,8 @@
     <div class="row card-panel grey lighten-5">
         <form class="col s12" 
               method="POST" 
-              action="{{ url_for('add_dataset') }}">
+              action="{{ url_for('add_dataset') }}"
+              enctype="multipart/form-data">
 
             <!-- Dropdown : category selection -->
             <div class="row">
