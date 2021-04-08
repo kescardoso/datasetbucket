@@ -124,4 +124,22 @@ footer h6 {
 footer a {
     color: #00695c;
     text-decoration: solid;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+footer a:hover {
+    background-color: #b2dfdb;
+}
+
+footer a.authors {
+    color: #fff;
+    text-decoration: solid;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+footer a:hover.authors {
+    color: #004d40;
+    background-color: #b2dfdb;
 }
