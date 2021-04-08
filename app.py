@@ -165,12 +165,11 @@ def allowed_file(filename):
 @app.route("/add_dataset", methods=["GET", "POST"])
 def add_dataset():
     # Function for creating new datset (in the db)
+    # And for uploading report file into a directory in the project's folder
     if request.method == "POST":
         is_todo = "On" if request.files.get("is_todo") else "Off"
         target = os.path.join(app.config['UPLOAD_FOLDER'])
-        print(target)
         file = request.files["dataset_report"]
-        print(file)
 
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
@@ -202,11 +201,18 @@ def add_dataset():
 def edit_dataset(dataset_id):
     if request.method == "POST":
         is_todo = "On" if request.form.get("is_todo") else "Off"
+        target = os.path.join(app.config['UPLOAD_FOLDER'])
+        file = request.files["dataset_report"]
+
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(target, filename))
+
         save_edit = {
             "category_name": request.form.getlist("category_name"),
             "dataset_name": request.form.get("dataset_name"),
             "dataset_description": request.form.get("dataset_description"),
-            "dataset_report": request.form.get("dataset_report"),
+            "dataset_report": os.path.join(target, filename),
             "is_todo": is_todo,
             "last_update": request.form.get("last_update"),
             "created_by": session["user"]
