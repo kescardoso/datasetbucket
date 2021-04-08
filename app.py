@@ -151,7 +151,7 @@ def all_datasets():
     categories = list(mongo.db.categories.find())
     return render_template("datasets.html", 
                             datasets=datasets, 
-                            categories=categories)
+                            categories=categories,)
 
 
 # Allow file upload
