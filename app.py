@@ -133,7 +133,7 @@ def analyse_data():
             if reportMade:
                 time.sleep(5)
                 try:
-                    return send_file('/Users/mac/IdeaProjects/datasetbucket/report.pdf', as_attachment=True)
+                    return send_file('./reportdir/report.pdf', as_attachment=True)
                 except:
                     return render_template("analyse.html", 
                                             dataToRender="Unable able to generate report")
