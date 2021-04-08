@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="teal-text text-darken-2 center-align">Analyse Data Set</h3>
+
+<!-- Card turned into form -->
+<div class="row">
+    <!-- Center column with offset -->
+    <!-- Add method and action for dynamic form -->
+    <form class="col s12 m8 offset-m2" 
+          method="POST" 
+          action="{{ url_for('analyse_data') }}">
+
+          <div class="card-panel">
+            <label> {{ dataToRender }} </label>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-book-reader prefix teal-text text-darken-2"></i>
+                    <!-- Dataset input -->
+                    <input id="file_name" name="file_name" 
+                            minlength="10" maxlength="250"
+                            type="text" class="validate" required>
+                    <label id="file_name_label" for="file_name">Enter url from Kaggle</label>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="row">
+                <button type="submit" id="analyse_btn"
+                        class="col s12 btn-large teal darken-1 text-shadow">
+                        Get Analysis Report <i class="fas fa-sign-in-alt"></i>
+                </button>
+                
+                <div id="progress_bar"></div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+{% endblock %}
