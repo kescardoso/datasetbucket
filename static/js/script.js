@@ -31,11 +31,11 @@ $(document).ready(function(){
         }
     });
 
-    // Select Dropdown (Categories)
+    // Select Categories > Add/Edit Dataset form
     $('select').formSelect();
 });
 
-// Spinner
+// Upload progress bar > Analyse form
 $('#analyse_btn').click(function(){
     $('#progress_bar').html('<div class="progress"><div class="indeterminate"></div></div>')
 });
