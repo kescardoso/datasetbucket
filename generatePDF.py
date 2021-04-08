@@ -1,13 +1,12 @@
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.pagesizes import LETTER
 
+
 import os
 import shutil
 import time
 import sys
 
-print(LETTER)
-canvas = Canvas("report.pdf", pagesize=LETTER)
 
 # create and save the pdf report from the dicts, dataResultsCSV, dataResultsJSON
 
@@ -25,6 +24,9 @@ def generatePDFReport(title, subtitle, dataResultsCSV, dataResultsJSON, dataResu
         except:
             print("dir not made")
     
+
+    canvas = Canvas("report.pdf", pagesize=LETTER)
+
     # values to use for margin/formatting:
     centerPageWidth = 305
     centerPageHeight = 395
@@ -78,6 +80,7 @@ def generatePDFReport(title, subtitle, dataResultsCSV, dataResultsJSON, dataResu
     
     currentLine = currentLine - ( lineSpacing * 1.5 )
     canvas.setFont('Helvetica', currentFontSize-1)
+
 
     # add disclaimer to page
     canvas.drawString(marginLeftRight, currentLine, "IMPORTANT: This report does not gaurantee that your data is unbiased. This report is not an analysis of")
@@ -219,33 +222,4 @@ def generatePDFReport(title, subtitle, dataResultsCSV, dataResultsJSON, dataResu
         return True
     else:
         print("File Not Copied!")
-        return False
-
-    # save the pdf as report.pdf and return
-    # try:
-    #     canvas.save() # save the pdf as report.pdf and return
-    #     print("here")
-    #     time.sleep(6)
-    #     if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
-    #         os.system("cp "  + "report.pdf reportdir")
-    #         return True
-    #     if sys.platform.startswith('win32'):
-    #         print("windows")
-    #         os.system("copy " + "report.pdf reportdir")
-    #         return True
-    # except: 
-    #     time.sleep(5)
-    #     try:
-    #         # canvas.save()
-    #         time.sleep(5)
-    #         if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
-    #             os.system("cp "  + "report.pdf reportdir")
-    #             return True
-    #         if sys.platform.startswith('win32'):
-    #             os.system("copy " + "report.pdf reportdir")
-    #             return True
-    #     except:
-    #         print('file not copied')
-    #         return False
-
-        # return False
+        return False 

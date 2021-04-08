@@ -93,4 +93,38 @@ about data containing population and demographic subjects.
 
     - Choose a branch to deploy your changes
 
-    - Deploy your branch and view app
+## Connect to Kaggle
+
+Kaggle API allows the developer to download datasets directly from the terminal/command-line
+
+1. Create a kaggle account at https://kaggle.com
+
+2. `pip install kaggle`
+
+3. Go to 'Account' tab in your kaggle profile a scroll to 'API' section. Click 'Creat new API Token' and add the kaggle.json file that will download to your project structure.
+
+For more complete instructions on how to use the Kaggle API, go to https://www.kaggle.com/docs/api#getting-started-installation-&-authentication
+
+## Libraires you might need to install
+
+`pip install os`
+`pip install time`
+`pip install sys`
+`pip install json`
+`pip install csv`
+`pip install reportlab`
+`pip install numpy`
+`pip install statistics`
+`pip install sklearn.linear_model`
+
+
+## Technologies used
+
+- Python - an interpreted, high-level and general-purpose programming language, great for data base structured projects
+- Pip - a package manager for Python, that allows developers to install and manage additional libraries and dependencies that are not distributed as part of the standard library.
+- Flask - a Python framework that depends on the Jinja template engine and the Werkzeug WSGI toolkit
+- MongoDB - a document database (stores data in JSON-like documents) with a horizontal, scale-out architecture that can support huge volumes of both data and traffic.
+- [Materialize](https://materializecss.com/) - a modern front-end framework (responsive and mobile-first, similar to Bootstrap) that helps developers build a stylish and responsive application.
+- Git - a version control system for for source code management; it allows tracking file changes and coordinating work on those files among multiple people and machines.
+- GitHub - a code hosting platform for version control and collaboration. It lets developers work remotely and together on projects from anywhere.
+

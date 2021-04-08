@@ -1,8 +1,10 @@
 import numpy as np
 from statistics import mean, variance
 from sklearn.linear_model import LinearRegression
+
 import matplotlib
 import matplotlib.pyplot as plt
+
 
 # calculate the mean of an array of data
 def calcMean(data):
@@ -83,3 +85,4 @@ def calcHistogram(data, category):
     plt.close()
 
     return file_name
+

@@ -1,9 +1,10 @@
-# python program to read JSON file
 import os
 import json
 import pandas as pd
 import numpy
 from string import punctuation
+
+
 
 def readJSON(path, filename):
 
@@ -159,4 +160,5 @@ def readJSON(path, filename):
         dictToReturn.update({'Education': Education})
         
     return dictToReturn
+
 

@@ -1,10 +1,13 @@
 # importing csv module
 import csv
+
 import os
+
 
 import calculations
 
 def readCSV(path, filename): 
+
 	fields=[]
 	rows=[]
 	
@@ -149,6 +152,7 @@ def readCSV(path, filename):
 			labelDict.update({'Gender':Gender})
 		else:
 			labelDict.update({'Gender': Gender})
+
 
 	return labelDict
 	
