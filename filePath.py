@@ -29,12 +29,12 @@ def getPath(folder):
 
 # For debugging without running the whole app
 
-my_path = os.getcwd()
-files_jpg = glob.glob(my_path + '\\dataFiles\\**\\*.jpg' , recursive=True)
-files_jpeg = glob.glob(my_path + '\\dataFiles\\**\\*.jpeg' , recursive=True)
-files_png = glob.glob(my_path + '\\dataFiles\\**\\*.png' , recursive=True)
+# my_path = os.getcwd()
+# files_jpg = glob.glob(my_path + '\\dataFiles\\**\\*.jpg' , recursive=True)
+# files_jpeg = glob.glob(my_path + '\\dataFiles\\**\\*.jpeg' , recursive=True)
+# files_png = glob.glob(my_path + '\\dataFiles\\**\\*.png' , recursive=True)
 
-files = files_jpeg + files_jpg + files_png
-l = len(files)
+# files = files_jpeg + files_jpg + files_png
+# l = len(files)
 
-main.readImage(files, l)
+# main.readImage(files, l)
