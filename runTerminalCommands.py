@@ -101,10 +101,11 @@ def findReadableFiles(filename):
                         for f in fileImg:
                             if ".png" or ".jpeg" or ".jpg" in f:
                                 # res = main.readImage(f)
-                                file_paths = filePath.getPath(d)
-                                print(file_paths)
-                                res = main.readImage(file_paths)
-                                return res                           
+                                file_paths, l = filePath.getPath(d)
+                                if len(file_paths) != 0:
+                                    reportMade = main.readImage(file_paths, l)
+                                                            
+                                    return reportMade           
                 elif len(dirs) == 0:
                     for filename in files:
                         # global dataResultsFound

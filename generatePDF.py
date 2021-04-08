@@ -1,11 +1,29 @@
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.pagesizes import LETTER
 
+import os
+import shutil
+import time
+import sys
+
 print(LETTER)
 canvas = Canvas("report.pdf", pagesize=LETTER)
 
 # create and save the pdf report from the dicts, dataResultsCSV, dataResultsJSON
-def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON, dataResultsIMG):
+
+def generatePDFReport(title, subtitle, dataResultsCSV, dataResultsJSON, dataResultsIMG ):
+    try:
+        os.mkdir('reportdir')
+    except:
+        shutil.rmtree("./reportdir/") # deleting the temp directory
+        try:
+            os.remove("report.pdf")
+        except:
+            print("Not deleted")
+        try:
+            os.mkdir('reportdir')
+        except:
+            print("dir not made")
     
     # values to use for margin/formatting:
     centerPageWidth = 305
@@ -17,28 +35,25 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON, dataRe
 
     currentFontSize = 16
     currentLine = 750
-
     pngSize = 200
+
 
     # if no data was found, return and send an error message to the user
     if dataResultsCSV is None and dataResultsJSON is None:
         return False
 
-
+    # if dataResultsCSV is not None and len(dataResultsCSV) == 0:
+    #     if dataResultsJSON is not None and len(dataResultsJSON) == 0:
+    #         return False
+    #     if dataResultsJSON is None:
+    #         return False
     
-
-    if dataResultsCSV is None and dataResultsJSON is None and dataResultsIMG is None:
+    if dataResultsIMG is None:
         return False
-    if len(dataResultsCSV) == 0 and len(dataResultsJSON) == 0 and len(dataResultsIMG) == 0:
+    if len(dataResultsIMG) == 0:
         return False
-    
-    
-        
-    # test fields:
-    # title = "Test PDF Generation"
-    # subtitle = "This is a report of suspected bias in your dataset"
-    # dataResults = { "Sex assignment at birth": ["male 50", "female 40", "intersex 5", "unknown 5"], "Ethincity": ["African-American 30.6", "Asian-American 10.5", "Caucasian-American 50.8%", "Native-American/Indigenous 1.8%"] }
-    
+          
+    # if no title or subtitle was passed in, use defualts
     if title is None or title == "":
         title = "Analysis of your Data"
     if subtitle is None or subtitle == "":
@@ -47,6 +62,7 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON, dataRe
     # label
     label = "label.png"
 
+    # set title and subtitle
     canvas.setAuthor("Made by UnbiasData") # or whatever we name this project
     canvas.setFont('Helvetica-Bold', currentFontSize) 
 
@@ -58,23 +74,24 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON, dataRe
     currentFontSize = 13
     canvas.setFont('Helvetica', currentFontSize)
 
-     
     canvas.drawString((centerPageWidth - (len(subtitle)*(currentFontSize/4.5))), currentLine, subtitle) # set subtitle in page
     
     currentLine = currentLine - ( lineSpacing * 1.5 )
     canvas.setFont('Helvetica', currentFontSize-1)
 
+    # add disclaimer to page
     canvas.drawString(marginLeftRight, currentLine, "IMPORTANT: This report does not gaurantee that your data is unbiased. This report is not an analysis of")
     currentLine = currentLine - lineSpacing
     canvas.drawString(marginLeftRight, currentLine, "your model, you must perform separate analyis to test your model for bias. Use this report as a starting")
     currentLine = currentLine - lineSpacing
-    canvas.drawString(marginLeftRight, currentLine, "starting point to help you understand how your data might be biased.")
+    canvas.drawString(marginLeftRight, currentLine, "report as a starting point to help you understand how your data might be biased.")
     currentLine = currentLine - ( lineSpacing * 1.5 )
     
     if dataResultsIMG is not None and len(dataResultsIMG) > 0:
         #print(dataResultsIMG)
 
-        
+        print("img")
+ 
         # results = [total images, mean_color image, values less then mean val, values more than mean val]
         canvas.drawString(marginLeftRight, currentLine + 1, "Total Number of Images Analysed: " + str(dataResultsIMG[0][0]))
         currentLine = currentLine - lineSpacing
@@ -111,10 +128,11 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON, dataRe
 
             
 
-        # canvas.drawString(marginLeftRight*2, currentLine, dataResultsIMG)
+            # canvas.drawString(marginLeftRight*2, currentLine, dataResultsIMG)
 
 
-    if dataResultsCSV is not None or len(dataResultsCSV) == 0:
+    # run through csv dict and add each to the page
+    if dataResultsCSV is not None and len(dataResultsCSV) > 0:
         if currentLine < marginTopBottom+20:
                         canvas.showPage()
                         currentLine = 730
@@ -158,12 +176,13 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON, dataRe
                                 canvas.drawString(marginLeftRight*2, currentLine, v)
                                 currentLine = currentLine - lineSpacing 
                                 break
-
-
+            
     # TODO: need to check if current line runs off the page. If is does, need to make a new page
 
-        
-    if dataResultsJSON is not None or len(dataResultsJSON) == 0:
+
+     # run through json dict and add each to the page
+    if dataResultsJSON is not None and len(dataResultsJSON) > 0:
+
         for var in dataResultsJSON: # var is the category
             if len(dataResultsJSON.get(var)) > 1: 
                 if currentLine < marginTopBottom + 20:
@@ -190,16 +209,43 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON, dataRe
                                 canvas.drawString(marginLeftRight*2, currentLine, v +  ", " + str(dataResultsJSON.get(var)[v]))
                                 currentLine = currentLine - lineSpacing 
                                 break
-
-
     
-
-    # TODO: need to check if current line runs off the page. If is does, need to make a new page
-
-        # save the pdf as report.pdf and return
-    try:
-        canvas.save() # save the pdf as report.pdf and return
+    canvas.save()
+    if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
+        os.system("cp "  + "report.pdf reportdir")
         return True
-    except: 
-        #flash('could not generate report', 'error')
+    if sys.platform.startswith('win32'):
+        os.system("copy " + "report.pdf reportdir")
+        return True
+    else:
+        print("File Not Copied!")
         return False
+
+    # save the pdf as report.pdf and return
+    # try:
+    #     canvas.save() # save the pdf as report.pdf and return
+    #     print("here")
+    #     time.sleep(6)
+    #     if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
+    #         os.system("cp "  + "report.pdf reportdir")
+    #         return True
+    #     if sys.platform.startswith('win32'):
+    #         print("windows")
+    #         os.system("copy " + "report.pdf reportdir")
+    #         return True
+    # except: 
+    #     time.sleep(5)
+    #     try:
+    #         # canvas.save()
+    #         time.sleep(5)
+    #         if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
+    #             os.system("cp "  + "report.pdf reportdir")
+    #             return True
+    #         if sys.platform.startswith('win32'):
+    #             os.system("copy " + "report.pdf reportdir")
+    #             return True
+    #     except:
+    #         print('file not copied')
+    #         return False
+
+        # return False

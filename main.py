@@ -17,6 +17,8 @@ import generatePDF
 import passToPDF
 
 def readImage(f, l):
+
+  print("main")
       
   N = 5
   data = []
