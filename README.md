@@ -1,5 +1,10 @@
 # Dataset Bucket & Bias Auditor
 
+<p align="center">
+<img src="https://raw.githubusercontent.com/kescardoso/datasetbucket/main/static/images/responsive.png">
+<img src="https://raw.githubusercontent.com/kescardoso/datasetbucket/main/static/images/dbba-full.png" width="250px">
+</p>
+
 A dataset bucket with a machine learning bias auditor. Built with Python-Flask, MaterializeCSS and the Kaggle API.
 
 This is a python-flask web application build upon a CRUD data-base system (Create, Read, Update and Delete) to generate, store and display dataset structures.

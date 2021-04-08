@@ -88,6 +88,11 @@ nav li,
     font-size: 100%;
 }
 
+/* Edit Dataset */
+.saved_report {
+    margin-left: 45px;
+}
+
 /* By Category */
 .by_tag_tag {
     background-color:#e0f2f1;

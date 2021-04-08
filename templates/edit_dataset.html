@@ -14,13 +14,24 @@
                     <select multiple id="category_name" name="category_name" class="validate" required>
                         <option value="" disabled>Choose Category</option>
                         
-                        {% for category in categories %}
-                            {% if category.category_name == dataset.category_name %}
-                                <option value="{{ category.category_name }}" selected>{{ category.category_name }}</option>
-                            {% else %}
-                                <option value="{{ category.category_name }}" >{{ category.category_name }}</option>
-                            {% endif %}
-                        {% endfor %}
+                        {% if dataset.category_name is string %}
+                            <option value="{{ dataset.category_name }}" selected>{{ dataset.category_name }}</option>
+                            {% for category in categories %}
+                                    {% if category != dataset.category_name %}
+                                        <option value="{{ category }}">{{ category }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                        {% else %}
+                            {% for data in dataset.category_name %}
+                                <option value="{{ data }}" selected>{{ data }}</option>
+                            {% endfor %}
+                                <!-- List of all categories, If not selected -->
+                                {% for category in categories %}
+                                    {% if category not in dataset.category_name %}
+                                        <option value="{{ category }}">{{ category }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                        {% endif %}
 
                     </select>
                     <label for="category_name">Dataset Category</label>
@@ -53,19 +64,23 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-file-pdf prefix teal-text text-darken-2"></i>
-                    <label for="dataset_report">Dataset Report (upload pdf or csv file)</label>
+                    
+                    <label for="dataset_report">Change Dataset Report (upload pdf or csv file)</label>
+                    
                     <input id="dataset_report" name="dataset_report"
                            type="file" class="validate">
+                    
+                    <p class="saved_report">Saved Report : <a href="{{ dataset.dataset_report }}">Download Report</p>
                 </div>
             </div>
 
             <!-- Change selected Datepicker ("last updated") -->
             <div class="row">
               <div class="input-field col s12">
-                  <i class="fas fa-calendar-check prefix teal-text text-darken-2"></i>
-                  <input id="last_update" name="last_update" value="{{ dataset.last_update }}"
-                         type="text" class="datepicker validate" required>
-                  <label for="last_update">Last Updated</label>
+                    <i class="fas fa-calendar-check prefix teal-text text-darken-2"></i>
+                    <input id="last_update" name="last_update" value="{{ dataset.last_update }}"
+                            type="text" class="datepicker validate" required>
+                    <label for="last_update">Last Updated</label>
               </div>
           </div>
 

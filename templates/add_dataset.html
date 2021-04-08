@@ -5,19 +5,22 @@
 
     <!-- Form: Add Dataset -->
     <div class="row card-panel grey lighten-5">
-        <form class="col s12" method="POST" action="{{ url_for('add_dataset') }}">
+        <form class="col s12" 
+              method="POST" 
+              action="{{ url_for('add_dataset') }}"
+              enctype="multipart/form-data">
 
             <!-- Dropdown : category selection -->
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-tags prefix teal-text text-darken-2"></i>
                     <select multiple id="category_name" name="category_name" class="validate"  required>
-                        <option value="" disabled selected>Choose Category</option>
+                        <option value="" disabled>Choose Tag(s)</option>
                         {% for category in categories %}
                             <option value="{{ category.category_name }}">{{ category.category_name }}</option>
                         {% endfor %}
                     </select>
-                    <label for="category_name">Dataset Category</label>
+                    <label for="category_name">Dataset Tag</label>
                 </div>
             </div>
 
@@ -47,7 +50,7 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-file-pdf prefix teal-text text-darken-2"></i>
-                    <label for="dataset_report">Dataset Report (upload pdf or csv file)</label>
+                    <label for="dataset_report">Dataset Report (upload pdf file)</label>
                     <input id="dataset_report" name="dataset_report"
                            type="file" class="validate">
                 </div>
