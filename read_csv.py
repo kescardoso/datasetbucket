@@ -153,6 +153,4 @@ def readCSV(path, filename):
 		else:
 			labelDict.update({'Gender': Gender})
 
-
 	return labelDict
-	

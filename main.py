@@ -92,16 +92,13 @@ def readImage(f, l):
       g = int(255)
       r = int(255)
 
-    # print(c, r, g, b)
     c = np.array([b,g,r])
-    # print(c)
     
     # adding the most dominant color to a list for doing statistical analysis
     imageCalculations.addToList(l = c)
 
     # skin color to test
-    skinColor = np.uint8([[[b,g,r]]])
-    # print(skinColor)    
+    skinColor = np.uint8([[[b,g,r]]])    
 
     skinColorHSV = cv2.cvtColor(skinColor,cv2.COLOR_BGR2HSV)
     temp = skinColorHSV[0]
@@ -111,23 +108,15 @@ def readImage(f, l):
     
 
     #Show the dominant color information
-    # print("Color Information")
     info = plot.prety_print_data(dominantColors)
     
     # dominantColors:[{'cluster_index: int, 'color':[float,float,float], 'color_percentage': float} x N]
-    
-    
-    #Show in the dominant color as bar
-    # print("Color Bar")
 
     info = "             "
     # clrs = []
     colour_bar = plot.plotColorBar(dominantColors)
-    # print(len(dominantColors))
     for clr in dominantColors:
       
-      
-      # print(color)
       # clrs.append(color)
       per_age = clr['color_percentage']
       info += str(int(per_age*100)) + "%" + " "
@@ -147,7 +136,6 @@ def readImage(f, l):
     ## (Maybe Instead of profileImage pass the statistical data to pdf)
     imageCalculations.stats()
     analysis = l
-    # print(analysis)
 
     # info = dominantColors
     colorBar = imgName

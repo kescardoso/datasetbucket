@@ -28,10 +28,8 @@ def stats():
     
     for l in colors:
         sum_of_terms += l
-        # print(l)
 
     mean_of_terms = sum_of_terms/len(colors)
-    # print(mean_of_terms)
 
     b = int(mean_of_terms[0])
     g = int(mean_of_terms[1])

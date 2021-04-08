@@ -128,8 +128,6 @@ def analyse_data():
             split_filename = fileString.split('.com/')
             fileString = split_filename[1]
             reportMade = startCommands(fileString)
-            # With open('/Users/mac/IdeaProjects/datasetbucket/report.pdf', 'rb') 
-            # as static_file """
             if reportMade:
                 time.sleep(5)
                 try:

@@ -91,17 +91,11 @@ def findReadableFiles(filename):
                                             dataResultsFoundJSON = read_json.readJSON(stringD, fL)
                                         if ".csv" in fL: 
                                             dataResultsFoundCSV = read_csv.readCSV("./dataFiles/", fL)
-                                        # if ".png" or ".jpeg" or ".jpg" in f:
-                                        #     # res = main.readImage(f)
-                                        #     file_paths = filePath.getPath()
-                                        #     print(file_paths)
-                                        #     res = main.readImage(file_paths)
-                                        #     return res
+
                         fileImg = os.listdir("./dataFiles/"+d)
                         print('fileImg', fileImg)
                         for f in fileImg:
                             if ".png" or ".jpeg" or ".jpg" in f:
-                                # res = main.readImage(f)
                                 file_paths, l = filePath.getPath(d)
                                 if len(file_paths) != 0:
                                     reportMade = main.readImage(file_paths, l)
@@ -117,18 +111,13 @@ def findReadableFiles(filename):
                             dataResultsFoundCSV = read_csv.readCSV("./dataFiles/", filename)
                             # TODO: ? need to make dataResultsFound appendable, or create multiple dicts in case a data set has more than 1 type of file 
 
-        # TODO : need to make the folder-walking work for windows
             if sys.platform.startswith('win32'):
                 for filename in files:
-                    # print("filename: " + str(filename))
                     with zipfile.ZipFile(filename,'r') as file:
 
                         file.extractall("./dataFiles") # extracting files in the dataFiles directory
-                        # listOfFileNames = file.namelist()
                         for name in file.namelist():
-                            # print("name = " + str(name))
                             data = file.read(name)
-                            # print(data)
 
                             if ".json" in name: 
                                 print(".json")
@@ -138,29 +127,11 @@ def findReadableFiles(filename):
                                 dataResultsFoundCSV = read_csv.readCSV("./dataFiles/", name)
                             if ".zip" not in name:
                                 if ".png" or ".jpeg" or ".jpg" in name:
-                                    # res = main.readImage(f)
                                     file_paths, l = filePath.getPath('')
                                     if len(file_paths) != 0:
                                         reportMade = main.readImage(file_paths, l)
                                                                 
                                         return reportMade 
-
-                    # files = os.listdir("./dataFiles")
-                    # for f in files:
-                    #     if ".zip" not in f:
-                    #         if ".png" or ".jpeg" or ".jpg" in f:
-                    #             # res = main.readImage(f)
-                    #             file_paths, l = filePath.getPath('')
-                    #             reportMade = main.readImage(file_paths, l)
-                                                               
-                    #             return reportMade
-
-                        
-
-                            # if ".png" or ".jpeg" or ".jpg" in name:
-                            #     print("images duh!")
-                            #     dataResultsFoundIMG = main.readImage(name = name)
-                            #     return dataResultsFoundIMG
 
     # results from parsing + calculations, will be passed into >>  generatePDF.generatePDFReport()
     reportMade = generatePDF.generatePDFReport( zipFile , None, dataResultsFoundCSV, dataResultsFoundJSON , []) # generate the PDF report
@@ -169,7 +140,6 @@ def findReadableFiles(filename):
 
 
 # copy zip to dataFiles folder and open the zip to get the data files
-
 def openFiles(filename):  
     if os.system("kaggle datasets download -d " + filename) == 0 :
         indexOfSlash = filename.find("/") # kaggle names dataset like: [creator of dataset]/[name of dataset]
