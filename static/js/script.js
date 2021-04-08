@@ -4,7 +4,9 @@
 $(document).ready(function(){
 
     // Mobile hamburger navbar
-    $('.sidenav').sidenav({edge: "right"});
+    $('.sidenav').sidenav({
+        edge: "right"
+    });
 
     // Navbar dropdown
     $(".dropdown-trigger").dropdown({
@@ -31,4 +33,9 @@ $(document).ready(function(){
 
     // Select Dropdown (Categories)
     $('select').formSelect();
+});
+
+// Spinner
+$('#analyse_btn').click(function(){
+    $('#progress_bar').html('<div class="progress"><div class="indeterminate"></div></div>')
 });

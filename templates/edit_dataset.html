@@ -14,13 +14,24 @@
                     <select multiple id="category_name" name="category_name" class="validate" required>
                         <option value="" disabled>Choose Category</option>
                         
-                        {% for category in categories %}
-                            {% if category.category_name == dataset.category_name %}
-                                <option value="{{ category.category_name }}" selected>{{ category.category_name }}</option>
-                            {% else %}
-                                <option value="{{ category.category_name }}" >{{ category.category_name }}</option>
-                            {% endif %}
-                        {% endfor %}
+                        {% if dataset.category_name is string %}
+                            <option value="{{ dataset.category_name }}" selected>{{ dataset.category_name }}</option>
+                            {% for category in categories %}
+                                    {% if category != dataset.category_name %}
+                                        <option value="{{ category }}">{{ category }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                        {% else %}
+                            {% for data in dataset.category_name %}
+                                <option value="{{ data }}" selected>{{ data }}</option>
+                            {% endfor %}
+                                <!-- List of all categories, If not selected -->
+                                {% for category in categories %}
+                                    {% if category not in dataset.category_name %}
+                                        <option value="{{ category }}">{{ category }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                        {% endif %}
 
                     </select>
                     <label for="category_name">Dataset Category</label>

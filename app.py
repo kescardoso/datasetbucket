@@ -168,23 +168,19 @@ def add_dataset():
     if request.method == "POST":
         is_todo = "On" if request.files.get("is_todo") else "Off"
         target = os.path.join(app.config['UPLOAD_FOLDER'])
-        if not os.path.isdir(target):
-            os.mkdir(target)
-
+        print(target)
         file = request.files["dataset_report"]
         print(file)
 
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            destination = "/".join([target, filename])
-            print(destination)
-            file.save(destination)
+            file.save(os.path.join(target, filename))
 
             dataset = {
                 "category_name": request.form.getlist("category_name"),
                 "dataset_name": request.form.get("dataset_name"),
                 "dataset_description": request.form.get("dataset_description"),
-                "dataset_report": request(url_for("destination")),
+                "dataset_report": os.path.join(target, filename),
                 "is_todo": is_todo,
                 "last_update": request.form.get("last_update"),
                 "created_by": session["user"]
@@ -192,6 +188,8 @@ def add_dataset():
             mongo.db.datasets.insert_one(dataset)
             flash("New Dataset Successfully Added")
             return redirect(url_for("all_datasets"))
+        else:
+            flash('Unable to Upload File')
 
     # Wire up the db to dynamically generate the category collection
     categories = mongo.db.categories.find().sort("category_name")
@@ -219,7 +217,7 @@ def edit_dataset(dataset_id):
     # Retrieve a dataset by its id, and convert it to a bson data type
     dataset = mongo.db.datasets.find_one({"_id": ObjectId(dataset_id)})
     categories = mongo.db.categories.find().sort("category_select")
-
+    categories = [i['category_name'] for i in categories]
     return render_template("edit_dataset.html", 
                             dataset=dataset, 
                             categories=categories,)
