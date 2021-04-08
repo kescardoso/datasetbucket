@@ -18,6 +18,13 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON, dataRe
     currentFontSize = 16
     currentLine = 750
 
+    pngSize = 200
+
+    # if no data was found, return and send an error message to the user
+    if dataResultsCSV is None and dataResultsJSON is None:
+        return False
+
+
     
 
     if dataResultsCSV is None and dataResultsJSON is None and dataResultsIMG is None:
@@ -139,6 +146,10 @@ def generatePDFReport ( title, subtitle, dataResultsCSV, dataResultsJSON, dataRe
                         currentLine = currentLine - lineSpacing
                     if(len(v) == 0):
                         break
+                    elif "png" in v: # display histogram
+                        currentLine = currentLine - pngSize
+                        canvas.drawImage(v, marginLeftRight*2, currentLine, width=pngSize, height=pngSize)
+                        curentLine = currentLine - lineSpacing * 2
                     else:
                         for i in v:
                             if isinstance(i, list):

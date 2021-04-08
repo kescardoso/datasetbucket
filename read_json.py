@@ -99,7 +99,7 @@ def readJSON(path, filename):
             if len(cols) >= 1:
                 if 'annotation' in cols[1]:
                     for val in df.values: 
-                        # for this format, df.values is each line, containting content, annotation, and extra columns, but we only want the annotation values, which
+                        # for this format, df.values is each line, containing content, annotation, and extra columns, but we only want the annotation values, which
                         # so the data will be in a numpy.ndarray
                         if isinstance(val, numpy.ndarray):
                                 for xi in val: 
@@ -159,4 +159,4 @@ def readJSON(path, filename):
         dictToReturn.update({'Education': Education})
         
     return dictToReturn
-       
+
