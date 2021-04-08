@@ -14,18 +14,21 @@
                     <select multiple id="category_name" name="category_name" class="validate" required>
                         <option value="" disabled>Choose Category</option>
                         
+                        <!-- If one single category is selected -->
                         {% if dataset.category_name is string %}
                             <option value="{{ dataset.category_name }}" selected>{{ dataset.category_name }}</option>
+                            <!-- List of all categories (inc. not selected) -->
                             {% for category in categories %}
                                     {% if category != dataset.category_name %}
                                         <option value="{{ category }}">{{ category }}</option>
                                     {% endif %}
                                 {% endfor %}
                         {% else %}
+                            <!-- If more than one category is selected for the dataset -->
                             {% for data in dataset.category_name %}
                                 <option value="{{ data }}" selected>{{ data }}</option>
                             {% endfor %}
-                                <!-- List of all categories, If not selected -->
+                                <!-- List of all categories (inc. not selected) -->
                                 {% for category in categories %}
                                     {% if category not in dataset.category_name %}
                                         <option value="{{ category }}">{{ category }}</option>
@@ -70,7 +73,7 @@
                     <input id="dataset_report" name="dataset_report"
                            type="file" class="validate">
                     
-                    <p class="saved_report">Saved Report : <a href="{{ dataset.dataset_report }}">Download Report</p>
+                    <p class="saved_report">Saved Report : <a href="{{ dataset.dataset_report }}" target="_blank">Download Report</p>
                 </div>
             </div>
 
