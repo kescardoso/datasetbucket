@@ -39,7 +39,9 @@ def generatePDFReport(title, subtitle, dataResultsCSV, dataResultsJSON, dataResu
 
 
     # if no data was found, return and send an error message to the user
-    if dataResultsCSV is None and dataResultsJSON is None:
+    if dataResultsCSV is None and dataResultsCSV is None and dataResultsJSON is None:
+        return False
+    if len(dataResultsCSV) is None and len(dataResultsCSV) is None and len(dataResultsJSON) is None:
         return False
 
     # if dataResultsCSV is not None and len(dataResultsCSV) == 0:
@@ -48,9 +50,7 @@ def generatePDFReport(title, subtitle, dataResultsCSV, dataResultsJSON, dataResu
     #     if dataResultsJSON is None:
     #         return False
     
-    if dataResultsIMG is None:
-        return False
-    if len(dataResultsIMG) == 0:
+    if dataResultsIMG is None and len(dataResultsIMG) == 0:
         return False
           
     # if no title or subtitle was passed in, use defualts
