@@ -135,10 +135,10 @@ def analyse_data():
                                       as_attachment=True)
                 except:
                     return render_template("analyse.html", 
-                                            dataToRender="Unable able to generate report")
+                                            dataToRender="Unable to generate report")
             else:
                 return render_template("analyse.html", 
-                                        dataToRender="Unable able to generate report")
+                                        dataToRender="Unable to generate report")
     return render_template("analyse.html")
 
 

@@ -63,9 +63,11 @@ about data containing population and demographic subjects.
 
     1. Create a [kaggle account](https://kaggle.com)
 
-    2. Go to the 'Account' tab in your Kaggle profile and scroll to the 'API' section. Click 'Create new API Token' and add the `kaggle.json` file, which will download to your project structure.
+    2. Go to the 'Account' tab in your Kaggle profile and scroll to the 'API' section. Click 'Create new API Token' and add the `kaggle.json` file, which will download to your Downloads folder. You need to create a C:\Users<Windows-username>.kaggle\ OR on Linux/OSX, a ~/.kaggle/ folder. Then move the kaggle.json file into that folder.
 
     For more complete and detailed instructions on how to use the Kaggle API, visit [Kaggle's documentation](https://www.kaggle.com/docs/api#getting-started-installation-&-authentication).
+
+    If you are on macOS/linux, and you need help getting to your ~/.kaggle/ folder, follow these instructions: [Kaggle installation on macOS/Linux](https://adityashrm21.github.io/Setting-Up-Kaggle/)
 
 5. Run the `app.py` in debug mode as a flask application to see the project in your locally deployed http address.
 
