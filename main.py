@@ -146,7 +146,7 @@ def readImage(f, l, targetReportPath):
 
     data.append(passToPDF.createData(analysis, info, colorBar))
 
-  reportMade = generatePDF.generatePDFReport(targetReportPath, None, None, dataResultsCSV, dataResultsJSON, dataResultsIMG = data)
+  reportMade, nameOfReport = generatePDF.generatePDFReport(targetReportPath, None, None, dataResultsCSV, dataResultsJSON, dataResultsIMG = data)
   
   # imageCalculations.printList()
   
@@ -156,4 +156,4 @@ def readImage(f, l, targetReportPath):
 
   os.remove('mean_color.jpg')
 
-  return reportMade
+  return reportMade, nameOfReport

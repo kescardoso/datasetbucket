@@ -239,10 +239,5 @@ def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataRes
         os.path.join(temp_target, 'report.pdf')
         os.system("copy " + "report.pdf " + targetReportPath)
 
-        
-    # else:
-    #     print("File Not Copied!")
-    #     return None 
-    #temp_target = os.path.join(os.getcwd(), nameOfReport) 
     print('return outside of if/if')
     return os.getcwd(), nameOfReport

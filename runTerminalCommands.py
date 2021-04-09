@@ -12,36 +12,6 @@ import filePath
 import zipfile
 import shutil
 
-#source /Users/kescardoso/Documents/GitHub/datasetbucket/venv/bin/activate
-
-# TODO: connect to frontend / get user-specified Kaggle dataset instead of the hard-coded one in the filename variable
-
-# creating the dataFiles directory
-
-# def makeFilesDir():
-#     try: 
-#         os.makedirs("dataFiles") # creating a temp directory in runtime
-#         os.system("cd ./dataFiles")
-#         return True
-#     except: # need to delete temp folder if an error occured and it wasn't deleted before         
-#         try:
-#             shutil.rmtree("./dataFiles/") # deleting the temp directory
-#             time.sleep(3)
-#             os.makedirs("dataFiles") # make a new/clean dataFiles folder
-#             os.system("cd ./dataFiles")
-#             return True
-#         except:
-#             try: # sometimes an error ocurrs and dataFiles is made, but not as a directory. So delete it and remake it
-#                 os.remove("dataFiles") 
-#                 time.sleep(3)
-#                 os.makedirs("dataFiles")
-#                 return True
-#             except:
-#                 print("dataFiles not empty")
-#                 return False
-    
-
-
 zipFile = ""    # needed for report title later
 
  # find .json or .csv files in ./dataFiles folder
@@ -73,9 +43,9 @@ def findReadableFiles(filename, targetReportPath):
                             if ".png" or ".jpeg" or ".jpg" in f:
                                 file_paths, l = filePath.getPath(d)
                                 if len(file_paths) != 0:
-                                    reportMade = main.readImage(file_paths, l, targetReportPath)
+                                    reportMade, nameOfReport = main.readImage(file_paths, l, targetReportPath)
                                                             
-                                    return reportMade           
+                                    return reportMade, nameOfReport           
                 elif len(dirs) == 0:
                     for filename in files:
                         # global dataResultsFound
@@ -114,7 +84,6 @@ def findReadableFiles(filename, targetReportPath):
 
     return reportMade, nameOfReport
 
-
 # copy zip to dataFiles folder and open the zip to get the data files
 def openFiles(filename, targetDataPath, targetReportPath):  
     print('data path: ', )
@@ -123,50 +92,42 @@ def openFiles(filename, targetDataPath, targetReportPath):
         indexOfSlash = filename.find("/") # kaggle names dataset like: [creator of dataset]/[name of dataset]
         zip = filename[(indexOfSlash+1):len(filename)]
         file1 = os.access(zip, os.F_OK)
-
         print(targetDataPath + " : ",file1, zip)
+
         # checking for macOS or linux
         if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
             for  root, dirs, files in os.walk(os.getcwd()):
-                # print('files in app:', files)
-                # print('dirs in app: ', dirs)
-                # print('root in app: ', root)
+
                 for f1 in files:
                     if '.zip' in f1:
+                        filelist = glob.glob(temp_target)
+                        for fL in filelist:
+                            if f1 not in fL:
+                                print('removing: ', fL)
+                                os.remove(fL)
+                                
                         print('zipfile', f1)
                         with zipfile.ZipFile(f1,'r') as file:
                             print('file to unzip', file)
                             print("getcwd + dataFiles", os.getcwd(), "dataFiles")
                             temp_target = os.path.join(os.getcwd(), "dataFiles")
+
+                            
                             print("temp_target", temp_target)
                             file.extractall(temp_target)
                             break
 
-        # checking for windows
+        # TODO checking for windows
         if sys.platform.startswith('win32'):
-            #if makeFilesDir():
             os.system("copy " + zip + ".zip "+ targetDataPath) # copy to dataFiles folder
 
         time.sleep(3)
-        
 
-        # for root, dirs, files in os.walk(targetDataPath): # find the .zip file in the folder
-        #     print(dirs)
-        #     print(files)
-        #     for fn in files:
-
-        #         #checking for macOS or linux
-        #         if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
-        #             print("open "+ targetDataPath + "/" + zip + ".zip")
-        #             os.system("open " + zip + ".zip") # open the file in a designated folder so we know where the files are!
-
-        #         #checking for windows
-        #         if sys.platform.startswith('win32'):
-        #             os.system("start dataFiles " + zip + ".zip") # open the file in a designated folder so we know where the files are!
         print('zip before find-readable-files', zip)
         reportMade, namedReport = findReadableFiles(zip, targetReportPath)
         print('zip after find-readable-files', zip)
         return reportMade, namedReport
+    return None
 
 def startCommands(filenameToDownload, targetReportPath, targetDataPath):
 
