@@ -226,7 +226,8 @@ def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataRes
     if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
         temp_target = os.path.join(os.getcwd(), 'reportdir')
         print('temp_target in generatePDF', temp_target)
-        os.system("cp "  + "report.pdf " + temp_target)
+        os.path.join(temp_target, 'report.pdf')
+        #os.system("cp "  + "report.pdf " + temp_target)
         return True
     if sys.platform.startswith('win32'):
         os.system("copy " + "report.pdf " + targetReportPath)
