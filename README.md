@@ -8,7 +8,7 @@
 
 A dataset bucket and a machine learning bias auditor 📈, fully responsive web-app built on Python, with [Flask](https://flask.palletsprojects.com/en/1.1.x/), [the MaterializeCSS UI grid system](https://materializecss.com/) and the [Kaggle API](https://www.kaggle.com/docs/api).
 
-Based on a CRUD(Create, Read, Update and Delete)  data-base system to generate, store and display dataset structures.
+Based on a CRUD (Create, Read, Update and Delete) data-base system to generate, store and display dataset structures.
 
 You will be able to find and read reports from a **wiki styled list** of information about data containing _population_ and _demographic_ subjects. 
 
@@ -16,9 +16,11 @@ You will be able to find and read reports from a **wiki styled list** of informa
 
 ## Motivation
 
-The whole world is data-driven, but we are still not sure if the data used in testing the machine learning models are biased to one thing, person, or group. If this is the case the chances are extremely high that the model doesn't yield accurate results. 
+The whole world is data-driven.
 
-To overcome this issue, we came up with an idea to create a web app that tells you if the dataset you are using is biased or not, and also suggests possible changes you can make to improve the quality of your analysis. 📊
+However, data can often be misleading, inaccurate, or unrepresentative. When this biased data used in analytics or ML models, it can not only produce inaccurate results, but also result in disastrous implications on minority groups and people
+
+To overcome this issue, we built a web app that analyzes a dataset for bias, and also suggests possible changes you can make to improve the quality of your dataset. 📊
 
 
 ## Technologies used
@@ -210,21 +212,24 @@ _You may need to install gunicorn. For a good tutorial, check [this youtube tuto
 
 🔸 If you wish to contribute to the existing project, follow the guidelines in [CONTRIBUTION.md](https://github.com/kescardoso/datasetbucket/blob/main/CONTRIBUTION.md).
 
-## Challenges we faced!
+## Challenges
 
-- Last minute bugs!
-- Not testing deployement earlier, which stressed us on the last day.
-- Initially testing we were not aware that the app would behave differently on macOS and windows
-- Since, we did not have a strong knowledge of data analysis and python, it was tough for us to implement models inthe initial weeks.
-- Different time zones!
+- Encountering bugs when deploying on Heroku
+- Accounting for different formatting of different datasets and types of files (JSON and CSV)
+- Ensuring that the app works for both macOS and Windows
+- Working with lots of new technologies and languages for our team, including Python, Flask, HTML, CSS, Javascript, Matplot, file parsing, and data analysis.
+- Different time zones
 
-## Take aways!
+## Lessons / Takeaways
 
-- Had an oppurtunity to get better at python
-- Practising git and GitHub 
-- getting familiar with heroku
-- team work
+- Plan more in advance instead of diving into code headfirst
+- Deploy on Heroku earlier
+- Spend less time getting program to run on different files, but do more analysis for one specific file
 
+## Next Steps
+
+- Implement more advanced metrics and recommendations for dataset analysis
+- Allow users to upload their own datasets in addition to datasets on kaggle
 
 ## Contributors
 
