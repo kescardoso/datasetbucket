@@ -1,6 +1,6 @@
 # DATASET BUCKET & BIAS AUDITOR
 
-![label](https://user-images.githubusercontent.com/54631569/114139488-bfc68000-992c-11eb-9b11-28084dd9b8bc.png)
+![label](https://raw.githubusercontent.com/kescardoso/datasetbucket/main/static/images/dbba-branding.png)
 
 [Check our project on Heroku!](https://datasetbucket.herokuapp.com/)
 
