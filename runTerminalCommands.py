@@ -122,9 +122,9 @@ def openFiles(filename, targetDataPath):
         
         indexOfSlash = filename.find("/") # kaggle names dataset like: [creator of dataset]/[name of dataset]
         zip = filename[(indexOfSlash+1):len(filename)]
-        file = os.access(zip, os.F_OK)
+        file1 = os.access(zip, os.F_OK)
 
-        print(targetDataPath + " : ",file, zip)
+        print(targetDataPath + " : ",file1, zip)
         # checking for macOS or linux
         if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
             for root, dirs, files in os.walk("/app"):
@@ -133,6 +133,7 @@ def openFiles(filename, targetDataPath):
                 print('root in app: ', root)
                 for filename in files:
                     if '.zip' in filename:
+                        print('zipfile', filename)
                         with zipfile.ZipFile(filename,'r') as file:
                             file.extractall("https://github.com/eliboss/datasetbucket/raw/main/dataFiles")
 
