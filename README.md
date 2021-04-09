@@ -265,5 +265,9 @@ _You may need to install gunicorn. For a good tutorial, check [this youtube tuto
 
 ➡ [LIBRARIES.md](https://github.com/kescardoso/datasetbucket/blob/main/LIBRARIES.md)
 
+## License
+
+[MIT LICENSE 2021](https://github.com/kescardoso/datasetbucket/blob/main/LICENSE)
+
 
 ### Thank You! ✨
