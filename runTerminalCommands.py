@@ -135,7 +135,9 @@ def openFiles(filename, targetDataPath):
                     if '.zip' in f1:
                         print('zipfile', f1)
                         with zipfile.ZipFile(f1,'r') as file:
+                            print('file to unzip', file)
                             file.extractall("https://github.com/eliboss/datasetbucket/raw/main/dataFiles")
+                            break
 
         # checking for windows
         if sys.platform.startswith('win32'):
