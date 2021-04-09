@@ -116,7 +116,8 @@ def findReadableFiles(filename, targetReportPath):
 
 
 # copy zip to dataFiles folder and open the zip to get the data files
-def openFiles(filename):  
+def openFiles(filename, targetDataPath):  
+    print('data path: ', targetDataPath)
     if os.system("kaggle datasets download -d " + filename) == 0 :
         indexOfSlash = filename.find("/") # kaggle names dataset like: [creator of dataset]/[name of dataset]
         zip = filename[(indexOfSlash+1):len(filename)]
