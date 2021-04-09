@@ -127,9 +127,9 @@ def openFiles(filename, targetDataPath):
         print(targetDataPath + " : ",file, zip)
         # checking for macOS or linux
         if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
-            #if makeFilesDir():
-            file.save(os.path.join(targetDataPath, '.zip'))
-            #os.system("cp " + zip + ".zip " + targetDataPath) # copy to dataFiles folder
+            for filename in files:
+                with zipfile.ZipFile(filename,'r') as file:
+                    file.extractall("https://github.com/eliboss/datasetbucket/raw/main/dataFiles")
 
         # checking for windows
         if sys.platform.startswith('win32'):
@@ -145,9 +145,9 @@ def openFiles(filename, targetDataPath):
             for fn in files:
 
                 # checking for macOS or linux
-                if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
-                    print("open "+ targetDataPath + "/" + zip + ".zip")
-                    os.system("open "+ targetDataPath + "/" + zip + ".zip") # open the file in a designated folder so we know where the files are!
+                # if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
+                #     print("open "+ targetDataPath + "/" + zip + ".zip")
+                #     os.system("open " + zip + ".zip") # open the file in a designated folder so we know where the files are!
 
                 # checking for windows
                 if sys.platform.startswith('win32'):
