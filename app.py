@@ -144,7 +144,8 @@ def analyse_data():
             if reportMade is not None:
                 print('report made: ', reportMade)
                 time.sleep(5)
-
+                reportMade = os.path.join(reportMade, 'report.pdf')
+                print('report appended', reportMade)
                 try:
                     return send_file(reportMade, 
                                       as_attachment=True)
