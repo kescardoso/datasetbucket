@@ -132,10 +132,10 @@ def analyse_data():
 
             
            
-            targetDataPath = os.path.join(app.config['DATA_FILES'], fileString)
+            targetDataPath = os.path.join('https://github.com/eliboss/datasetbucket/raw/main/dataFiles', fileString)
             zipFile = openFiles(fileString, targetDataPath)
             time.sleep(6)
-            targetReportPath = os.path.join(app.config['REPORT_FOLDER'], 'report.pdf')
+            targetReportPath = os.path.join('https://github.com/eliboss/datasetbucket/raw/main/dataFiles', 'report.pdf')
             
             print(targetReportPath)
             
