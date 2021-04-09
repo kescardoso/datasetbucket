@@ -143,6 +143,7 @@ def analyse_data():
             reportMade, reportName = openFiles(fileString, targetDataPath, targetReportPath)
             if reportMade is not None:
                 print('report made: ', reportMade)
+                print('report name: ', reportName)
                 time.sleep(5)
                 #reportName = reportName+'.pdf'
                 #reportPath = os.path.join(reportMade, reportName)

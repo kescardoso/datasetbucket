@@ -63,10 +63,8 @@ def findReadableFiles(filename, targetReportPath):
                                         if ".json" in fL: 
                                             stringD = "./dataFiles/"+d
                                             dataResultsFoundJSON = read_json.readJSON(stringD, fL)
-                                            validFilename = filename
                                         if ".csv" in fL: 
                                             dataResultsFoundCSV = read_csv.readCSV("./dataFiles/", fL)
-                                            validFilename = filename
 
                         fileImg = os.listdir("./dataFiles/"+d)
                         print('fileImg', fileImg)
@@ -88,8 +86,8 @@ def findReadableFiles(filename, targetReportPath):
                             # TODO: ? need to make dataResultsFound appendable, or create multiple dicts in case a data set has more than 1 type of file 
 
             if sys.platform.startswith('win32'):
-                for filename in files:
-                    with zipfile.ZipFile(filename,'r') as file:
+                for filename1 in files:
+                    with zipfile.ZipFile(filename1,'r') as file:
 
                         file.extractall("./"+targetDataPath) # extracting files in the dataFiles directory
                         for name in file.namelist():
@@ -110,9 +108,9 @@ def findReadableFiles(filename, targetReportPath):
                                         return reportMade 
 
     # results from parsing + calculations, will be passed into >>  generatePDF.generatePDFReport()
-    reportMade = generatePDF.generatePDFReport( targetReportPath, validFilename , None, dataResultsFoundCSV, dataResultsFoundJSON , []) # generate the PDF report
+    reportMade, nameOfReport = generatePDF.generatePDFReport( targetReportPath, filename , None, dataResultsFoundCSV, dataResultsFoundJSON , []) # generate the PDF report
 
-    return reportMade
+    return reportMade, nameOfReport
 
 
 # copy zip to dataFiles folder and open the zip to get the data files
@@ -150,19 +148,19 @@ def openFiles(filename, targetDataPath, targetReportPath):
         time.sleep(3)
         
 
-        for root, dirs, files in os.walk(targetDataPath): # find the .zip file in the folder
-            print(dirs)
-            print(files)
-            for fn in files:
+        # for root, dirs, files in os.walk(targetDataPath): # find the .zip file in the folder
+        #     print(dirs)
+        #     print(files)
+        #     for fn in files:
 
-                #checking for macOS or linux
-                if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
-                    print("open "+ targetDataPath + "/" + zip + ".zip")
-                    os.system("open " + zip + ".zip") # open the file in a designated folder so we know where the files are!
+        #         #checking for macOS or linux
+        #         if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
+        #             print("open "+ targetDataPath + "/" + zip + ".zip")
+        #             os.system("open " + zip + ".zip") # open the file in a designated folder so we know where the files are!
 
-                #checking for windows
-                if sys.platform.startswith('win32'):
-                    os.system("start dataFiles " + zip + ".zip") # open the file in a designated folder so we know where the files are!
+        #         #checking for windows
+        #         if sys.platform.startswith('win32'):
+        #             os.system("start dataFiles " + zip + ".zip") # open the file in a designated folder so we know where the files are!
         reportMade, namedReport = findReadableFiles(zip, targetReportPath)
         return reportMade, namedReport
 
