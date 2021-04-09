@@ -130,8 +130,9 @@ def openFiles(filename, targetDataPath):
             for root, dirs, files in os.walk("/app"):
                 print('files in app:', files)
                 for filename in files:
-                    with zipfile.ZipFile(filename,'r') as file:
-                        file.extractall("https://github.com/eliboss/datasetbucket/raw/main/dataFiles")
+                    if '.zip' in filename:
+                        with zipfile.ZipFile(filename,'r') as file:
+                            file.extractall("https://github.com/eliboss/datasetbucket/raw/main/dataFiles")
 
         # checking for windows
         if sys.platform.startswith('win32'):
