@@ -228,11 +228,13 @@ def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataRes
         print('temp_target in generatePDF', temp_target)
         os.path.join(temp_target, 'report.pdf')
         #os.system("cp "  + "report.pdf " + temp_target)
-        return True
+        return temp_target
     if sys.platform.startswith('win32'):
+        temp_target = os.path.join(os.getcwd(), 'reportdir')
+        os.path.join(temp_target, 'report.pdf')
         os.system("copy " + "report.pdf " + targetReportPath)
 
-        return True
+        return temp_target
     else:
         print("File Not Copied!")
-        return False 
+        return None 

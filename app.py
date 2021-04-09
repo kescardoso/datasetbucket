@@ -140,13 +140,13 @@ def analyse_data():
             # print('report made: ', reportMade)
             #print(targetReportPath)
             
-            # reportMade = 
-            if openFiles(fileString, targetDataPath, targetReportPath):
-                print('report made: ')
+            reportMade = openFiles(fileString, targetDataPath, targetReportPath)
+            if reportMade is not None:
+                print('report made: ', reportMade)
                 time.sleep(5)
 
                 try:
-                    return send_file(targetReportPath, 
+                    return send_file(reportMade, 
                                       as_attachment=True)
                 except:
                     return render_template("analyse.html", 
