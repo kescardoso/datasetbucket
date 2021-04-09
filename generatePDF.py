@@ -26,12 +26,14 @@ def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataRes
     #         print("dir not made")
     
     # new instance of canvas every time we want to make a new report
+
     if '.' in title:
         splitMe = title.split('.')
         nameOfReport = splitMe[0]+'.pdf'
     else:
         nameOfReport = title+'.pdf'
     canvas = Canvas(nameOfReport, pagesize=LETTER)
+
 
     # values to use for margin/formatting:
     centerPageWidth = 305
@@ -46,10 +48,9 @@ def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataRes
     pngSize = 200
 
 
-    # if no data was found, return and send an error message to the user
 
+    # if no data was found, return and send an error message to the user
     if dataResultsCSV is None and dataResultsIMG is None and dataResultsJSON is None:
-        print('no data at all in pdf ')
         return False
     # if len(dataResultsCSV) is None and len(dataResultsCSV) is None and len(dataResultsJSON) is None:
     #     return False
@@ -123,7 +124,6 @@ def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataRes
 
         canvas.line( marginLeftRight, currentLine-3, centerPageWidth, currentLine-4)
 
-
         ## might try to implement this later ##
         # canvas.drawString(marginLeftRight, currentLine + 1, "Variance: ")
         # canvas.drawImage("variance_color.jpg", marginLeftRight*4, currentLine, 40, 15)
@@ -138,7 +138,6 @@ def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataRes
             if currentLine < marginTopBottom+20:
                         canvas.showPage()
                         currentLine = 730
-
             currentLine -= 20
             canvas.drawImage(idx[2], marginLeftRight*1.2, currentLine - 1, 70, 15)
 
@@ -146,10 +145,8 @@ def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataRes
 
             # canvas.drawString(marginLeftRight*2, currentLine, dataResultsIMG)
 
-
     # run through csv dict and add each to the page
     if dataResultsCSV is not None and len(dataResultsCSV) > 0:
-        print("csv results ",dataResultsCSV)
         if currentLine < marginTopBottom+20:
                         canvas.showPage()
                         currentLine = 730
@@ -159,7 +156,6 @@ def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataRes
             currentLine = currentLine - lineSpacing
             if isinstance(dataResultsCSV.get(var), dict):
                 for v in dataResultsCSV.get(var):
-
                     if currentLine < marginTopBottom:
                         canvas.showPage()
                         currentLine = 730

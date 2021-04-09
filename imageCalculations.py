@@ -31,7 +31,6 @@ def stats():
 
     mean_of_terms = sum_of_terms/len(colors)
 
-
     b = int(mean_of_terms[0])
     g = int(mean_of_terms[1])
     r = int(mean_of_terms[2])

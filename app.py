@@ -12,6 +12,7 @@ from werkzeug.utils import secure_filename
 
 # only importing this function prevents 
 # the whole .py file from executing on startup
+
 from runTerminalCommands import openFiles, findReadableFiles 
 
 if os.path.exists("env.py"):
@@ -129,8 +130,6 @@ def analyse_data():
         if fileString is not None:
             split_filename = fileString.split('.com/')
             fileString = split_filename[1]
-
-            
            
             targetDataPath = os.path.join('https://github.com/eliboss/datasetbucket/raw/main/dataFiles', fileString)
             
@@ -149,8 +148,7 @@ def analyse_data():
                 #reportPath = os.path.join(reportMade, reportName)
                 
                 try:
-                    return send_file(reportMade, 
-                                      as_attachment=True)
+                    return send_file(reportMade, as_attachment=True)
                 except:
                     return render_template("analyse.html", 
                                             dataToRender="Unable to generate report")

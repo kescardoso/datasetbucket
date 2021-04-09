@@ -13,21 +13,22 @@ import filePath
 import zipfile
 import shutil
 
+
 zipFile = ""    # needed for report title later
 
  # find .json or .csv files in ./dataFiles folder
+
 def findReadableFiles(filename, targetReportPath):  
     print('filename at start of find-readable-files', filename) 
     dataResultsFoundCSV = {} # results from parsing + calculations, will be passed into >>  generatePDF.generatePDFReport()
     dataResultsFoundJSON = {}
-    
+
     for root, dirs, files in os.walk("./dataFiles/"):
 
             if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
                 if len(dirs) > 0:
                     for d in dirs:
                         for files in os.walk("./dataFiles/"+d+"/"):
-                            
                             for f1 in files:
                                 if isinstance(f1, list):
                                     for fL in f1:
@@ -39,6 +40,7 @@ def findReadableFiles(filename, targetReportPath):
                                             dataResultsFoundCSV = read_csv.readCSV("./dataFiles/", fL)
 
                         fileImg = os.listdir("./dataFiles/"+d)
+
                         print('fileImg', fileImg)
                         for f in fileImg:
                             if ".png" or ".jpeg" or ".jpg" in f:
@@ -47,12 +49,12 @@ def findReadableFiles(filename, targetReportPath):
                                     reportMade, nameOfReport = main.readImage(file_paths, l, targetReportPath)
                                                             
                                     return reportMade, nameOfReport           
+
                 elif len(dirs) == 0:
                     for filename in files:
                         # global dataResultsFound
                         if ".json" in filename: 
                             dataResultsFoundJSON = read_json.readJSON("./dataFiles/", filename)
-
                         if ".csv" in filename: 
                             dataResultsFoundCSV = read_csv.readCSV("./dataFiles/", filename)
                             # TODO: ? need to make dataResultsFound appendable, or create multiple dicts in case a data set has more than 1 type of file 
@@ -60,7 +62,6 @@ def findReadableFiles(filename, targetReportPath):
             if sys.platform.startswith('win32'):
                 for filename1 in files:
                     with zipfile.ZipFile(filename1,'r') as file:
-
                         file.extractall("./"+targetDataPath) # extracting files in the dataFiles directory
                         for name in file.namelist():
                             data = file.read(name)
@@ -88,6 +89,7 @@ def findReadableFiles(filename, targetReportPath):
 # copy zip to dataFiles folder and open the zip to get the data files
 def openFiles(filename, targetDataPath, targetReportPath):  
     print('data path: ', )
+
     if os.system("kaggle datasets download -d " + filename) == 0 :
         print(os.getcwd())
         indexOfSlash = filename.find("/") # kaggle names dataset like: [creator of dataset]/[name of dataset]
@@ -145,7 +147,6 @@ def startCommands(filenameToDownload, targetReportPath, targetDataPath):
         zipFile = openFiles(filename, targetDataPath) # save zipFiles so it can be accessed in findReadableFiles()
         print('zipFile', zipFile)
         time.sleep(7) # >>>>> protects from multithreading woes :,(
-    
     if findReadableFiles(filename, targetReportPath, targetDataPath):  # >>>>> protects from multithreading woes :,(
     # remove the dataFiles folder
         try:
