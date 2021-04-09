@@ -121,29 +121,30 @@ def openFiles(filename, targetDataPath):
     if os.system("kaggle datasets download -d " + filename) == 0 :
         indexOfSlash = filename.find("/") # kaggle names dataset like: [creator of dataset]/[name of dataset]
         zip = filename[(indexOfSlash+1):len(filename)]
-        
+        targetDataPath = "https://github.com/eliboss/datasetbucket/raw/main/dataFiles"
+        print(targetDataPath)
         # checking for macOS or linux
         if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
             #if makeFilesDir():
-            os.system("cp " + zip + ".zip dataFiles") # copy to dataFiles folder
+            os.system("cp " + zip + ".zip " +targetDataPath) # copy to dataFiles folder
 
         # checking for windows
         if sys.platform.startswith('win32'):
             #if makeFilesDir():
-            os.system("copy " + zip + ".zip dataFiles") # copy to dataFiles folder
+            os.system("copy " + zip + ".zip "+ targetDataPath) # copy to dataFiles folder
 
         time.sleep(3)
         
 
-        for root, dirs, files in os.walk("dataFiles"): # find the .zip file in the folder
+        for root, dirs, files in os.walk(targetDataPath): # find the .zip file in the folder
             print(dirs)
             print(files)
             for fn in files:
 
                 # checking for macOS or linux
                 if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
-                    print("open ./dataFiles/" + zip + ".zip")
-                    os.system("open ./dataFiles/" + zip + ".zip") # open the file in a designated folder so we know where the files are!
+                    print("open "+ targetDataPath + "/" + zip + ".zip")
+                    os.system("open "+ targetDataPath + "/" + zip + ".zip") # open the file in a designated folder so we know where the files are!
 
                 # checking for windows
                 if sys.platform.startswith('win32'):
