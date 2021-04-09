@@ -28,9 +28,9 @@ def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataRes
     # new instance of canvas every time we want to make a new report
     if '.' in title:
         splitMe = title.split('.')
-        nameOfReport = 'reporta.pdf'#splitMe[0]
+        nameOfReport = splitMe[0]+'.pdf'
     else:
-        nameOfReport = 'reporta.pdf'#title
+        nameOfReport = title+'.pdf'
     canvas = Canvas(nameOfReport, pagesize=LETTER)
 
     # values to use for margin/formatting:
