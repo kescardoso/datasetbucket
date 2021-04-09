@@ -6,7 +6,9 @@
 
 ## About
 
-A dataset bucket and a machine learning bias auditor 📈, fully responsive web-app built on Python, with [Flask](https://flask.palletsprojects.com/en/1.1.x/), [the MaterializeCSS UI grid system](https://materializecss.com/) and the [Kaggle API](https://www.kaggle.com/docs/api).Based on a CRUD data-base system (Create, Read, Update and Delete) to generate, store and display dataset structures.
+A dataset bucket and a machine learning bias auditor 📈, fully responsive web-app built on Python, with [Flask](https://flask.palletsprojects.com/en/1.1.x/), [the MaterializeCSS UI grid system](https://materializecss.com/) and the [Kaggle API](https://www.kaggle.com/docs/api).
+
+Based on a CRUD(Create, Read, Update and Delete)  data-base system to generate, store and display dataset structures.
 
 You will be able to find and read reports from a **wiki styled list** of information about data containing _population_ and _demographic_ subjects. 
 
@@ -30,11 +32,11 @@ To overcome this issue, we came up with an idea to create a web app that tells y
 - [Git](https://git-scm.com/) - a version control system for for source code management; it allows tracking file changes and coordinating work on those files among multiple people and machines.
 - [GitHub](https://github.com/) - a open-source code hosting platform for version control and collaboration. It lets developers work remotely and together on projects from anywhere.
 
-##### We used a lot of python libraries for building this project. Know more about them from [LIBRARIES.md]().
+##### We used a lot of python libraries for building this project. Know more about them from [LIBRARIES.md](https://github.com/kescardoso/datasetbucket/blob/main/LIBRARIES.md).
 
 ## App Walkthrough
 
-![image](https://raw.githubusercontent.com/kescardoso/datasetbucket/main/static/images/responsive.png)
+<img width="1111" alt="responsive" src="https://user-images.githubusercontent.com/54631569/114216890-237c9780-9985-11eb-9f9a-f8269d034396.png">
 
 #### 1. OPEN THE APP
 [Head on to our app deployed on Heroku.](https://datasetbucket.herokuapp.com/)
@@ -204,9 +206,25 @@ _You may need to install gunicorn. For a good tutorial, check [this youtube tuto
 
 ### References
 
-🔸 If you want to test run the project on your local computer, follow the guidelines in [TEST.md](https://github.com/kescardoso/datasetbucket/TEST.md).
+🔸 If you want to test run the project on your local computer, follow the guidelines in [installation guide](https://github.com/kescardoso/datasetbucket#-project-installation-and-local-deployment).
 
-🔸 If you wish to contribute to the existing project, follow the guidelines in [CONTRIBUTION.md]().
+🔸 If you wish to contribute to the existing project, follow the guidelines in [CONTRIBUTION.md](https://github.com/kescardoso/datasetbucket/blob/main/CONTRIBUTION.md).
+
+## Challenges we faced!
+
+- Last minute bugs!
+- Not testing deployement earlier, which stressed us on the last day.
+- Initially testing we were not aware that the app would behave differently on macOS and windows
+- Since, we did not have a strong knowledge of data analysis and python, it was tough for us to implement models inthe initial weeks.
+- Different time zones!
+
+## Take aways!
+
+- Had an oppurtunity to get better at python
+- Practising git and GitHub 
+- getting familiar with heroku
+- team work
+
 
 ## Contributors
 
@@ -220,9 +238,9 @@ _You may need to install gunicorn. For a good tutorial, check [this youtube tuto
 
 ## Navigate
 
-➡ [CONTRIBUTION.md]()
+➡ [CONTRIBUTION.md](https://github.com/kescardoso/datasetbucket/blob/main/CONTRIBUTION.md)
 
-➡ [LIBRARIES.md]()
+➡ [LIBRARIES.md](https://github.com/kescardoso/datasetbucket/blob/main/LIBRARIES.md)
 
 
 ### Thank You! ✨
