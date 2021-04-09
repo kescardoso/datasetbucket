@@ -28,7 +28,7 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.config["UPLOAD_FOLDER"] = os.environ.get("UPLOAD_FOLDER")
 app.config["REPORT_FOLDER"] = os.environ.get("REPORT_FOLDER")
 app.config["DATA_FILES"] = os.environ.get("DATA_FILES")
-
+print(app.config["REPORT_FOLDER"])
 app.config["ALLOWED_EXTENSIONS"] = os.environ.get("ALLOWED_EXTENSIONS")
 
 # Connect MongoDB to the Flask app 
@@ -130,8 +130,12 @@ def analyse_data():
         if fileString is not None:
             split_filename = fileString.split('.com/')
             fileString = split_filename[1]
+            print('report path', os.path.join(app.config['REPORT_FOLDER']))
             targetReportPath = os.path.join(app.config['REPORT_FOLDER'])
+            print('data path', os.path.join(app.config['DATA_FILES']))
             targetDataPath = os.path.join(app.config['DATA_FILES'])
+           
+            
             reportMade = startCommands(fileString, targetReportPath, targetDataPath)
             if reportMade:
                 time.sleep(5)
