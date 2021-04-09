@@ -129,6 +129,8 @@ def openFiles(filename, targetDataPath):
         if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
             for root, dirs, files in os.walk("/app"):
                 print('files in app:', files)
+                print('dirs in app: ', dirs)
+                print('root in app: ', root)
                 for filename in files:
                     if '.zip' in filename:
                         with zipfile.ZipFile(filename,'r') as file:
