@@ -136,7 +136,10 @@ def openFiles(filename, targetDataPath):
                         print('zipfile', f1)
                         with zipfile.ZipFile(f1,'r') as file:
                             print('file to unzip', file)
-                            file.extractall("https://github.com/eliboss/datasetbucket/raw/main/dataFiles")
+                            print("getcwd + dataFiles", os.getcwd(), "dataFiles")
+                            temp_target = os.path.join(os.getcwd(), "dataFiles")
+                            print("temp_target", temp_target)
+                            file.extractall(temp_target)
                             break
 
         # checking for windows
