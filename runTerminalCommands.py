@@ -127,14 +127,14 @@ def openFiles(filename, targetDataPath):
         print(targetDataPath + " : ",file1, zip)
         # checking for macOS or linux
         if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
-            for root, dirs, files in os.walk("/app"):
+            for files in os.walk("/app"):
                 print('files in app:', files)
-                print('dirs in app: ', dirs)
-                print('root in app: ', root)
-                for filename in files:
-                    if '.zip' in filename:
-                        print('zipfile', filename)
-                        with zipfile.ZipFile(filename,'r') as file:
+                # print('dirs in app: ', dirs)
+                # print('root in app: ', root)
+                for f1 in files:
+                    if '.zip' in f1:
+                        print('zipfile', f1)
+                        with zipfile.ZipFile(f1,'r') as file:
                             file.extractall("https://github.com/eliboss/datasetbucket/raw/main/dataFiles")
 
         # checking for windows
