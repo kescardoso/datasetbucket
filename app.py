@@ -135,7 +135,7 @@ def analyse_data():
             
             zipFile = openFiles(fileString)
             time.sleep(6)
-            targetReportPath = os.path.join(app.config['REPORT_FOLDER'], 'report.pdf')
+            targetReportPath = os.path.join('./dataFiles', 'report.pdf')
             #targetDataPath = os.path.join(app.config['DATA_FILES'], zipFile)
             print(targetReportPath)
             
