@@ -81,9 +81,17 @@ _After logging into the app_ go to the * analyze* tab. You will see a menu to `e
 
 ![image](https://user-images.githubusercontent.com/54631569/114151798-218de680-993b-11eb-8054-a7a52811994f.png)
 
+_Currently we are only accepting .`json`, `.csv`, `.png`, `.jpeg` and `.jpg` files for ananlysis._
+
 You will see a progress bar till the report gets generated. Once it stops, the report gets downloaded automatically by the name of `report.pdf`.
 
+`IMAGES: .png, .jpeg, .jpg`
+
 ![image](https://user-images.githubusercontent.com/54631569/114153383-e12f6800-993c-11eb-8c2c-4ecf9d1c1de9.png)
+
+`CSV FILES: .csv`
+
+![image](https://user-images.githubusercontent.com/54631569/114232500-9a239000-9999-11eb-9521-4787c3e7ddc6.png)
 
 It would have all the details related to your dataset and what all improvements are possible.
 
@@ -239,6 +247,7 @@ _You may need to install gunicorn. For a good tutorial, check [this youtube tuto
 
 - Implement more advanced metrics and recommendations for dataset analysis
 - Allow users to upload their own datasets in addition to datasets on kaggle
+- Work on getting more files accepted, like .txt, etc
 
 ## Contributors
 
