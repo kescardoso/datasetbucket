@@ -18,7 +18,7 @@ You will be able to find and read reports from a **wiki styled list** of informa
 
 The whole world is data-driven.
 
-However, data can often be misleading, inaccurate, or unrepresentative. When this biased data used in analytics or ML models, it can not only produce inaccurate results, but also result in disastrous implications on minority groups and people
+However, data can often be misleading, inaccurate, or unrepresentative. When this biased data used in analytics or ML models, it can not only produce inaccurate results, but also result in disastrous implications for minority groups and classes.
 
 To overcome this issue, we built a web app that analyzes a dataset for bias, and also suggests possible changes you can make to improve the quality of your dataset. 📊
 
@@ -217,8 +217,8 @@ _You may need to install gunicorn. For a good tutorial, check [this youtube tuto
 - Encountering bugs when deploying on Heroku
 - Accounting for different formatting of different datasets and types of files (JSON and CSV)
 - Ensuring that the app works for both macOS and Windows
-- Working with lots of new technologies and languages for our team, including Python, Flask, HTML, CSS, Javascript, Matplot, file parsing, and data analysis.
-- Different time zones
+- Learning about lots of new technologies and languages for our team, including Python, Flask, HTML, CSS, Javascript, Matplot, file parsing, and data analysis
+- Working in time zones
 
 ## Lessons / Takeaways
 
