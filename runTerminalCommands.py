@@ -1,6 +1,7 @@
 import os
 import time
 import sys
+import glob
 
 import read_json
 import read_csv
@@ -100,7 +101,7 @@ def openFiles(filename, targetDataPath, targetReportPath):
 
                 for f1 in files:
                     if '.zip' in f1:
-                        filelist = glob.glob(temp_target)
+                        filelist = glob.glob(os.path.join(os.getcwd(), "dataFiles"))
                         for fL in filelist:
                             if f1 not in fL:
                                 print('removing: ', fL)
