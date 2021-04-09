@@ -224,20 +224,22 @@ def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataRes
     # save report and copy to directory so that app.py can access it in the directory
     canvas.save()
     
-    # if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
-    #     temp_target = os.path.join(os.getcwd(), nameOfReport)
-    #     print('temp_target in generatePDF', temp_target)
-    #     os.path.join(temp_target, 'report.pdf')
-    #     #os.system("cp "  + "report.pdf " + temp_target)
-    #     return temp_target, nameOfReport
-    # if sys.platform.startswith('win32'):
-    #     temp_target = os.path.join(os.getcwd(), 'reportdir')
-    #     os.path.join(temp_target, 'report.pdf')
-    #     os.system("copy " + "report.pdf " + targetReportPath)
+    if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
+        nameOfReport = nameOfReport + ".pdf"
+        temp_target = os.path.join(os.getcwd(), nameOfReport)
+        print('temp_target in generatePDF', temp_target)
+        
+        #os.system("cp "  + "report.pdf " + temp_target)
+        return temp_target, nameOfReport
+    if sys.platform.startswith('win32'):
+        temp_target = os.path.join(os.getcwd(), 'reportdir')
+        os.path.join(temp_target, 'report.pdf')
+        os.system("copy " + "report.pdf " + targetReportPath)
 
         
     # else:
     #     print("File Not Copied!")
     #     return None 
     #temp_target = os.path.join(os.getcwd(), nameOfReport) 
+    print('return outside of if/if')
     return os.getcwd(), nameOfReport

@@ -144,11 +144,11 @@ def analyse_data():
             if reportMade is not None:
                 print('report made: ', reportMade)
                 time.sleep(5)
-                reportName = reportName+'.pdf'
-                reportPath = os.path.join(reportMade, reportName)
-                print('report appended', reportPath)
+                #reportName = reportName+'.pdf'
+                #reportPath = os.path.join(reportMade, reportName)
+                print('report appended', reportMade)
                 try:
-                    return send_file(reportPath, 
+                    return send_file(reportMade, 
                                       as_attachment=True)
                 except:
                     return render_template("analyse.html", 
