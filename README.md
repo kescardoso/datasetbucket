@@ -1,96 +1,115 @@
-# Dataset Bucket & Bias Auditor
+# DATASET BUCKET & BIAS AUDITOR
 
-<p align="center">
-<img src="https://raw.githubusercontent.com/kescardoso/datasetbucket/main/static/images/responsive.png">
-<img src="https://raw.githubusercontent.com/kescardoso/datasetbucket/main/static/images/dbba-full.png" width="250px">
-</p>
+![label](https://user-images.githubusercontent.com/54631569/114139488-bfc68000-992c-11eb-9b11-28084dd9b8bc.png)
 
-A dataset bucket with a machine learning bias auditor. Built with Python-Flask, MaterializeCSS and the Kaggle API.
+## About
 
-This is a python-flask web application build upon a CRUD data-base system (Create, Read, Update and Delete) to generate, store and display dataset structures.
+Dataset Bucket 📈 is a python-flask web application build upon a CRUD (Create, Read, Update and Delete) database system to generate, store and display dataset structures.
 
-You will be able to find and read reports from a wiki styled list of information 
-about data containing population and demographic subjects.
+It's a machine learning bias auditor. Built with [Python-Flask](https://flask.palletsprojects.com/en/1.1.x/), [MaterializeCSS](https://materializecss.com/) and the [Kaggle API](https://www.kaggle.com/docs/api).
 
-[View the deployment on Heroku](https://datasetbucket.herokuapp.com/)
+You will be able to find and read reports from a **wiki styled list** of information about data containing _population_ and _demographic_ subjects. 
 
-## Technologies used
+👩 👳🏾‍♂️ 👱🏻‍♀️ 🧔🏾 👩🏼‍🦰 👨🏿‍🦳
 
-- [MongoDB](https://www.mongodb.com/) - a document database (stores data in JSON-like documents) with a horizontal, scale-out architecture that can support huge volumes of both data and traffic.
-- [Materialize](https://materializecss.com/) - a modern front-end framework (responsive and mobile-first, similar to Bootstrap) that helps developers build a stylish and responsive application.
-- [Python](https://www.python.org/) - an interpreted, high-level and general-purpose programming language, great for data base structured projects.
-- [Pip](https://pypi.org/project/pip/) - a package manager for Python, that allows developers to install and manage additional libraries and dependencies that are not distributed as part of the standard library.
-- [Flask](https://flask.palletsprojects.com/) - a Python framework that depends on the Jinja template engine and the Werkzeug WSGI toolkit.
-- [Heroku](https://www.heroku.com/) - used for the app deployment, Heroku is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
-- [Git](https://git-scm.com/) - a version control system for for source code management; it allows tracking file changes and coordinating work on those files among multiple people and machines.
-- [GitHub](https://github.com/) - a open-source code hosting platform for version control and collaboration. It lets developers work remotely and together on projects from anywhere.
+## Motivation
 
-## Project Installation and Local Deployment
+The whole world is data-driven, but we are still not sure if the data used in testing the machine learning models are biased to one thing, person, or group. If this is the case the chances are extremely high that the model doesn't yield accurate results. 
 
-### Installation
+To overcome this issue, we came up with an idea to create a web app that tells you if the dataset you are using is biased or not, and also suggests possible changes you can make to improve the quality of your analysis. 📊
 
-1. Install [python3 and pip3](https://www.python.org) in your machine
-    
-2. Download or clone [this project](https://github.com/kescardoso/datasetbucket) into your local workspace
 
-3. Create a virtual environment: `Python3 -m venv venv`
+## Technologies and Frameworks Used
 
-    After running this command, the folders will be automatically set up on your workspace.
+- [Flask](https://flask.palletsprojects.com/)
 
-4. Run: `source venv/bin/activate`
+- [Git](https://git-scm.com/)
 
-5. Install Flask and all the required dependencies with: 
+- [GitHub](https://github.com/)
 
-`pip3 install -r requirements.txt`
+- [Heroku](https://www.heroku.com/)
 
-### Local Deployment
+- [Materialize](https://materializecss.com/)
 
-1. Create an `env.py` file to keep your sensitive data secret.
+- [MongoDB](https://www.mongodb.com/)
 
-2. Open `env.py` and enter the following:
+- [Pip](https://pypi.org/project/pip/)
 
-    ```python
-    import os
+- [Python](https://www.python.org/)
 
-    os.environ.setdefault("SECRET_KEY", "secret_key_here")
-    os.environ.setdefault("MONGO_URI", "value_from mongoDB_here")
-    os.environ.setdefault("MONGO_DBNAME", "value_from mongoDB_here")
-    ```
+##### We used a lot of python libraries for building this project. Know more about them from [LIBRARIES.md]().
 
-3. Wire up Kaggle
+## App Walkthrough
 
-    Kaggle API allows the developer to download datasets directly from the terminal.
+###### 1. OPEN THE APP
+[Head on to our app deployed on Heroku.](https://datasetbucket.herokuapp.com/)
 
-    1. Create a [kaggle account](https://kaggle.com)
+![image](https://user-images.githubusercontent.com/54631569/114146731-9100d780-9935-11eb-9700-52d6ed2ccbdb.png)
 
-    2. Go to the 'Account' tab in your Kaggle profile and scroll to the 'API' section. Click 'Create new API Token' and add the `kaggle.json` file, which will download to your project structure.
+You will see a **WELCOME** screen, it has the same basic instructions to get started and what you can expect from the app.
 
-    For more complete and detailed instructions on how to use the Kaggle API, visit [Kaggle's documentation](https://www.kaggle.com/docs/api#getting-started-installation-&-authentication).
+###### 2. DATATAGS
 
-5. Run the `app.py` in debug mode as a flask application to see the project in your locally deployed http address.
+In the **data tags** tab, you can find various tags associated with the reports uploaded on the app. 
 
-## Heroku Deployment
+![image](https://user-images.githubusercontent.com/54631569/114147605-79761e80-9936-11eb-8d32-b42ac288e8de.png)
 
-1. Fulfil all Heroku requirements by chequing and freezing your dependencies and by creating a Procfile:
+By clicking the **view** button on any of the available tags, you can see the dataset, analytical reports, and other information about the TAG.
 
-    Run these two commands:
+![image](https://user-images.githubusercontent.com/54631569/114148794-cad2dd80-9937-11eb-855f-996f2d4e2f06.png)
 
-    `pip3 freeze > requirements.txt`
+###### 3. DATASETS
 
-    `echo web: python app.py > Procfile`
+The **datasets** tab has the list of all the datasets, to which an analytical report was generated. It is presented in the form of an accordion collapsable styled list, so you can click on any dataset you wish to explore and all the information related to that particular dataset will be displayed. 
 
-    Commit and push your changes.
+![image](https://user-images.githubusercontent.com/54631569/114149794-eb4f6780-9938-11eb-8709-2e313cad1f99.png)
 
-2. Create a new app from your [Heroku dashboard](https://www.heroku.com/).
+You can view the author, the development status, tags associated, and an option to download the analytical report. 
 
-3. Add your environmental variables to Heroku, by going to 'Settings', and then to 'Config Vars', and enter the sensitive information from your MongoDB and your `env.py` file:
+###### 4. REGISTER / LOG IN
 
-5. From your Heroku dashboard, wire up your heroku app to your git repository, by going to:
+Using the **register** tab you will land on the registration page, where you can create an account on this app.
 
-    - "Deploy" > "Deployment Method" > and click: "Connect to GitHub"
+![image](https://user-images.githubusercontent.com/54631569/114149979-20f45080-9939-11eb-83a1-171fca78f160.png)
 
-    - Search your repo from the dropdown, and connect
+If you are already a user of our app, head on the **log in** page.
 
-    - Choose a branch to deploy your changes
+💟 _By being a registered user of our app, you will have access to upload new datasets to the app and generate reports for those._
 
-    - Deploy your branch and view app
+###### 5. ANALYSE
+
+_After logging into the app_ go to the * analyze* tab. You will see a menu to `enter the kaggle URL`. After adding a valid Kaggle dataset URL. Click on `GET ANALYSIS REPORT`.
+
+![image](https://user-images.githubusercontent.com/54631569/114151798-218de680-993b-11eb-8054-a7a52811994f.png)
+
+You will see a progress bar till the report gets generated. Once it stops, the report gets downloaded automatically by the name of `report.pdf`.
+
+![image](https://user-images.githubusercontent.com/54631569/114153383-e12f6800-993c-11eb-8c2c-4ecf9d1c1de9.png)
+
+It would have all the details related to your dataset and what all improvements are possible.
+
+## References
+
+🔸 If you want to test run the project on your local computer, follow the guidelines in [TEST.md](https://github.com/kescardoso/datasetbucket/TEST.md).
+
+🔸 If you wish to contribute to the existing project, follow the guidelines in [CONTRIBUTION.md]().
+
+## Contributors
+
+⭐[Elizabeth Crouther]()
+
+⭐[Kes Cardoso]()
+
+⭐[Sakshi Gupta]()
+
+⭐[William Yang]()
+
+## Navigate
+
+➡ [CONTRIBUTION.md]()
+
+➡ [LIBRARIES.md]()
+
+➡ [TEST.md]()
+
+## Thank You! ✨
