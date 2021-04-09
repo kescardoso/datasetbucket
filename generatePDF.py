@@ -45,6 +45,7 @@ def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataRes
     # if no data was found, return and send an error message to the user
 
     if dataResultsCSV is None and dataResultsIMG is None and dataResultsJSON is None:
+        print('no data at all in pdf ')
         return False
     # if len(dataResultsCSV) is None and len(dataResultsCSV) is None and len(dataResultsJSON) is None:
     #     return False
@@ -53,6 +54,7 @@ def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataRes
     if dataResultsCSV is not None and len(dataResultsCSV) == 0:
         if dataResultsJSON is not None and len(dataResultsJSON) == 0:
             if dataResultsIMG is not None and len(dataResultsIMG) == 0:
+                print('all data is empty in pdf ')
                 return False
             if dataResultsIMG is None:
                 return False
@@ -143,6 +145,7 @@ def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataRes
 
     # run through csv dict and add each to the page
     if dataResultsCSV is not None and len(dataResultsCSV) > 0:
+        print("csv results ",dataResultsCSV)
         if currentLine < marginTopBottom+20:
                         canvas.showPage()
                         currentLine = 730

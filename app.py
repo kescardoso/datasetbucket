@@ -133,13 +133,13 @@ def analyse_data():
             
            
             targetDataPath = os.path.join('https://github.com/eliboss/datasetbucket/raw/main/dataFiles', fileString)
-            zipFile = openFiles(fileString, targetDataPath)
+            reportMade = openFiles(fileString, targetDataPath)
             time.sleep(6)
-            targetReportPath = os.path.join('https://github.com/eliboss/datasetbucket/raw/main/dataFiles', 'report.pdf')
+            #targetReportPath = os.path.join('https://github.com/eliboss/datasetbucket/raw/main/dataFiles', 'report.pdf')
             
-            print(targetReportPath)
+            #print(targetReportPath)
             
-            reportMade = findReadableFiles(zipFile, targetReportPath)
+            # reportMade = 
             if reportMade:
                 time.sleep(5)
 

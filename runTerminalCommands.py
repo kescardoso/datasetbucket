@@ -161,8 +161,8 @@ def openFiles(filename, targetDataPath):
                 #checking for windows
                 if sys.platform.startswith('win32'):
                     os.system("start dataFiles " + zip + ".zip") # open the file in a designated folder so we know where the files are!
-        
-        return zip
+        reportMade = findReadableFiles(zip)
+        return reportMade
 
 def startCommands(filenameToDownload, targetReportPath, targetDataPath):
 
