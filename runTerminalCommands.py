@@ -110,8 +110,6 @@ def findReadableFiles(filename, targetReportPath):
     # results from parsing + calculations, will be passed into >>  generatePDF.generatePDFReport()
     reportMade = generatePDF.generatePDFReport( targetReportPath, zipFile , None, dataResultsFoundCSV, dataResultsFoundJSON , []) # generate the PDF report
 
-    
-    
     return reportMade
 
 
