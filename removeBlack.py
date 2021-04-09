@@ -24,18 +24,12 @@ def removeBlack(estimator_labels, estimator_cluster):
 
     # Check if the color is [0,0,0] that if it is black
 
-    # print(type(color))
-    # print(color)
-
     r = color[0]
     g = color[1]
     b = color[2]
 
     hair = np.uint8([[[r,g,b]]])
     hair_hsv = cv2.cvtColor(hair, cv2.COLOR_RGB2HSV)
-
-    # print(hair)
-    # print(hair_hsv)
 
     l_ = np.array([0,0,0])
     h_ = np.array([255,255,10])

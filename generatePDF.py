@@ -6,24 +6,26 @@ import os
 import shutil
 import time
 import sys
-#comment
 
 # create and save the pdf report from the dicts, dataResultsCSV, dataResultsJSON
 
-def generatePDFReport(title, subtitle, dataResultsCSV, dataResultsJSON, dataResultsIMG ):
-    try:
-        os.mkdir('reportdir')
-    except:
-        shutil.rmtree("./reportdir/") # deleting the temp directory
-        try:
-            os.remove("report.pdf")
-        except:
-            print("Not deleted")
-        try:
-            os.mkdir('reportdir')
-        except:
-            print("dir not made")
+# create and save the pdf report from the dicts, dataResultsCSV, dataResultsJSON
+
+def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataResultsJSON, dataResultsIMG ):
+    # try:
+    #     os.mkdir('reportdir')
+    # except:
+    #     shutil.rmtree("./reportdir/") # deleting the temp directory
+    #     try:
+    #         os.remove("report.pdf")
+    #     except:
+    #         print("Not deleted")
+    #     try:
+    #         os.mkdir('reportdir')
+    #     except:
+    #         print("dir not made")
     
+    # new instance of canvas every time we want to make a new report
 
     canvas = Canvas("report.pdf", pagesize=LETTER)
 
@@ -41,19 +43,28 @@ def generatePDFReport(title, subtitle, dataResultsCSV, dataResultsJSON, dataResu
 
 
     # if no data was found, return and send an error message to the user
-    if dataResultsCSV is None and dataResultsCSV is None and dataResultsJSON is None:
-        return False
-    if len(dataResultsCSV) is None and len(dataResultsCSV) is None and len(dataResultsJSON) is None:
-        return False
 
-    # if dataResultsCSV is not None and len(dataResultsCSV) == 0:
-    #     if dataResultsJSON is not None and len(dataResultsJSON) == 0:
-    #         return False
-    #     if dataResultsJSON is None:
-    #         return False
-    
-    if dataResultsIMG is None and len(dataResultsIMG) == 0:
+    if dataResultsCSV is None and dataResultsIMG is None and dataResultsJSON is None:
         return False
+    # if len(dataResultsCSV) is None and len(dataResultsCSV) is None and len(dataResultsJSON) is None:
+    #     return False
+
+    # checking for all combinations of empty OR None dataResults 
+    if dataResultsCSV is not None and len(dataResultsCSV) == 0:
+        if dataResultsJSON is not None and len(dataResultsJSON) == 0:
+            if dataResultsIMG is not None and len(dataResultsIMG) == 0:
+                return False
+            if dataResultsIMG is None:
+                return False
+        if dataResultsJSON is None:
+            if dataResultsIMG is not None and len(dataResultsIMG) == 0:
+                return False
+            if dataResultsIMG is None:
+                return False
+    
+    # if dataResultsIMG is None and len(dataResultsIMG) == 0:
+    #     return False
+
           
     # if no title or subtitle was passed in, use defualts
     if title is None or title == "":
@@ -105,10 +116,12 @@ def generatePDFReport(title, subtitle, dataResultsCSV, dataResultsJSON, dataResu
         currentLine = currentLine - lineSpacing
 
         canvas.line( marginLeftRight, currentLine-3, centerPageWidth, currentLine-4)
+
+
+        ## might try to implement this later ##
         # canvas.drawString(marginLeftRight, currentLine + 1, "Variance: ")
         # canvas.drawImage("variance_color.jpg", marginLeftRight*4, currentLine, 40, 15)
         # currentLine = currentLine - lineSpacing
-
 
         canvas.line( marginLeftRight, currentLine-3, centerPageWidth, currentLine-4)
         canvas.drawString(marginLeftRight, currentLine + 1, " Color Pallete             Percentage Share")
@@ -119,17 +132,11 @@ def generatePDFReport(title, subtitle, dataResultsCSV, dataResultsJSON, dataResu
             if currentLine < marginTopBottom+20:
                         canvas.showPage()
                         currentLine = 730
-            # canvas.drawImage(idx[0],marginLeftRight*2, currentLine, 10, 10)
-            # print(idx[0])
-            # print(type(idx[0]))
+
             currentLine -= 20
-            # print(idx[2])
-            # print(currentLine)
             canvas.drawImage(idx[2], marginLeftRight*1.2, currentLine - 1, 70, 15)
 
             canvas.drawString(marginLeftRight*4, currentLine + 2, idx[1])
-
-            
 
             # canvas.drawString(marginLeftRight*2, currentLine, dataResultsIMG)
 
@@ -145,7 +152,7 @@ def generatePDFReport(title, subtitle, dataResultsCSV, dataResultsJSON, dataResu
             currentLine = currentLine - lineSpacing
             if isinstance(dataResultsCSV.get(var), dict):
                 for v in dataResultsCSV.get(var):
-                    print(dataResultsCSV.get(var)[v])
+
                     if currentLine < marginTopBottom:
                         canvas.showPage()
                         currentLine = 730
@@ -174,7 +181,7 @@ def generatePDFReport(title, subtitle, dataResultsCSV, dataResultsJSON, dataResu
                     else:
                         for i in v:
                             if isinstance(i, list):
-                                print(i)
+                                x = i
                             else:
                                 canvas.drawString(marginLeftRight*2, currentLine, v)
                                 currentLine = currentLine - lineSpacing 
@@ -182,10 +189,12 @@ def generatePDFReport(title, subtitle, dataResultsCSV, dataResultsJSON, dataResu
             
     # TODO: need to check if current line runs off the page. If is does, need to make a new page
 
-
      # run through json dict and add each to the page
     if dataResultsJSON is not None and len(dataResultsJSON) > 0:
 
+
+     # run through json dict and add each to the page
+    if dataResultsJSON is not None and len(dataResultsJSON) > 0:
         for var in dataResultsJSON: # var is the category
             if len(dataResultsJSON.get(var)) > 1: 
                 if currentLine < marginTopBottom + 20:
@@ -207,18 +216,21 @@ def generatePDFReport(title, subtitle, dataResultsCSV, dataResultsJSON, dataResu
                     else:
                         for i in v:
                             if isinstance(i, list):
-                                print(i)
+                                x = i
                             else:
                                 canvas.drawString(marginLeftRight*2, currentLine, v +  ", " + str(dataResultsJSON.get(var)[v]))
                                 currentLine = currentLine - lineSpacing 
                                 break
-    
+
+    # save report and copy to directory so that app.py can access it in the directory
     canvas.save()
+    
     if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
-        os.system("cp "  + "report.pdf reportdir")
+        os.system("cp "  + "report.pdf " + targetReportPath)
         return True
     if sys.platform.startswith('win32'):
-        os.system("copy " + "report.pdf reportdir")
+        os.system("copy " + "report.pdf " + targetReportPath)
+
         return True
     else:
         print("File Not Copied!")

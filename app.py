@@ -26,6 +26,9 @@ app.secret_key = os.environ.get("SECRET_KEY")
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.config["UPLOAD_FOLDER"] = os.environ.get("UPLOAD_FOLDER")
+app.config["REPORT_FOLDER"] = os.environ.get("REPORT_FOLDER")
+app.config["DATA_FILES"] = os.environ.get("DATA_FILES")
+
 app.config["ALLOWED_EXTENSIONS"] = os.environ.get("ALLOWED_EXTENSIONS")
 
 # Connect MongoDB to the Flask app 
@@ -127,19 +130,22 @@ def analyse_data():
         if fileString is not None:
             split_filename = fileString.split('.com/')
             fileString = split_filename[1]
-            reportMade = startCommands(fileString)
-            # With open('/Users/mac/IdeaProjects/datasetbucket/report.pdf', 'rb') 
-            # as static_file """
+            targetReportPath = os.path.join(app.config['REPORT_FOLDER'])
+            targetDataPath = os.path.join(app.config['DATA_FILES'])
+            reportMade = startCommands(fileString, targetReportPath, targetDataPath)
             if reportMade:
                 time.sleep(5)
+
                 try:
-                    return send_file('./reportdir/report.pdf', as_attachment=True)
+                    return send_file(targetReportPath+'/report.pdf', 
+                                      as_attachment=True)
                 except:
                     return render_template("analyse.html", 
-                                            dataToRender="Unable able to generate report")
+                                            dataToRender="Unable to generate report")
             else:
                 return render_template("analyse.html", 
-                                        dataToRender="Unable able to generate report")
+                                        dataToRender="Unable to generate report")
+
     return render_template("analyse.html")
 
 

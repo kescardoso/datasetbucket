@@ -18,7 +18,6 @@ def plotColorBar(colorInformation):
     color = tuple(map(int,(x['color'])))
 
     colors.append(list(color))
-    # print(colors)
 
     cv2.rectangle(color_bar , (int(top_x),0) , (int(bottom_x),color_bar.shape[0]) ,color , -1)
     top_x = bottom_x
@@ -26,8 +25,6 @@ def plotColorBar(colorInformation):
 
 def prety_print_data(color_info):
   for x in color_info:
-    # print(pprint.pformat(x))
     text = str(pprint.pformat(x))
-    # print()
     return text
     
