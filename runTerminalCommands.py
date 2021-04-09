@@ -128,9 +128,9 @@ def openFiles(filename, targetDataPath):
         # checking for macOS or linux
         if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
             for  root, dirs, files in os.walk(os.getcwd()):
-                #print('files in app:', files)
-                print('dirs in app: ', dirs)
-                print('root in app: ', root)
+                # print('files in app:', files)
+                # print('dirs in app: ', dirs)
+                # print('root in app: ', root)
                 for f1 in files:
                     if '.zip' in f1:
                         print('zipfile', f1)
@@ -152,12 +152,12 @@ def openFiles(filename, targetDataPath):
             print(files)
             for fn in files:
 
-                # checking for macOS or linux
-                # if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
-                #     print("open "+ targetDataPath + "/" + zip + ".zip")
-                #     os.system("open " + zip + ".zip") # open the file in a designated folder so we know where the files are!
+                #checking for macOS or linux
+                if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
+                    print("open "+ targetDataPath + "/" + zip + ".zip")
+                    os.system("open " + zip + ".zip") # open the file in a designated folder so we know where the files are!
 
-                # checking for windows
+                #checking for windows
                 if sys.platform.startswith('win32'):
                     os.system("start dataFiles " + zip + ".zip") # open the file in a designated folder so we know where the files are!
         
