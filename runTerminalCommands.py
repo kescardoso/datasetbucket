@@ -122,13 +122,14 @@ def openFiles(filename, targetDataPath):
         
         indexOfSlash = filename.find("/") # kaggle names dataset like: [creator of dataset]/[name of dataset]
         zip = filename[(indexOfSlash+1):len(filename)]
-        file = os.access(zip, os.R_OK)
+        file = os.access(zip, os.F_OK)
 
-        print(targetDataPath + " : ",file)
+        print(targetDataPath + " : ",file, zip)
         # checking for macOS or linux
         if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
             #if makeFilesDir():
-            os.system("cp " + zip + ".zip " + targetDataPath) # copy to dataFiles folder
+            file.save(os.path.join(targetDataPath, '.zip'))
+            #os.system("cp " + zip + ".zip " + targetDataPath) # copy to dataFiles folder
 
         # checking for windows
         if sys.platform.startswith('win32'):
