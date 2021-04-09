@@ -45,7 +45,8 @@ import shutil
 zipFile = ""    # needed for report title later
 
  # find .json or .csv files in ./dataFiles folder
-def findReadableFiles(filename, targetReportPath):   
+def findReadableFiles(filename, targetReportPath):  
+    print('filename at start of find-readable-files', filename) 
     dataResultsFoundCSV = {} # results from parsing + calculations, will be passed into >>  generatePDF.generatePDFReport()
     dataResultsFoundJSON = {}
     
@@ -108,6 +109,7 @@ def findReadableFiles(filename, targetReportPath):
                                         return reportMade 
 
     # results from parsing + calculations, will be passed into >>  generatePDF.generatePDFReport()
+    print('filename before generate PDF', filename)
     reportMade, nameOfReport = generatePDF.generatePDFReport( targetReportPath, filename , None, dataResultsFoundCSV, dataResultsFoundJSON , []) # generate the PDF report
 
     return reportMade, nameOfReport
@@ -161,7 +163,9 @@ def openFiles(filename, targetDataPath, targetReportPath):
         #         #checking for windows
         #         if sys.platform.startswith('win32'):
         #             os.system("start dataFiles " + zip + ".zip") # open the file in a designated folder so we know where the files are!
+        print('zip before find-readable-files', zip)
         reportMade, namedReport = findReadableFiles(zip, targetReportPath)
+        print('zip after find-readable-files', zip)
         return reportMade, namedReport
 
 def startCommands(filenameToDownload, targetReportPath, targetDataPath):

@@ -28,9 +28,9 @@ def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataRes
     # new instance of canvas every time we want to make a new report
     if '.' in title:
         splitMe = title.split('.')
-        nameOfReport = splitMe[0]
+        nameOfReport = 'reporta.pdf'#splitMe[0]
     else:
-        nameOfReport = title
+        nameOfReport = 'reporta.pdf'#title
     canvas = Canvas(nameOfReport, pagesize=LETTER)
 
     # values to use for margin/formatting:
@@ -228,7 +228,7 @@ def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataRes
     canvas.save()
     print('cwd right after saving', os.getcwd())
     if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
-        nameOfReport = nameOfReport + ".pdf"
+        
         temp_target = os.path.join(os.getcwd(), nameOfReport)
         print('temp_target in generatePDF', temp_target)
         
