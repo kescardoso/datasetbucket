@@ -108,10 +108,11 @@ def openFiles(filename, targetDataPath, targetReportPath):
                             print('filelist to remove old files', filelist)
                             print('f1 - f1 to see if f1 in fL', f1)
                             for fL in filelist:
-                                print('fL, current file looking for', fL)
-                                if f1 not in fL and os.path.isfile(fL):
-                                    print('removing: ', fL)
-                                    os.remove(fL)
+                                for file_i in fL:
+                                    print('fL, current file looking for', fL)
+                                    if f1 not in file_i and os.path.isfile(file_i):
+                                        print('removing: ', fL, file_i)
+                                        os.remove(file_i)
 
                             print('file to unzip', file)
                             print("getcwd + dataFiles", os.getcwd(), "dataFiles")
