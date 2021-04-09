@@ -103,7 +103,7 @@ def openFiles(filename, targetDataPath, targetReportPath):
                     if '.zip' in f1:
                         filelist = glob.glob(os.path.join(os.getcwd(), "dataFiles"))
                         for fL in filelist:
-                            if f1 not in fL:
+                            if f1 not in fL and os.path.isfile(fL):
                                 print('removing: ', fL)
                                 os.remove(fL)
                                 
