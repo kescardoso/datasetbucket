@@ -146,7 +146,7 @@ def analyse_data():
                 time.sleep(5)
                 #reportName = reportName+'.pdf'
                 #reportPath = os.path.join(reportMade, reportName)
-                print('report appended', reportMade)
+                
                 try:
                     return send_file(reportMade, 
                                       as_attachment=True)

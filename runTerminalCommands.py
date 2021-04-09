@@ -63,8 +63,10 @@ def findReadableFiles(filename, targetReportPath):
                                         if ".json" in fL: 
                                             stringD = "./dataFiles/"+d
                                             dataResultsFoundJSON = read_json.readJSON(stringD, fL)
+                                            validFilename = filename
                                         if ".csv" in fL: 
                                             dataResultsFoundCSV = read_csv.readCSV("./dataFiles/", fL)
+                                            validFilename = filename
 
                         fileImg = os.listdir("./dataFiles/"+d)
                         print('fileImg', fileImg)
@@ -108,7 +110,7 @@ def findReadableFiles(filename, targetReportPath):
                                         return reportMade 
 
     # results from parsing + calculations, will be passed into >>  generatePDF.generatePDFReport()
-    reportMade = generatePDF.generatePDFReport( targetReportPath, filename , None, dataResultsFoundCSV, dataResultsFoundJSON , []) # generate the PDF report
+    reportMade = generatePDF.generatePDFReport( targetReportPath, validFilename , None, dataResultsFoundCSV, dataResultsFoundJSON , []) # generate the PDF report
 
     return reportMade
 
