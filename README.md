@@ -41,6 +41,8 @@ To overcome this issue, we came up with an idea to create a web app that tells y
 
 ## App Walkthrough
 
+https://raw.githubusercontent.com/kescardoso/datasetbucket/main/static/images/responsive.png
+
 ###### 1. OPEN THE APP
 [Head on to our app deployed on Heroku.](https://datasetbucket.herokuapp.com/)
 
