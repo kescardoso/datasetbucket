@@ -1,6 +1,7 @@
 # DATASET BUCKET & BIAS AUDITOR
 
 ![label](https://user-images.githubusercontent.com/54631569/114139488-bfc68000-992c-11eb-9b11-28084dd9b8bc.png)
+
 [Check our project on Heroku!](https://datasetbucket.herokuapp.com/)
 
 ## About
@@ -35,14 +36,14 @@ To overcome this issue, we came up with an idea to create a web app that tells y
 
 ![image](https://raw.githubusercontent.com/kescardoso/datasetbucket/main/static/images/responsive.png)
 
-###### 1. OPEN THE APP
+#### 1. OPEN THE APP
 [Head on to our app deployed on Heroku.](https://datasetbucket.herokuapp.com/)
 
 ![image](https://user-images.githubusercontent.com/54631569/114146731-9100d780-9935-11eb-9700-52d6ed2ccbdb.png)
 
 You will see a **WELCOME** screen, it has the same basic instructions to get started and what you can expect from the app.
 
-###### 2. DATATAGS
+#### 2. DATATAGS
 
 In the **data tags** tab, you can find various tags associated with the reports uploaded on the app. 
 
@@ -52,7 +53,7 @@ By clicking the **view** button on any of the available tags, you can see the da
 
 ![image](https://user-images.githubusercontent.com/54631569/114148794-cad2dd80-9937-11eb-855f-996f2d4e2f06.png)
 
-###### 3. DATASETS
+#### 3. DATASETS
 
 The **datasets** tab has the list of all the datasets, to which an analytical report was generated. It is presented in the form of an accordion collapsable styled list, so you can click on any dataset you wish to explore and all the information related to that particular dataset will be displayed. 
 
@@ -60,7 +61,7 @@ The **datasets** tab has the list of all the datasets, to which an analytical re
 
 You can view the author, the development status, tags associated, and an option to download the analytical report. 
 
-###### 4. REGISTER / LOG IN
+#### 4. REGISTER / LOG IN
 
 Using the **register** tab you will land on the registration page, where you can create an account on this app.
 
@@ -209,13 +210,13 @@ _You may need to install gunicorn. For a good tutorial, check [this youtube tuto
 
 ## Contributors
 
-⭐[Elizabeth Crouther]()
+⭐[Elizabeth Crouther](https://github.com/eliboss)
 
-⭐[Kes Cardoso]()
+⭐[Kes Cardoso](https://github.com/kescardoso)
 
-⭐[Sakshi Gupta]()
+⭐[Sakshi Gupta](https://github.com/sakshigupta265)
 
-⭐[William Yang]()
+⭐[William Yang](https://github.com/wyang0216)
 
 ## Navigate
 
@@ -224,4 +225,4 @@ _You may need to install gunicorn. For a good tutorial, check [this youtube tuto
 ➡ [LIBRARIES.md]()
 
 
-## Thank You! ✨
+### Thank You! ✨
