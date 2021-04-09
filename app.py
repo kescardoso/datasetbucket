@@ -136,12 +136,13 @@ def analyse_data():
             
             time.sleep(6)
             targetReportPath = os.path.join('https://github.com/eliboss/datasetbucket/raw/main/reportdir', 'report.pdf')
-            reportMade = openFiles(fileString, targetDataPath, targetReportPath)
-            print('report made: ', reportMade)
+            # reportMade = 
+            # print('report made: ', reportMade)
             #print(targetReportPath)
             
             # reportMade = 
-            if reportMade:
+            if openFiles(fileString, targetDataPath, targetReportPath):
+                print('report made: ')
                 time.sleep(5)
 
                 try:

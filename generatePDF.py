@@ -51,18 +51,18 @@ def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataRes
     #     return False
 
     # checking for all combinations of empty OR None dataResults 
-    if dataResultsCSV is not None and len(dataResultsCSV) == 0:
-        if dataResultsJSON is not None and len(dataResultsJSON) == 0:
-            if dataResultsIMG is not None and len(dataResultsIMG) == 0:
-                print('all data is empty in pdf ')
-                return False
-            if dataResultsIMG is None:
-                return False
-        if dataResultsJSON is None:
-            if dataResultsIMG is not None and len(dataResultsIMG) == 0:
-                return False
-            if dataResultsIMG is None:
-                return False
+    # if dataResultsCSV is not None and len(dataResultsCSV) == 0:
+    #     if dataResultsJSON is not None and len(dataResultsJSON) == 0:
+    #         if dataResultsIMG is not None and len(dataResultsIMG) == 0:
+    #             print('all data is empty in pdf ')
+    #             return False
+    #         if dataResultsIMG is None:
+    #             return False
+    #     if dataResultsJSON is None:
+    #         if dataResultsIMG is not None and len(dataResultsIMG) == 0:
+    #             return False
+    #         if dataResultsIMG is None:
+    #             return False
     
     # if dataResultsIMG is None and len(dataResultsIMG) == 0:
     #     return False
