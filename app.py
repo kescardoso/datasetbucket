@@ -212,7 +212,6 @@ def edit_dataset(dataset_id):
             "last_update": request.form.get("last_update"),
             "created_by": session["user"]
         }
-        print(path)
         mongo.db.datasets.update({"_id": ObjectId(dataset_id)}, save_edit)
         flash("Dataset Successfully Updated")
 
