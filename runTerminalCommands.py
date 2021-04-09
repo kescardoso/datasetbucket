@@ -119,14 +119,16 @@ def findReadableFiles(filename, targetReportPath):
 def openFiles(filename, targetDataPath):  
     print('data path: ', targetDataPath)
     if os.system("kaggle datasets download -d " + filename) == 0 :
+        
         indexOfSlash = filename.find("/") # kaggle names dataset like: [creator of dataset]/[name of dataset]
         zip = filename[(indexOfSlash+1):len(filename)]
-        targetDataPath = "https://github.com/eliboss/datasetbucket/raw/main/dataFiles"
-        print(targetDataPath)
+        file = os.access(zip, os.R_OK)
+
+        print(targetDataPath + " : ",file)
         # checking for macOS or linux
         if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
             #if makeFilesDir():
-            os.system("cp " + zip + ".zip " +targetDataPath) # copy to dataFiles folder
+            os.system("cp " + zip + ".zip " + targetDataPath) # copy to dataFiles folder
 
         # checking for windows
         if sys.platform.startswith('win32'):
