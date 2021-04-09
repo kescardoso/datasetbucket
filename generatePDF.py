@@ -185,7 +185,6 @@ def generatePDFReport(title, subtitle, dataResultsCSV, dataResultsJSON, dataResu
 
      # run through json dict and add each to the page
     if dataResultsJSON is not None and len(dataResultsJSON) > 0:
-
         for var in dataResultsJSON: # var is the category
             if len(dataResultsJSON.get(var)) > 1: 
                 if currentLine < marginTopBottom + 20:
@@ -194,7 +193,6 @@ def generatePDFReport(title, subtitle, dataResultsCSV, dataResultsJSON, dataResu
                 canvas.drawString(marginLeftRight, currentLine, var)
                 canvas.line( marginLeftRight, currentLine-3, centerPageWidth, currentLine-4)
                 currentLine = currentLine - lineSpacing
-                
                 for v in dataResultsJSON.get(var): # v is the data/results in a specific category 
                     if currentLine < marginTopBottom:
                         canvas.showPage()
