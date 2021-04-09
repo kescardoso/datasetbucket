@@ -10,19 +10,19 @@ import sys
 
 # create and save the pdf report from the dicts, dataResultsCSV, dataResultsJSON
 
-def generatePDFReport(title, subtitle, dataResultsCSV, dataResultsJSON, dataResultsIMG ):
-    try:
-        os.mkdir('reportdir')
-    except:
-        shutil.rmtree("./reportdir/") # deleting the temp directory
-        try:
-            os.remove("report.pdf")
-        except:
-            print("Not deleted")
-        try:
-            os.mkdir('reportdir')
-        except:
-            print("dir not made")
+def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataResultsJSON, dataResultsIMG ):
+    # try:
+    #     os.mkdir('reportdir')
+    # except:
+    #     shutil.rmtree("./reportdir/") # deleting the temp directory
+    #     try:
+    #         os.remove("report.pdf")
+    #     except:
+    #         print("Not deleted")
+    #     try:
+    #         os.mkdir('reportdir')
+    #     except:
+    #         print("dir not made")
     
     # new instance of canvas every time we want to make a new report
     canvas = Canvas("report.pdf", pagesize=LETTER)
@@ -215,11 +215,12 @@ def generatePDFReport(title, subtitle, dataResultsCSV, dataResultsJSON, dataResu
     
     # save report and copy to directory so that app.py can access it in the directory
     canvas.save()
+    
     if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
-        os.system("cp "  + "report.pdf reportdir")
+        os.system("cp "  + "report.pdf " + targetReportPath)
         return True
     if sys.platform.startswith('win32'):
-        os.system("copy " + "report.pdf reportdir")
+        os.system("copy " + "report.pdf " + targetReportPath)
         return True
     else:
         print("File Not Copied!")

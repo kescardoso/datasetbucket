@@ -16,7 +16,7 @@ import ROI
 import generatePDF
 import passToPDF
 
-def readImage(f, l):
+def readImage(f, l, targetReportPath):
 
   print("main")
       
@@ -145,7 +145,7 @@ def readImage(f, l):
     data.append(passToPDF.createData(analysis, info, colorBar))
 
   
-  reportMade = generatePDF.generatePDFReport(None, None, dataResultsCSV, dataResultsJSON, dataResultsIMG = data)
+  reportMade = generatePDF.generatePDFReport(targetReportPath, None, None, dataResultsCSV, dataResultsJSON, dataResultsIMG = data)
   
   # imageCalculations.printList()
   
