@@ -140,11 +140,12 @@ def analyse_data():
             # print('report made: ', reportMade)
             #print(targetReportPath)
             
-            reportMade = openFiles(fileString, targetDataPath, targetReportPath)
+            reportMade, reportName = openFiles(fileString, targetDataPath, targetReportPath)
             if reportMade is not None:
                 print('report made: ', reportMade)
                 time.sleep(5)
-                reportPath = os.path.join(os.getcwd(), 'report.pdf')
+                reportName = reportName+'.pdf'
+                reportPath = os.path.join(os.getcwd(), reportName)
                 print('report appended', reportPath)
                 try:
                     return send_file(reportPath, 

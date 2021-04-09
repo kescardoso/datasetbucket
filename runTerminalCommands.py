@@ -108,7 +108,7 @@ def findReadableFiles(filename, targetReportPath):
                                         return reportMade 
 
     # results from parsing + calculations, will be passed into >>  generatePDF.generatePDFReport()
-    reportMade = generatePDF.generatePDFReport( targetReportPath, zipFile , None, dataResultsFoundCSV, dataResultsFoundJSON , []) # generate the PDF report
+    reportMade = generatePDF.generatePDFReport( targetReportPath, filename , None, dataResultsFoundCSV, dataResultsFoundJSON , []) # generate the PDF report
 
     return reportMade
 
@@ -161,8 +161,8 @@ def openFiles(filename, targetDataPath, targetReportPath):
                 #checking for windows
                 if sys.platform.startswith('win32'):
                     os.system("start dataFiles " + zip + ".zip") # open the file in a designated folder so we know where the files are!
-        reportMade = findReadableFiles(zip, targetReportPath)
-        return reportMade
+        reportMade, namedReport = findReadableFiles(zip, targetReportPath)
+        return reportMade, namedReport
 
 def startCommands(filenameToDownload, targetReportPath, targetDataPath):
 

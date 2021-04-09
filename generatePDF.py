@@ -26,8 +26,9 @@ def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataRes
     #         print("dir not made")
     
     # new instance of canvas every time we want to make a new report
-
-    canvas = Canvas("report.pdf", pagesize=LETTER)
+    splitMe = title.split('.')
+    nameOfReport = splitMe[0]
+    canvas = Canvas(nameOfReport, pagesize=LETTER)
 
     # values to use for margin/formatting:
     centerPageWidth = 305
@@ -224,17 +225,17 @@ def generatePDFReport(targetReportPath, title, subtitle, dataResultsCSV, dataRes
     canvas.save()
     
     if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
-        temp_target = os.path.join(os.getcwd(), 'reportdir')
+        temp_target = os.path.join(os.getcwd(), report.pdf)
         print('temp_target in generatePDF', temp_target)
         os.path.join(temp_target, 'report.pdf')
         #os.system("cp "  + "report.pdf " + temp_target)
-        return temp_target
+        return temp_target, nameOfReport
     if sys.platform.startswith('win32'):
         temp_target = os.path.join(os.getcwd(), 'reportdir')
         os.path.join(temp_target, 'report.pdf')
         os.system("copy " + "report.pdf " + targetReportPath)
 
-        return temp_target
+        return temp_target, nameOfReport
     else:
         print("File Not Copied!")
         return None 
