@@ -37,6 +37,5 @@ You can refer to [this example](http://www.openradar.me/11905408) from Craig Hoc
 
 ➡ [LIBRARIES.md]()
 
-➡ [TEST.md]()
 
 ## Looking forward to your contributions! 🎉
