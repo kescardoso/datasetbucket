@@ -110,7 +110,7 @@ def openFiles(filename, targetDataPath, targetReportPath):
                             for fL in filelist:
                                 for file_i in fL:
                                     print('fL, current file looking for', fL)
-                                    if f1 not in file_i and os.path.isfile(file_i):
+                                    if '.zip' not in file_i and os.path.isfile(file_i):
                                         print('removing: ', fL, file_i)
                                         os.remove(file_i)
 
