@@ -31,11 +31,12 @@ You can refer to [this example](http://www.openradar.me/11905408) from Craig Hoc
 - What is happening 
 - Notes (possibly including why you think this might be happening, or stuff you tried that didn't work)
 
+
 ## Navigate
 
-➡ [README.md]()
+➡ [README.md](https://github.com/kescardoso/datasetbucket#readme)
 
-➡ [LIBRARIES.md]()
+➡ [LIBRARIES.md](https://github.com/kescardoso/datasetbucket/blob/main/LIBRARIES.md)
 
 
 ## Looking forward to your contributions! 🎉
