@@ -2,7 +2,7 @@
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/kescardoso/datasetbucket/main/static/images/responsive.png">
-<img src="https://raw.githubusercontent.com/kescardoso/datasetbucket/main/static/images/dbba-full.png" width="250px">
+<img src="https://raw.githubusercontent.com/kescardoso/datasetbucket/main/static/images/dbba-branding.png">
 </p>
 
 A dataset bucket with a machine learning bias auditor. Built with Python-Flask, MaterializeCSS and the Kaggle API.
