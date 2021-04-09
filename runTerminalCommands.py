@@ -128,7 +128,7 @@ def openFiles(filename, targetDataPath):
         # checking for macOS or linux
         if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
             for files in os.walk("/app"):
-                print('files in app:', files)
+                #print('files in app:', files)
                 # print('dirs in app: ', dirs)
                 # print('root in app: ', root)
                 for f1 in files:
