@@ -45,27 +45,28 @@ import shutil
 zipFile = ""    # needed for report title later
 
  # find .json or .csv files in ./dataFiles folder
-def findReadableFiles(filename, targetReportPath, targetDataPath):   
+def findReadableFiles(filename, targetReportPath):   
     dataResultsFoundCSV = {} # results from parsing + calculations, will be passed into >>  generatePDF.generatePDFReport()
     dataResultsFoundJSON = {}
+    
     for root, dirs, files in os.walk("./dataFiles/"):
 
             if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
                 if len(dirs) > 0:
                     for d in dirs:
-                        for files in os.walk("./"+ targetDataPath+ "/"+d+"/"):
+                        for files in os.walk("./dataFiles/"+d+"/"):
                             
                             for f1 in files:
                                 if isinstance(f1, list):
                                     for fL in f1:
                                     # global dataResultsFound
                                         if ".json" in fL: 
-                                            stringD = "./"+ targetDataPath+ "/"+d
+                                            stringD = "./dataFiles/"+d
                                             dataResultsFoundJSON = read_json.readJSON(stringD, fL)
                                         if ".csv" in fL: 
-                                            dataResultsFoundCSV = read_csv.readCSV("./"+targetDataPath+"/", fL)
+                                            dataResultsFoundCSV = read_csv.readCSV("./dataFiles/", fL)
 
-                        fileImg = os.listdir("./"+ targetDataPath+"/"+d)
+                        fileImg = os.listdir("./dataFiles/"+d)
                         print('fileImg', fileImg)
                         for f in fileImg:
                             if ".png" or ".jpeg" or ".jpg" in f:
@@ -78,10 +79,10 @@ def findReadableFiles(filename, targetReportPath, targetDataPath):
                     for filename in files:
                         # global dataResultsFound
                         if ".json" in filename: 
-                            dataResultsFoundJSON = read_json.readJSON("./"+targetDataPath+"/", filename)
+                            dataResultsFoundJSON = read_json.readJSON("./dataFiles/", filename)
 
                         if ".csv" in filename: 
-                            dataResultsFoundCSV = read_csv.readCSV("./"+targetDataPath+"/", filename)
+                            dataResultsFoundCSV = read_csv.readCSV("./dataFiles/", filename)
                             # TODO: ? need to make dataResultsFound appendable, or create multiple dicts in case a data set has more than 1 type of file 
 
             if sys.platform.startswith('win32'):
@@ -94,10 +95,10 @@ def findReadableFiles(filename, targetReportPath, targetDataPath):
 
                             if ".json" in name: 
                                 print(".json")
-                                dataResultsFoundJSON = read_json.readJSON("./"+targetDataPath+"/", name)
+                                dataResultsFoundJSON = read_json.readJSON("./dataFiles/", name)
                             
                             if ".csv" in name:
-                                dataResultsFoundCSV = read_csv.readCSV("./"+targetDataPath+"/", name)
+                                dataResultsFoundCSV = read_csv.readCSV("./dataFiles/", name)
                             if ".zip" not in name:
                                 if ".png" or ".jpeg" or ".jpg" in name:
                                     file_paths, l = filePath.getPath('')
@@ -115,7 +116,7 @@ def findReadableFiles(filename, targetReportPath, targetDataPath):
 
 
 # copy zip to dataFiles folder and open the zip to get the data files
-def openFiles(filename, targetDataPath):  
+def openFiles(filename):  
     if os.system("kaggle datasets download -d " + filename) == 0 :
         indexOfSlash = filename.find("/") # kaggle names dataset like: [creator of dataset]/[name of dataset]
         zip = filename[(indexOfSlash+1):len(filename)]
@@ -123,29 +124,29 @@ def openFiles(filename, targetDataPath):
         # checking for macOS or linux
         if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
             #if makeFilesDir():
-            os.system("cp " + zip + ".zip " + targetDataPath) # copy to dataFiles folder
+            os.system("cp " + zip + ".zip dataFiles") # copy to dataFiles folder
 
         # checking for windows
         if sys.platform.startswith('win32'):
             #if makeFilesDir():
-            os.system("copy " + zip + ".zip " + targetDataPath) # copy to dataFiles folder
+            os.system("copy " + zip + ".zip dataFiles") # copy to dataFiles folder
 
         time.sleep(3)
         
 
-        for root, dirs, files in os.walk(targetDataPath): # find the .zip file in the folder
+        for root, dirs, files in os.walk("dataFiles"): # find the .zip file in the folder
             print(dirs)
             print(files)
             for fn in files:
 
                 # checking for macOS or linux
                 if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
-                    print("open ./" + targetDataPath + "/" + zip + ".zip")
-                    os.system("open ./" + targetDataPath + "/" + zip + ".zip") # open the file in a designated folder so we know where the files are!
+                    print("open ./dataFiles/" + zip + ".zip")
+                    os.system("open ./dataFiles/" + zip + ".zip") # open the file in a designated folder so we know where the files are!
 
                 # checking for windows
                 if sys.platform.startswith('win32'):
-                    os.system("start " + targetDataPath + " " + zip + ".zip") # open the file in a designated folder so we know where the files are!
+                    os.system("start dataFiles " + zip + ".zip") # open the file in a designated folder so we know where the files are!
         
         return zip
 
@@ -159,7 +160,7 @@ def startCommands(filenameToDownload, targetReportPath, targetDataPath):
         zipFile = openFiles(filename, targetDataPath) # save zipFiles so it can be accessed in findReadableFiles()
         print('zipFile', zipFile)
         time.sleep(7) # >>>>> protects from multithreading woes :,(
-
+    
     if findReadableFiles(filename, targetReportPath, targetDataPath):  # >>>>> protects from multithreading woes :,(
     # remove the dataFiles folder
         try:

@@ -12,7 +12,7 @@ from werkzeug.utils import secure_filename
 
 # only importing this function prevents 
 # the whole .py file from executing on startup
-from runTerminalCommands import startCommands 
+from runTerminalCommands import openFiles, findReadableFiles 
 
 if os.path.exists("env.py"):
     import env
@@ -129,16 +129,22 @@ def analyse_data():
         if fileString is not None:
             split_filename = fileString.split('.com/')
             fileString = split_filename[1]
-            targetReportPath = os.path.join(app.config['REPORT_FOLDER'],"")
-            targetDataPath = os.path.join(app.config['DATA_FILES'],"")
+
+            
            
             
-            reportMade = startCommands(fileString, targetReportPath, targetDataPath)
+            zipFile = openFiles(fileString)
+            time.sleep(6)
+            targetReportPath = os.path.join(app.config['REPORT_FOLDER'], 'report.pdf')
+            #targetDataPath = os.path.join(app.config['DATA_FILES'], zipFile)
+            print(targetReportPath)
+            
+            reportMade = findReadableFiles(zipFile, targetReportPath)
             if reportMade:
                 time.sleep(5)
 
                 try:
-                    return send_file(targetReportPath+'/report.pdf', 
+                    return send_file(targetReportPath, 
                                       as_attachment=True)
                 except:
                     return render_template("analyse.html", 
