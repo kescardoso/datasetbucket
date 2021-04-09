@@ -127,10 +127,10 @@ def openFiles(filename, targetDataPath):
         print(targetDataPath + " : ",file1, zip)
         # checking for macOS or linux
         if sys.platform.startswith('darwin') | sys.platform.startswith('linux'):
-            for files in os.walk(os.getcwd()):
+            for  root, dirs, files in os.walk(os.getcwd()):
                 #print('files in app:', files)
                 print('dirs in app: ', dirs)
-                # print('root in app: ', root)
+                print('root in app: ', root)
                 for f1 in files:
                     if '.zip' in f1:
                         print('zipfile', f1)
