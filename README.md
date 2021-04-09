@@ -226,6 +226,15 @@ _You may need to install gunicorn. For a good tutorial, check [this youtube tuto
 - Deploy on Heroku earlier
 - Spend less time getting program to run on different files, but do more analysis for one specific file
 
+## Accomplishments / Contributions
+
+- Overall, we are proud to have completed a tough project and develop a functional web app that effectively parses files, handles multiple types of datasets, and generates PDFs!
+- What are we proud to accomplish / what did we work on?
+    - "Gaining a better understanding of Python, and having a first real dive in data analytics — it changed how I see machine learning forver!" -Kes
+    - "Learning to use python better and parsing with pandas database, integrating back + front end, and deploying on heroku!" -Elizabeth
+    - "Working with images and extracting useful info out of it to generate reports!" -Sakshi
+    - "Parsing files, generating histograms, and connecting the analysis to the PDFs was super exciting for me!" -Will
+
 ## Next Steps
 
 - Implement more advanced metrics and recommendations for dataset analysis
