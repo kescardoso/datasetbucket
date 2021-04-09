@@ -119,7 +119,7 @@ def findReadableFiles(filename, targetReportPath):
 def openFiles(filename, targetDataPath):  
     print('data path: ', targetDataPath)
     if os.system("kaggle datasets download -d " + filename) == 0 :
-        
+        print(os.getcwd())
         indexOfSlash = filename.find("/") # kaggle names dataset like: [creator of dataset]/[name of dataset]
         zip = filename[(indexOfSlash+1):len(filename)]
         file1 = os.access(zip, os.F_OK)
