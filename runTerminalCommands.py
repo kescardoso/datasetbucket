@@ -101,20 +101,21 @@ def openFiles(filename, targetDataPath, targetReportPath):
 
                 for f1 in files:
                     if '.zip' in f1:
-                        filelist = glob.glob(os.path.join(os.getcwd(), "dataFiles"))
-                        print('filelist to remove old files', filelist)
-                        print('f1 - f1 to see if f1 in fL', f1)
-                        for fL in filelist:
-                            print('fL, current file looking for', fL)
-                            if f1 not in fL and os.path.isfile(fL):
-                                print('removing: ', fL)
-                                os.remove(fL)
-                                
                         print('zipfile', f1)
                         with zipfile.ZipFile(f1,'r') as file:
+                            temp_target = os.path.join(os.getcwd(), "dataFiles")
+                            filelist = glob.glob(temp_target)
+                            print('filelist to remove old files', filelist)
+                            print('f1 - f1 to see if f1 in fL', f1)
+                            for fL in filelist:
+                                print('fL, current file looking for', fL)
+                                if f1 not in fL and os.path.isfile(fL):
+                                    print('removing: ', fL)
+                                    os.remove(fL)
+
                             print('file to unzip', file)
                             print("getcwd + dataFiles", os.getcwd(), "dataFiles")
-                            temp_target = os.path.join(os.getcwd(), "dataFiles")
+                            
 
                             
                             print("temp_target", temp_target)
