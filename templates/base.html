@@ -46,13 +46,13 @@
             <div class="nav-wrapper">
                 {% if session.user %}
                     <a href="{{ url_for('all_datasets') }}" class="brand-logo center">
-                        <img src="{{ url_for('static', filename='images/dbba.png') }}"
+                        <img src="{{ url_for('static', filename='images/dbba-navlogo.png') }}"
                             width="170px"
                             alt="Dataset Bucket & Bias Auditor">
                     </a>
                 {% else %}
                     <a href="{{ url_for('about') }}" class="brand-logo center">
-                        <img src="{{ url_for('static', filename='images/dbba.png') }}"
+                        <img src="{{ url_for('static', filename='images/dbba-navlogo.png') }}"
                             width="170px"
                             alt="Dataset Bucket & Bias Auditor">
                     </a>
