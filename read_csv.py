@@ -61,7 +61,6 @@ def readCSV(path, filename):
 			
 	validRowsIndex = []
 	validRowsName = []
-	
 	# TODO need to check if a value is a string or number
 	countFieldNum = 0 # finding the index of field was causing problems. 
 	for field in fields:

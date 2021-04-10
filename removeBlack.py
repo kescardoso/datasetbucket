@@ -31,7 +31,6 @@ def removeBlack(estimator_labels, estimator_cluster):
     hair = np.uint8([[[r,g,b]]])
     hair_hsv = cv2.cvtColor(hair, cv2.COLOR_RGB2HSV)
 
-
     l_ = np.array([0,0,0])
     h_ = np.array([255,255,10])
 
