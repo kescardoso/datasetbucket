@@ -5,7 +5,8 @@
 
     <div class="row card-panel grey lighten-5">
         <form class="col s12" method="POST" 
-              action="{{ url_for('edit_dataset', dataset_id=dataset._id) }}">
+              action="{{ url_for('edit_dataset', dataset_id=dataset._id) }}"
+              enctype="multipart/form-data">
 
             <!-- Selected category -->
             <div class="row">
@@ -68,14 +69,19 @@
                 <div class="input-field col s12">
                     <i class="fas fa-file-pdf prefix teal-text text-darken-2"></i>
                     
-                    <label for="dataset_report">Change Dataset Report (upload pdf or csv file)</label>
+                    <label for="dataset_report">Dataset Report</label>
                     
-                    <input id="dataset_report" name="dataset_report"
-                           type="file" class="validate">
-                    
-                    <p class="saved_report">Saved Report : 
+                    <p class="saved_report">Saved File : 
                         <a href="https://github.com/kescardoso/datasetbucket/raw/main/{{ dataset.dataset_report }}" 
-                        target="_blank">Download Report</a></p>
+                        target="_blank">Download Report</a>
+                    </p>
+                    <p class="no_change_report grey-text">
+                        It is not possible to change the report file.
+                        <br>
+                        If you need to update this information, 
+                        <br>
+                        please delete this dataset and create a new one.
+                    </p>
                 </div>
             </div>
 

@@ -46,13 +46,13 @@
             <div class="nav-wrapper">
                 {% if session.user %}
                     <a href="{{ url_for('all_datasets') }}" class="brand-logo center">
-                        <img src="{{ url_for('static', filename='images/dbba.png') }}"
+                        <img src="{{ url_for('static', filename='images/dbba-navlogo.png') }}"
                             width="170px"
                             alt="Dataset Bucket & Bias Auditor">
                     </a>
                 {% else %}
                     <a href="{{ url_for('about') }}" class="brand-logo center">
-                        <img src="{{ url_for('static', filename='images/dbba.png') }}"
+                        <img src="{{ url_for('static', filename='images/dbba-navlogo.png') }}"
                             width="170px"
                             alt="Dataset Bucket & Bias Auditor">
                     </a>
@@ -129,13 +129,18 @@
                 <div class="col s12">
                 <h6 class="white-text center">A Dataset Bucket with a Bias Auditor</h6>
                 <h6 class="small-text white-text center">
-                    [ Kes Cardoso + Sakshi Gupta + Elizabeth Crouther + William Yang ]
+                    [ 
+                    <a href="https://github.com/kescardoso" target="_blank" class="authors">Kes Cardoso</a> + 
+                    <a href="https://github.com/sakshigupta265" target="_blank" class="authors">Sakshi Gupta</a> + 
+                    <a href="https://github.com/eliboss" target="_blank" class="authors">Elizabeth Crouther</a> + 
+                    <a href="https://github.com/wyang0216" target="_blank" class="authors">William Yang</a> 
+                    ]
                 </h6>
                 </div>
             </div>
         </div>
         <div class="footer-copyright">
-            <div class="container teal-text text-darken-1">
+            <div class="container credits teal-text text-darken-1">
                 © 2021 Built by <a href="https://github.com/goofy-goofy" target="-blank">
                     The Goofy-Goofy Pod</a>. 
                     Powered by <a href="https://github.com/MLH-Fellowship" target="-blank">MLH</a>.

@@ -216,18 +216,14 @@ def add_dataset():
 def edit_dataset(dataset_id):
     if request.method == "POST":
         is_todo = "On" if request.form.get("is_todo") else "Off"
-        target = os.path.join(app.config['UPLOAD_FOLDER'])
-        file = request.files["dataset_report"]
-
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(target, filename))
+        data_for_file = mongo.db.datasets.find_one({"_id": ObjectId(dataset_id)})
+        file_path = data_for_file["dataset_report"]
 
         save_edit = {
             "category_name": request.form.getlist("category_name"),
             "dataset_name": request.form.get("dataset_name"),
             "dataset_description": request.form.get("dataset_description"),
-            "dataset_report": os.path.join(target, filename),
+            "dataset_report": file_path,
             "is_todo": is_todo,
             "last_update": request.form.get("last_update"),
             "created_by": session["user"]

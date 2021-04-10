@@ -90,6 +90,11 @@ nav li,
 
 /* Edit Dataset */
 .saved_report {
+    margin-top: 40px;
+    margin-left: 45px;
+}
+
+.no_change_report {
     margin-left: 45px;
 }
 
@@ -124,4 +129,22 @@ footer h6 {
 footer a {
     color: #00695c;
     text-decoration: solid;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+footer a:hover {
+    background-color: #b2dfdb;
+}
+
+footer a.authors {
+    color: #fff;
+    text-decoration: solid;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+footer a:hover.authors {
+    color: #004d40;
+    background-color: #b2dfdb;
 }
