@@ -1,5 +1,6 @@
-env.py
 __pycache__
 venv
-DS_Store
-kaggle.json
+env.py
+.kaggle
+.vscode
+.DS_Store
