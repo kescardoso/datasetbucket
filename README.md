@@ -2,11 +2,13 @@
 
 ![label](https://user-images.githubusercontent.com/54631569/114139488-bfc68000-992c-11eb-9b11-28084dd9b8bc.png)
 
-[Check our project on Heroku!](https://datasetbucket.herokuapp.com/)
+[Check out our project on Heroku!](https://datasetbucket.herokuapp.com/)
 
 ## About
 
-A dataset bucket and a machine learning bias auditor 📈, fully responsive web-app built on Python, with [Flask](https://flask.palletsprojects.com/en/1.1.x/), [the MaterializeCSS UI grid system](https://materializecss.com/) and the [Kaggle API](https://www.kaggle.com/docs/api).Based on a CRUD data-base system (Create, Read, Update and Delete) to generate, store and display dataset structures.
+A dataset bucket and a machine learning bias auditor 📈, fully responsive web-app built on Python, with [Flask](https://flask.palletsprojects.com/en/1.1.x/), [the MaterializeCSS UI grid system](https://materializecss.com/) and the [Kaggle API](https://www.kaggle.com/docs/api).
+
+Based on a CRUD (Create, Read, Update and Delete) data-base system to generate, store and display dataset structures.
 
 You will be able to find and read reports from a **wiki styled list** of information about data containing _population_ and _demographic_ subjects. 
 
@@ -14,9 +16,11 @@ You will be able to find and read reports from a **wiki styled list** of informa
 
 ## Motivation
 
-The whole world is data-driven, but we are still not sure if the data used in testing the machine learning models are biased to one thing, person, or group. If this is the case the chances are extremely high that the model doesn't yield accurate results. 
+The whole world is data-driven.
 
-To overcome this issue, we came up with an idea to create a web app that tells you if the dataset you are using is biased or not, and also suggests possible changes you can make to improve the quality of your analysis. 📊
+However, data can often be misleading, inaccurate, or unrepresentative. When this biased data used in analytics or ML models, it not only produces inaccurate results, but also results in disastrous implications for minority groups and classes.
+
+To confront this dangerous problem, we built a web app that analyzes a dataset for bias, and also suggests possible changes you can make to improve the quality of your dataset. 📊
 
 
 ## Technologies used
@@ -30,11 +34,11 @@ To overcome this issue, we came up with an idea to create a web app that tells y
 - [Git](https://git-scm.com/) - a version control system for for source code management; it allows tracking file changes and coordinating work on those files among multiple people and machines.
 - [GitHub](https://github.com/) - a open-source code hosting platform for version control and collaboration. It lets developers work remotely and together on projects from anywhere.
 
-##### We used a lot of python libraries for building this project. Know more about them from [LIBRARIES.md]().
+##### We used a lot of python libraries for building this project. Know more about them from [LIBRARIES.md](https://github.com/kescardoso/datasetbucket/blob/main/LIBRARIES.md).
 
 ## App Walkthrough
 
-![image](https://raw.githubusercontent.com/kescardoso/datasetbucket/main/static/images/responsive.png)
+<img width="1111" alt="responsive" src="https://user-images.githubusercontent.com/54631569/114216890-237c9780-9985-11eb-9f9a-f8269d034396.png">
 
 #### 1. OPEN THE APP
 [Head on to our app deployed on Heroku.](https://datasetbucket.herokuapp.com/)
@@ -77,9 +81,17 @@ _After logging into the app_ go to the * analyze* tab. You will see a menu to `e
 
 ![image](https://user-images.githubusercontent.com/54631569/114151798-218de680-993b-11eb-8054-a7a52811994f.png)
 
+_Currently we are only accepting .`json`, `.csv`, `.png`, `.jpeg` and `.jpg` files for ananlysis._
+
 You will see a progress bar till the report gets generated. Once it stops, the report gets downloaded automatically by the name of `report.pdf`.
 
+`IMAGES: .png, .jpeg, .jpg`
+
 ![image](https://user-images.githubusercontent.com/54631569/114153383-e12f6800-993c-11eb-8c2c-4ecf9d1c1de9.png)
+
+`CSV FILES: .csv`
+
+![image](https://user-images.githubusercontent.com/54631569/114232500-9a239000-9999-11eb-9521-4787c3e7ddc6.png)
 
 It would have all the details related to your dataset and what all improvements are possible.
 
@@ -204,9 +216,38 @@ _You may need to install gunicorn. For a good tutorial, check [this youtube tuto
 
 ### References
 
-🔸 If you want to test run the project on your local computer, follow the guidelines in [TEST.md](https://github.com/kescardoso/datasetbucket/TEST.md).
+🔸 If you want to test run the project on your local computer, follow the guidelines in [installation guide](https://github.com/kescardoso/datasetbucket#-project-installation-and-local-deployment).
 
-🔸 If you wish to contribute to the existing project, follow the guidelines in [CONTRIBUTION.md]().
+🔸 If you wish to contribute to the existing project, follow the guidelines in [CONTRIBUTION.md](https://github.com/kescardoso/datasetbucket/blob/main/CONTRIBUTION.md).
+
+## Challenges
+
+- Encountering bugs when deploying on Heroku
+- Accounting for different formatting of different datasets and types of files (JSON and CSV)
+- Ensuring that the app works for both macOS and Windows
+- Learning about lots of new technologies and languages for our team, including Python, Flask, HTML, CSS, Javascript, Matplot, file parsing, and data analysis
+- Working in different time zones
+
+## Lessons / Takeaways
+
+- Plan more in advance instead of diving into code headfirst
+- Deploy on Heroku earlier
+- Spend less time getting program to run on different files, but do more analysis for one specific file
+
+## Accomplishments / Contributions
+
+- Overall, we are proud to have completed a tough project and develop a functional web app that effectively parses files, handles multiple types of datasets, and generates PDFs!
+- What are we proud to accomplish / what did we work on?
+    - "Gaining a better understanding of Python, and having a first real dive in data analytics — it changed how I see machine learning forver!" -Kes
+    - "Learning to use python better and parsing with pandas database, integrating back + front end, and deploying on heroku!" -Elizabeth
+    - "Working with images and extracting useful info out of it to generate reports!" -Sakshi
+    - "Parsing files, generating histograms, and connecting the analysis to the PDFs was super exciting for me!" -Will
+
+## Next Steps
+
+- Implement more advanced metrics and recommendations for dataset analysis
+- Allow users to upload their own datasets in addition to datasets on kaggle
+- Work on getting more files accepted, like .txt, etc
 
 ## Contributors
 
@@ -220,9 +261,13 @@ _You may need to install gunicorn. For a good tutorial, check [this youtube tuto
 
 ## Navigate
 
-➡ [CONTRIBUTION.md]()
+➡ [CONTRIBUTION.md](https://github.com/kescardoso/datasetbucket/blob/main/CONTRIBUTION.md)
 
-➡ [LIBRARIES.md]()
+➡ [LIBRARIES.md](https://github.com/kescardoso/datasetbucket/blob/main/LIBRARIES.md)
+
+## License
+
+[MIT LICENSE 2021](https://github.com/kescardoso/datasetbucket/blob/main/LICENSE)
 
 
 ### Thank You! ✨
