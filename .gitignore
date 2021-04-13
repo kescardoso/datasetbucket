@@ -1,5 +1,6 @@
-env.py
 __pycache__
-.venv
+venv
+env.py
+.kaggle
+.vscode
 .DS_Store
-
