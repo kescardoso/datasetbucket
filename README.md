@@ -155,28 +155,17 @@ It would have all the details related to your dataset and what all improvements 
         
         _If you are on macOS/linux, and you need help getting to your ~/.kaggle/ folder, follow these instructions: [Kaggle installation on macOS/Linux](https://adityashrm21.github.io/Setting-Up-Kaggle/)_
 
-    3. Wire up MongoDB and its functionalities with Flask, by installing `flask-pymongo` and `dnspython`. Use:
+4. Wire up MongoDB and its functionalities with Flask, by installing `flask-pymongo` and `dnspython`. Use:
 
         `pip3 install flask-pymongo`
 
         `pip3 install dnspython`
-    
-    
-    4. Run the `app.py` in debug mode as a flask application or use the following command: 
+
+5. Run the `app.py` in debug mode as a flask application or use the following command: 
 
         `python3 -m flask run`
     
         to see the project in your locally deployed `http` address.
-
-    5. You may need to install the following packages to enable all the commands and functionalities:
-
-        `pip3 install reportlab`
-
-        `pip3 install statistics`
-
-        `pip3 install sklearn`
-
-    
 
 ### Heroku Deployment
 
@@ -268,6 +257,5 @@ _You may need to install gunicorn. For a good tutorial, check [this youtube tuto
 ## License
 
 [MIT LICENSE 2021](https://github.com/kescardoso/datasetbucket/blob/main/LICENSE)
-
 
 ### Thank You! ✨
