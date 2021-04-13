@@ -177,9 +177,9 @@ It would have all the details related to your dataset and what all improvements 
 
     `echo web: python app.py > Procfile`
 
-_You may need to install gunicorn. For a good tutorial, check [this youtube tutorial]( "https://www.youtube.com/watch?v=9GCLwYlM8cc")_
+_You may need to install gunicorn. For a good tutorial, check [this youtube tutorial]("https://www.youtube.com/watch?v=9GCLwYlM8cc")_
 
-   **Commit and push your changes.**
+Commit and push your changes.
 
 2. Create a new app from your [Heroku dashboard](https://www.heroku.com/).
 
