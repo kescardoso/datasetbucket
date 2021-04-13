@@ -45,7 +45,7 @@ If you think we missed something that should be here, let us know by reading the
 
 ## Navigate
 
-➡ [README.md]()
+➡ [README.md](https://github.com/kescardoso/datasetbucket#readme)
 
-➡ [CONTRIBUTION.md]()
+➡ [CONTRIBUTION.md](https://github.com/kescardoso/datasetbucket/blob/main/CONTRIBUTION.md)
 
